@@ -5,7 +5,7 @@
 
 		<ul class="movies">
 			<li 
-				v-for="movie in items" 
+				v-for="(movie, index) in movies" 
 				:key="movie.id"
 				class="movie"
 			>
@@ -32,9 +32,14 @@
 						Rating: ({{ movie.rating }}/5) 
 						<span class="stars">
 							<StarIcon 
-								v-for="star in movie.rating"
-								:key="star"
+								v-for="starNum in 5"
+								:key="starNum"
 								class="star-icon" 
+                :class="{
+                  'star-on': movieRatings[index][starNum - 1],
+                  'star-off': !movieRatings[index][starNum - 1]
+                }"
+                @click="clickable[index][starNum - 1] && rateMovie(movie.id, starNum)"
 							/>
 						</span>
 					</span>
@@ -51,6 +56,47 @@ import { items } from "./movies.json";
  otherwise you could just use a simple ⭐️ emoji, or * character.
 */
 import { StarIcon } from "@heroicons/vue/24/solid";
+import { computed, ref } from "vue";
+
+const movies = ref(items);
+
+const movieRatings = computed(() => 
+  movies.value.map(movie => {
+    const rating = [];
+
+    for (let i = 0; i < 5; i++) {
+      if(i < movie.rating) {
+        rating.push(true);
+      } else {
+        rating.push(false);
+      }
+    }
+
+    return rating;
+  })
+);
+
+const clickable = computed(() => 
+  movieRatings.value.map(ratings => {
+    const clickable = [];
+
+    for (let i = 0; i < ratings.length - 1; i++) {
+      if(ratings[i] == true && ratings[i + 1] == false) {
+        clickable.push(false);
+      } else {
+        clickable.push(true);
+      }
+    }
+
+    clickable.push(true); //the last star is always clickable
+
+    return clickable;
+  })
+);
+
+const rateMovie = (movieId, starNum) => {
+  movies.value.find(movie => movie.id == movieId).rating = starNum;
+}
 </script>
 
 <style>
@@ -155,9 +201,25 @@ p {
 }
 
 .star-icon {
-  fill: #e9b209;
   height: 20px;
   width: 20px;
+  cursor: pointer;
+}
+
+.star-on {
+  fill: #e9b209;
+
+  &:hover {
+    fill: #2c3c56;
+  }
+}
+
+.star-off {
+  fill: #2c3c56;
+
+  &:hover {
+    fill: #e9b209;
+  }
 }
 
 @media (max-width: 768px) {
