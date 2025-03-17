@@ -9,6 +9,10 @@
 				:key="movie.id"
 				class="movie"
 			>
+        <div v-if="movie.rating > 0" class="top-right-rating">
+          <StarIcon class="big-star" />
+          <label>{{ movie.rating }}</label>
+        </div>
 				<img :src="movie.image" :alt="movie.name" />
 
 				<div class="movie-info">
@@ -140,6 +144,30 @@ h1 {
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
+}
+
+.top-right-rating {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-right-rating label {
+  position: absolute;
+  font-weight: bold;
+  color: #111826;
+  z-index: 1;
+}
+
+.big-star {
+  height: 50px;
+  width: 50px;
+  fill: #e9b209;
 }
 
 .movie img {
