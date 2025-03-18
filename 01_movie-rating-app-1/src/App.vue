@@ -2,10 +2,21 @@
 	<div class="container">
 		<h1>Movies</h1>
 
-    <button class="add-movie-button" @click="showMovieModal">Add Movie</button>
+    <header class="movies-header">
+      <div class="movies-header-info">
+        <p>Total movies: {{ movies.length }}</p>
+        <p>/</p>
+        <p>Average rating: {{ averageRating }}</p>
+      </div>  
+
+      <div class="movies-header-buttons">
+        <button class="movie-button" @click="removeRatings">Remove Ratings</button>
+        <button class="movie-button" @click="showMovieModal">Add Movie</button>
+      </div>
+    </header>
 
     <div v-if="displayMovieModal" class="movie-modal">
-      <form class="movie-form" @submit.prevent="createMovie">
+      <form class="movie-form" @submit.prevent="submitMovie">
         <div class="form-item">
           <label>Name</label>
           <input 
@@ -69,7 +80,7 @@
 
         <div class="form-actions">
           <button class="form-button gray" type="button" @click="closeMovieModal">Cancel</button>
-          <button class="form-button blue" type="submit">Create</button>
+          <button class="form-button blue" type="submit">{{ editMode ? "Edit" : "Create" }}</button>
         </div>
       </form>
     </div>
@@ -79,6 +90,8 @@
 				v-for="(movie, index) in movies" 
 				:key="movie.id"
 				class="movie"
+        @mouseenter="hover = index"
+        @mouseleave="hover = -1"
 			>
         <div v-if="movie.rating > 0" class="top-right-rating">
           <StarIcon class="big-star" />
@@ -100,23 +113,39 @@
 							</li>
 						</ul>
 
-						<p>{{ movie.description }}</p>
+						<p class="movie-description">{{ movie.description }}</p>
 					</div>
 					
 					<span class="rating">
-						Rating: ({{ movie.rating }}/5) 
-						<span class="stars">
-							<StarIcon 
-								v-for="starNum in 5"
-								:key="starNum"
-								class="star-icon" 
-                :class="{
-                  'star-on': movieRatings[index][starNum - 1],
-                  'star-off': !movieRatings[index][starNum - 1]
-                }"
-                @click="clickable[index][starNum - 1] && rateMovie(movie.id, starNum)"
-							/>
-						</span>
+            <span style="display: flex; align-items: center; gap: 5px;">
+              Rating: ({{ movie.rating }}/5) 
+						
+              <span class="stars">
+                <StarIcon 
+                  v-for="starNum in 5"
+                  :key="starNum"
+                  class="star-icon" 
+                  :class="{
+                    'star-on': movieRatings[index][starNum - 1],
+                    'star-off': !movieRatings[index][starNum - 1]
+                  }"
+                  @click="clickable[index][starNum - 1] && rateMovie(movie.id, starNum)"
+                />
+              </span>
+            </span>
+
+            <div class="movie-actions" v-if="moviesHover[index]">
+              <button class="icon-button edit" @click="editMovie(movie.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                  <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                </svg>
+              </button>
+              <button class="icon-button delete" @click="deleteMovie(movie.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                  <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
 					</span>
 				</div>
 			</li>
@@ -152,7 +181,6 @@ const movieGenres = computed(() => {
 
   return [...new Set(allGenres)];
 });
-
 const clickable = computed(() => 
   movieRatings.value.map(ratings => {
     const clickable = [];
@@ -170,20 +198,35 @@ const clickable = computed(() =>
     return clickable;
   })
 );
+const averageRating = computed(() => {
+  const totalRating = movies.value.reduce((sum, movie) => sum + movie.rating, 0);
+  return (totalRating / movies.value.length).toFixed(1);
+});
 
 const rateMovie = (movieId, starNum) => {
   movies.value.find(movie => movie.id == movieId).rating = starNum;
 }
 
 const displayMovieModal = ref(false);
+const editMode = ref(false);
 const showMovieModal = () => {
   displayMovieModal.value = true;
+  editMode.value = false;
 }
 const closeMovieModal = () => {
   displayMovieModal.value = false;
+  editMode.value = false;
+
+  newMovie.id = '';
+  newMovie.name = '';
+  newMovie.description = '';
+  newMovie.image = '';
+  newMovie.genres = [];
+  newMovie.inTheaters = false;
 }
 
 const newMovie = reactive({
+  id: '',
   name: '',
   description: '',
   image: '',
@@ -208,8 +251,18 @@ const addNewGenre = () => {
 const createMovie = () => {
   const movie = { ...newMovie };
 
+  let highestId = 0;
+  movies.value.forEach(movie => {
+    if(movie.id > highestId) {
+      highestId = movie.id;
+    }
+  });
+
+  movie.id = highestId + 1;
+
   movies.value.push(movie);
 
+  newMovie.id = '';
   newMovie.name = '';
   newMovie.description = '';
   newMovie.image = '';
@@ -219,6 +272,72 @@ const createMovie = () => {
   newGenres.value = [];
 
   closeMovieModal()
+}
+
+const removeRatings = () => {
+  movies.value.forEach(movie => {
+    movie.rating = 0;
+  });
+}
+
+const hover = ref(-1);
+const moviesHover = computed(() => {
+  const moviesHover = [];
+
+  for(let i = 0; i < movies.value.length; i++) {
+    if(i == hover.value) {
+      moviesHover.push(true);
+    } else {
+      moviesHover.push(false);
+    }
+  }
+
+  return moviesHover;
+});
+
+const editMovie = (movieId) => {
+  const movie = movies.value.find(movie => movie.id == movieId);
+
+  newMovie.id = movie.id;
+  newMovie.name = movie.name;
+  newMovie.description = movie.description;
+  newMovie.image = movie.image;
+  newMovie.genres = movie.genres;
+  newMovie.inTheaters = movie.inTheaters;
+
+  displayMovieModal.value = true;
+  editMode.value = true;
+}
+
+const updateMovie = () => {
+  const movie = movies.value.find(movie => movie.id == newMovie.id);
+
+  movie.name = newMovie.name;
+  movie.description = newMovie.description;
+  movie.image = newMovie.image;
+  movie.genres = newMovie.genres;
+  movie.inTheaters = newMovie.inTheaters;
+
+  newMovie.id = '';
+  newMovie.name = '';
+  newMovie.description = '';
+  newMovie.image = '';
+  newMovie.genres = [];
+  newMovie.inTheaters = false;
+
+  closeMovieModal();
+}
+
+const submitMovie = () => {
+  if(editMode.value) {
+    updateMovie();
+  } else {
+    createMovie();
+  }
+}
+
+const deleteMovie = (movieId) => {
+  movies.value = movies.value.filter(movie => movie.id !== movieId);
 }
 </script>
 
@@ -250,12 +369,29 @@ h1 {
   margin-bottom: 1em;
 }
 
-.add-movie-button {
+.movies-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movies-header-info {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.movies-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.movie-button {
   background-color: #0095c6;
   color: #fff;
   font-size: medium;
   width: fit-content;
-  align-self: flex-end;
   border: none;
   border-radius: 5px;
   padding: 0.5em;
@@ -471,7 +607,7 @@ h2 {
   font-size: 0.8rem;
 }
 
-p {
+.movie-description {
   line-height: 1.6;
   color: #ccc;
   margin-bottom: 15px;
@@ -479,6 +615,7 @@ p {
 
 .rating {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 5px;
   font-size: 0.9rem;
@@ -556,5 +693,26 @@ p {
 
 .new-genre-input {
   margin-top: 5px;
+}
+
+.movie-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-button {
+  border: none;
+  border-radius: 50%;
+  padding: .5em;
+  cursor: pointer;
+  background-color: #b4b4b4;
+}
+
+.edit:hover {
+  background-color: #0095c6;
+}
+
+.delete:hover {
+  background-color: #f07474;
 }
 </style>
