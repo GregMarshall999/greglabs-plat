@@ -1,12 +1,36 @@
 <template>
-	<MovieFormModal 
-		v-if="displayMovieModal"
-		v-model="newMovie" 
-		:movies="movies"
-		:edit-mode="editMode"
+	<AsyncAppModal 
+		v-if="displayMovieModal" 
 		@close="closeMovieModal"
 		@submit="submitMovie"
-	/>
+	>
+		<template #title>Add Movie</template>
+
+		<template #default>
+			<TextInput required v-model="newMovie.name">
+				Name
+			</TextInput>
+
+			<TextAreaInput v-model="newMovie.description">
+				Description
+			</TextAreaInput>
+
+			<TagsInput :tags="movieGenres" v-model="newMovie.genres">
+				Genres
+			</TagsInput>
+
+			<TextInput required v-model="newMovie.image">
+				Image
+			</TextInput>
+
+			<CheckboxInput id="in-theaters" v-model="newMovie.inTheaters">
+				In theaters
+			</CheckboxInput>
+		</template>
+
+		<template #close-button>Cancel</template>
+		<template #submit-button>{{ editMode ? 'Update' : 'Create' }}</template>
+	</AsyncAppModal>
 
 	<div class="container">
     	<h1>Rate your Movies</h1>
@@ -33,14 +57,26 @@
 <script setup>
 import MoviesAnalytics from './components/MoviesAnalytics.vue';
 import MovieItem from './components/MovieItem.vue';
-import MovieFormModal from './components/MovieFormModal.vue';
+import TextInput from './components/form-inputs/TextInput.vue';
+import TextAreaInput from './components/form-inputs/TextAreaInput.vue';
+import TagsInput from './components/form-inputs/TagsInput.vue';
+import CheckboxInput from './components/form-inputs/CheckboxInput.vue';
 import { items } from './movies.json';
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed, defineAsyncComponent } from 'vue';
+
+const AsyncAppModal = defineAsyncComponent(() => import('./components/AppModal.vue'));
+
+const movies = ref(items);
 
 //Modal
 
 const displayMovieModal = ref(false);
 const editMode = ref(false);
+
+const movieGenres = computed(() => {
+	let allGenres = movies.value.flatMap(movie => movie.genres);
+    return [...new Set(allGenres)];
+});
 
 const closeMovieModal = () => {
 	displayMovieModal.value = false;
@@ -54,8 +90,6 @@ const closeMovieModal = () => {
 	newMovie.genres = [];
 	newMovie.inTheaters = false;
 };
-
-const movies = ref(items);
 
 //Movie CUD
 
