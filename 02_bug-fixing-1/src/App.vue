@@ -10,7 +10,10 @@ const MovieForm = defineAsyncComponent(() => import("@/MovieForm.vue"));
 const movies = ref(items);
 const currentMovie = ref();
 function updateRating(id, rating) {
+  console.log(id, rating);
+
   movies.value = movies.value.map((movie) => {
+    //Corrected to use id instead of data.id
     if (movie.id === id) {
       movie.rating = rating;
     }
@@ -115,13 +118,14 @@ function removeRatings() {
       </div>
     </div>
     <div class="movie-list">
+      <!--Corrected v-bind to v-on. We are listening to an event, not binding a value.-->
       <MovieItem
         v-for="movie in movies"
         :key="movie.id"
         :movie="movie"
         @edit="editMovie"
         @remove="removeMovie"
-        v-bind:update:rating="updateRating"
+        v-on:update:rating="updateRating"
       />
     </div>
   </div>
