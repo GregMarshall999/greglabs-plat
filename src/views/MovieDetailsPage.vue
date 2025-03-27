@@ -1,13 +1,21 @@
 <template>
     <div class="container">
         <article>
-            <RatedPicture 
-                :movie-rating="movie.rating"
-                :movie-image="movie.image"
-                :movie-name="movie.name"
-            />
+            <span class="picture">
+                <RatedPicture 
+                    :movie-rating="movie.rating"
+                    :movie-image="movie.image"
+                    :movie-name="movie.name"
+                />    
+            </span>
 
-            <h1>{{ movie.name }}</h1>
+            <div class="details">
+                <MovieDetails :genres="movie.genres" style="height: 100%;">
+                    <template #title>{{ movie.name }}</template>
+
+                    <template #description>{{ movie.description }}</template>
+                </MovieDetails>
+            </div>
         </article>
     </div>
 </template>
@@ -16,6 +24,7 @@
 import { items } from '../movies.json';
 import { computed, ref } from 'vue';
 import RatedPicture from '../components/RatedPicture.vue';
+import MovieDetails from '../components/MovieDetails.vue';
 
 const props = defineProps({
     id: {
@@ -34,6 +43,18 @@ const movie = computed(() => {
 
 <style scoped>
 
+article {
+    display: flex;
+    position: relative;
+}
 
+.picture {
+    position: relative;
+}
+
+.details {
+    display: flex;
+    justify-content: center;
+}
 
 </style>
