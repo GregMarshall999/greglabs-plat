@@ -1,35 +1,50 @@
 <template>
-    <div class="modal-background">
-        <div class="modal">
-            <h2>
-                <slot name="title"></slot>
-            </h2>
+    <transition @enter="slideForm = true" @after-leave="slideForm = false" name="fade">
+        <div v-if="displayModal" class="modal-background">
+            <div class="modal">
+                <h2>
+                    <slot name="title"></slot>
+                </h2>
 
-            <form @submit.prevent="emits('submit')">
-                <slot></slot>
+                <transition name="slide">
+                    <form v-if="slideForm" @submit.prevent="emits('submit')">
+                        <slot></slot>
 
-                <div class="form-actions">
-                    <button 
-                        class="form-button gray" 
-                        type="button" 
-                        @click="emits('close')"
-                    >
-                        <slot name="close-button">X</slot>
-                    </button>
-                    <button 
-                        class="form-button blue" 
-                        type="submit"
-                    >
-                        <slot name="submit-button">Submit</slot>
-                    </button>
-                </div>
-            </form>
+                        <div class="form-actions">
+                            <button 
+                                class="form-button gray" 
+                                type="button" 
+                                @click="emits('close')"
+                            >
+                                <slot name="close-button">X</slot>
+                            </button>
+                            <button 
+                                class="form-button blue" 
+                                type="submit"
+                            >
+                                <slot name="submit-button">Submit</slot>
+                            </button>
+                        </div>
+                    </form>
+                </transition>
+            </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 const emits = defineEmits(['close', 'submit']);
+
+const props = defineProps({
+    displayModal: {
+        type: Boolean,
+        default: false,
+    },
+});
+
+const slideForm = ref(false);
 </script>
 
 <style scoped>
@@ -97,6 +112,26 @@ form {
     &:hover {
         background-color: #0077a3;
     }
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    transform: translateY(-100px);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+    transition: all 0.5s ease;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<AsyncAppModal 
-		v-if="displayMovieModal" 
+		:display-modal="displayMovieModal" 
 		@close="closeMovieModal"
 		@submit="submitMovie"
 	>
