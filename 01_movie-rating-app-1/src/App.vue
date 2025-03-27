@@ -7,7 +7,7 @@
 		<template #title>Add Movie</template>
 
 		<template #default>
-			<TextInput required v-model="newMovie.name">
+			<TextInput required v-model="newMovie.name" focus>
 				Name
 			</TextInput>
 

@@ -6,19 +6,35 @@
             class="form-input"
             type="text"
             :required="required"
+            ref="focusInput"
         />
     </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+
 const props = defineProps({
     required: {
+        type: Boolean,
+        default: false
+    }, 
+    focus: {
         type: Boolean,
         default: false
     }
 });
 
 const modelValue = defineModel({ required: true });
+
+
+const focusInput = ref(null);
+
+onMounted(() => {
+    if (props.focus) {
+        focusInput.value.focus();
+    }
+});
 </script>
 
 <style scoped>
