@@ -1,18 +1,70 @@
 <template>
-	<RouterView />
+    <AsyncAppModal 
+		:display-modal="displayMovieModal" 
+		@close="closeMovieModal"
+		@submit="submitMovie"
+	>
+		<template #title>Add Movie</template>
+
+		<template #default>
+			<TextInput required v-model="newMovie.name" focus>
+				Name
+			</TextInput>
+
+			<TextAreaInput v-model="newMovie.description">
+				Description
+			</TextAreaInput>
+
+			<TagsInput :tags="movieGenres" v-model="newMovie.genres">
+				Genres
+			</TagsInput>
+
+			<TextInput required v-model="newMovie.image">
+				Image
+			</TextInput>
+
+			<CheckboxInput id="in-theaters" v-model="newMovie.inTheaters">
+				In theaters
+			</CheckboxInput>
+		</template>
+
+		<template #close-button>Cancel</template>
+		<template #submit-button>{{ editMode ? 'Update' : 'Create' }}</template>
+	</AsyncAppModal>
+
+	<div class="container">
+    	<h1>Rate your Movies</h1>
+
+		<MoviesAnalytics 
+			:movies="movies" 
+			@remove-ratings="removeRatings"
+			@add-movie="addMovie"
+		/>
+		
+		<ul class="movies">
+			<MovieItem 
+				v-for="movie in movies" 
+				:key="movie.id" 
+				:movie="movie" 
+				@edit="editMovie"
+				@remove="removeMovie"
+				@update-rating="updateRating"
+			/>
+		</ul>
+  </div>
 </template>
 
 <script setup>
-import MoviesAnalytics from './components/MoviesAnalytics.vue';
-import MovieItem from './components/MovieItem.vue';
-import TextInput from './components/form-inputs/TextInput.vue';
-import TextAreaInput from './components/form-inputs/TextAreaInput.vue';
-import TagsInput from './components/form-inputs/TagsInput.vue';
-import CheckboxInput from './components/form-inputs/CheckboxInput.vue';
-import { items } from './movies.json';
+import MoviesAnalytics from '../components/MoviesAnalytics.vue';
+import MovieItem from '../components/MovieItem.vue';
+import TextInput from '../components/form-inputs/TextInput.vue';
+import TextAreaInput from '../components/form-inputs/TextAreaInput.vue';
+import TagsInput from '../components/form-inputs/TagsInput.vue';
+import CheckboxInput from '../components/form-inputs/CheckboxInput.vue';
+import { items } from '../movies.json';
 import { reactive, ref, computed, defineAsyncComponent } from 'vue';
 
-const AsyncAppModal = defineAsyncComponent(() => import('./components/AppModal.vue'));
+const AsyncAppModal = defineAsyncComponent(() => import('../components/AppModal.vue'));
 
 const movies = ref(items);
 
@@ -117,27 +169,32 @@ const updateRating = (movieId, starNum) => {
 
 </script>
 
-<style>
+<style scoped>
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body {
-	background-color: #111826;
-	font-family: 'Manrope', sans-serif;
+h1 {
 	color: #fff;
+	font-size: 2rem;
+	margin-bottom: 1em;
 }
 
-.container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	gap: 2em;
+.movies {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 20px;
+	list-style: none;
+	padding: 0;
+}
+
+@media (max-width: 768px) {
+	.movies {
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	}
+}
+
+@media (max-width: 480px) {
+	.movies {
+		grid-template-columns: 1fr;
+	}
 }
 
 </style>

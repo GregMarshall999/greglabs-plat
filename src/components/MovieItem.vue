@@ -4,12 +4,11 @@
         @mouseover="hovering = true"
         @mouseleave="hovering = false"
     >
-        <div v-if="!notRated" class="top-right-rating">
-            <StarIcon class="big-star" />
-            <label>{{ movie.rating }}</label>
-        </div>
-
-        <img :src="movie.image" :alt="movie.name" crossorigin="anonymous"/>
+        <RatedPicture 
+            :movie-rating="movie.rating"
+            :movie-image="movie.image"
+            :movie-name="movie.name"
+        />
 
         <div class="info">
             <div class="info-content">
@@ -47,6 +46,14 @@
                 </span>
 
                 <div class="actions" v-if="hovering">
+                    <RouterLink 
+                        :to="{ name: 'movie-details', params: { id: movie.id } }"
+                        class="icon-button view"
+                    >
+                        <svg fill="#000000" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z"/>
+                        </svg>
+                    </RouterLink>
                     <button class="icon-button edit" @click="emits('edit', movie.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                             <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
@@ -65,6 +72,7 @@
 
 <script setup>
 import { StarIcon } from "@heroicons/vue/24/solid";
+import RatedPicture from "./RatedPicture.vue";
 import { computed, ref } from "vue";
 
 const props = defineProps({
@@ -77,10 +85,6 @@ const props = defineProps({
 const emits = defineEmits(["edit", "remove", "update-rating"]);
 
 const hovering = ref(false);
-
-const notRated = computed(() => {
-    return props.movie.rating <= 0;
-});
 
 const movieRating = computed(() => {
     const rating = [];
@@ -124,42 +128,6 @@ const clickable = computed(() => {
     flex-direction: column;
     height: 100%;
     position: relative;
-}
-
-@media (max-width: 480px) {  
-    .movie img {
-        height: 300px;
-    }
-}
-
-.top-right-rating {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.big-star {
-    height: 50px;
-    width: 50px;
-    fill: #e9b209;
-}
-
-label {
-    position: absolute;
-    font-weight: bold;
-    color: #111826;
-    z-index: 1;
-}
-
-img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    display: block;
 }
 
 .info {
@@ -253,6 +221,13 @@ footer {
     padding: .5em;
     cursor: pointer;
     background-color: #b4b4b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.view:hover {
+    background-color: #e9b209;
 }
 
 .edit:hover {
