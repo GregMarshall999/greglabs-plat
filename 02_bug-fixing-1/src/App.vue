@@ -10,8 +10,6 @@ const MovieForm = defineAsyncComponent(() => import("@/MovieForm.vue"));
 const movies = ref(items);
 const currentMovie = ref();
 function updateRating(id, rating) {
-  console.log(id, rating);
-
   movies.value = movies.value.map((movie) => {
     //Corrected to use id instead of data.id
     if (movie.id === id) {
@@ -21,7 +19,7 @@ function updateRating(id, rating) {
   });
 }
 function removeMovie(id) {
-  movies.value.filter((movie) => movie.id !== id);
+  movies.value = movies.value.filter((movie) => movie.id !== id);
 }
 function editMovie(id) {
   currentMovie.value = movies.value.find((movie) => movie.id === id);
@@ -29,6 +27,7 @@ function editMovie(id) {
 }
 function saveMovie(data) {
   const isNew = !movies.value.find((movie) => movie.id === data.id);
+
   if (isNew) {
     addMovie(data);
   } else {
@@ -38,11 +37,11 @@ function saveMovie(data) {
 function updateMovie(data) {
   movies.value = movies.value.map((m) => {
     if (m.id === data.id) {
-      data.rating = m.rating;
       return data;
     }
-    return data;
+    return m;
   });
+
   hideForm();
 }
 function addMovie(data) {
