@@ -55,8 +55,8 @@
 </template>
 
 <script setup>
-import MoviesAnalytics from '../components/MoviesAnalytics.vue';
-import MovieItem from '../components/MovieItem.vue';
+import MoviesAnalytics from '../components/movies/MoviesAnalytics.vue';
+import MovieItem from '../components/movies/MovieItem.vue';
 import TextInput from '../components/form-inputs/TextInput.vue';
 import TextAreaInput from '../components/form-inputs/TextAreaInput.vue';
 import TagsInput from '../components/form-inputs/TagsInput.vue';

@@ -23,8 +23,8 @@
 <script setup>
 import { items } from '../movies.json';
 import { computed, ref } from 'vue';
-import RatedPicture from '../components/RatedPicture.vue';
-import MovieDetails from '../components/MovieDetails.vue';
+import RatedPicture from '../components/movies/RatedPicture.vue';
+import MovieDetails from '../components/movies/MovieDetails.vue';
 
 const props = defineProps({
     id: {
