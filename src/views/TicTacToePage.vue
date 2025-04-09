@@ -2,9 +2,39 @@
     <div class="container">
         <h1>Tic-Tac-Toe</h1>
 
+        <div class="difficulty-selection" v-if="!gameStarted">
+            <h3>Select Difficulty:</h3>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="difficulty" value="pvp" v-model="difficulty" checked>
+                    PVP
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="easy" v-model="difficulty">
+                    PVE - Easy
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="hard" v-model="difficulty">
+                    PVE - Hard
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="impossible" v-model="difficulty">
+                    PVE - Impossible
+                </label>
+            </div>
+        </div>
+
         <h2 v-if="!gameStarted && !gameOver">Click a cell to play !</h2>
-        <h2 v-if="gameStarted && !gameOver">Player {{ playerTurn }}'s turn</h2>
-        <h2 v-if="gameOver">Player {{ playerTurn }} wins!</h2>
+
+        <h2 v-if="difficulty === 'pvp' && gameStarted && !gameOver">Player {{ playerTurn }}'s turn</h2>
+        <h2 v-if="difficulty === 'pvp' && gameOver && !draw">Player {{ playerTurn }} wins!</h2>
+
+        <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && computerTurn">Let me think...</h2>
+        <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && !computerTurn">Your turn !</h2>
+        <h2 v-if="difficulty !== 'pvp' && gameOver && computerTurn && !draw">I win ! An other game ?</h2>
+        <h2 v-if="difficulty !== 'pvp' && gameOver && !computerTurn && !draw">You win ! Well played !</h2>
+        
+        <h2 v-if="gameOver && draw">It's a draw !</h2>
 
         <div class="board">
             <div v-for="row in 3" :key="row" class="board-row">
@@ -28,8 +58,11 @@
 <script setup>
 import { ref, computed } from 'vue';
 
+const difficulty = ref('pvp');
 const playerTurn = ref('X');
+const computerTurn = ref(false);
 const gameOver = ref(false);
+const draw = ref(false);
 
 const mark = ref([
     [{ value: "", canHover: true, hoverValue: "" }, { value: "", canHover: true, hoverValue: "" }, { value: "", canHover: true, hoverValue: "" }],
@@ -42,18 +75,36 @@ const gameStarted = computed(() => {
 });
 
 const play = (row, col) => {
+    if(computerTurn.value) {
+        return;
+    }
+
+    //play
     mark.value[row][col].value = playerTurn.value;
     mark.value[row][col].canHover = false;
     mark.value[row][col].hoverValue = '';
 
+    //is winning move ?
     if(checkWin()) {
         return;
     }
 
-    if(playerTurn.value === 'X') {
-        playerTurn.value = 'O';
-    } else {
-        playerTurn.value = 'X';
+    //handle next player
+    switch(difficulty.value) {
+        case 'easy':
+            computerEasyMove();
+            break;
+        case 'hard':
+            break;
+        case 'impossible':
+            break;
+        default:
+            if(playerTurn.value === 'X') {
+                playerTurn.value = 'O';
+            } else {
+                playerTurn.value = 'X';
+            }
+            break;
     }
 }
 
@@ -75,6 +126,60 @@ const checkWin = () => {
             return true;
         }
     }
+
+    // Check for draw
+    let allCellsFilled = true;
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+            if (mark.value[r][c].value === "") {
+                allCellsFilled = false;
+                break;
+            }
+        }
+        if (!allCellsFilled) break;
+    }
+    
+    if (allCellsFilled) {
+        draw.value = true;
+        gameOver.value = true;
+        return true;
+    }
+    
+    return false;
+}
+
+const computerEasyMove = () => {
+    computerTurn.value = true;
+
+    // simulate computer thinking
+    setTimeout(() => {
+        // Find empty cells
+        const emptyCells = [];
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 3; c++) {
+                if (mark.value[r][c].value === "") {
+                    emptyCells.push({ row: r, col: c });
+                }
+            }
+        }
+                
+        // select random cell
+        if (emptyCells.length > 0) {
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const { row, col } = emptyCells[randomIndex];
+            
+            mark.value[row][col].value = 'O';
+            mark.value[row][col].canHover = false;
+            mark.value[row][col].hoverValue = '';
+            
+            // did computer win ?
+            if (checkWin()) {
+                return;
+            }
+        }
+
+        computerTurn.value = false;
+    }, 1000);
 }
 
 const resetGame = () => {
@@ -86,6 +191,8 @@ const resetGame = () => {
 
     playerTurn.value = 'X';
     gameOver.value = false;
+    computerTurn.value = false;
+    draw.value = false;
 }
 
 const hover = (row, col) => {
@@ -106,6 +213,11 @@ const unhover = (row, col) => {
 
 .container {
     align-items: center;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .board {
