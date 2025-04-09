@@ -9,6 +9,7 @@
                     <li><RouterLink to="/" class="nav-link">Movies</RouterLink></li>
                     <li><RouterLink to="/countdown" class="nav-link">Countdown</RouterLink></li>
                     <li><RouterLink to="/shopping-cart" class="nav-link">Shopping Cart</RouterLink></li>
+                    <li><RouterLink to="/custom-directive" class="nav-link">Custom Directive</RouterLink></li>
                 </ul>
             </div>
         </div>

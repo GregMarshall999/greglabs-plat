@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import MovieDetailsPage from '../views/MovieDetailsPage.vue'
 import CountdownPage from '../views/CountdownPage.vue'
 import ShoppingCartPage from '../views/ShoppingCartPage.vue'
+import CustomDirectivePage from '../views/CustomDirectivePage.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/shopping-cart',
     name: 'shopping-cart',
     component: ShoppingCartPage
+  },
+  {
+    path: '/custom-directive',
+    name: 'custom-directive',
+    component: CustomDirectivePage
   }
 ]
 
