@@ -6,8 +6,9 @@
                     <h1>Vue JS Certification Mid Level</h1>
                 </div>
                 <ul class="nav-links">
-                    <li><RouterLink to="/" class="nav-link">Home</RouterLink></li>
+                    <li><RouterLink to="/" class="nav-link">Movies</RouterLink></li>
                     <li><RouterLink to="/countdown" class="nav-link">Countdown</RouterLink></li>
+                    <li><RouterLink to="/shopping-cart" class="nav-link">Shopping Cart</RouterLink></li>
                 </ul>
             </div>
         </div>
