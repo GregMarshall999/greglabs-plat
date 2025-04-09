@@ -95,6 +95,7 @@ const play = (row, col) => {
             computerEasyMove();
             break;
         case 'hard':
+            computerHardMove();
             break;
         case 'impossible':
             break;
@@ -178,6 +179,65 @@ const computerEasyMove = () => {
             }
         }
 
+        computerTurn.value = false;
+    }, 1000);
+}
+
+const computerHardMove = () => {
+    computerTurn.value = true;
+
+    // simulate computer thinking
+    setTimeout(() => {
+        // Find empty cells
+        const emptyCells = [];
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 3; c++) {
+                if (mark.value[r][c].value === "") {
+                    emptyCells.push({ row: r, col: c });
+                }
+            }
+        }
+        
+        let moveFound = false;
+        
+        // Check if player is about to win and block
+        for (const cell of emptyCells) {
+            // Temporarily place 'X' to check if player would win
+            mark.value[cell.row][cell.col].value = 'X';
+            
+            // Check if this would create a win for the player
+            if (checkWin()) {
+                // Reset the cell
+                mark.value[cell.row][cell.col].value = "";
+                
+                // Block the winning move by placing 'O'
+                mark.value[cell.row][cell.col].value = 'O';
+                mark.value[cell.row][cell.col].canHover = false;
+                mark.value[cell.row][cell.col].hoverValue = '';
+                gameOver.value = false; // don't forget or the game will end
+                moveFound = true;
+                break;
+            }
+            
+            // Reset the cell
+            mark.value[cell.row][cell.col].value = "";
+        }
+        
+        // If no blocking move needed, make a random move
+        if (!moveFound && emptyCells.length > 0) {
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const { row, col } = emptyCells[randomIndex];
+            
+            mark.value[row][col].value = 'O';
+            mark.value[row][col].canHover = false;
+            mark.value[row][col].hoverValue = '';
+        }
+        
+        // Check if computer won
+        if (checkWin()) {
+            return;
+        }
+        
         computerTurn.value = false;
     }, 1000);
 }
