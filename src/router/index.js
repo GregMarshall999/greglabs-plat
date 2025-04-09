@@ -4,7 +4,7 @@ import MovieDetailsPage from '../views/MovieDetailsPage.vue'
 import CountdownPage from '../views/CountdownPage.vue'
 import ShoppingCartPage from '../views/ShoppingCartPage.vue'
 import CustomDirectivePage from '../views/CustomDirectivePage.vue'
-
+import TicTacToePage from '../views/TicTacToePage.vue'
 const routes = [
   {
     path: '/',
@@ -31,6 +31,11 @@ const routes = [
     path: '/custom-directive',
     name: 'custom-directive',
     component: CustomDirectivePage
+  },
+  {
+    path: '/tic-tac-toe',
+    name: 'tic-tac-toe',
+    component: TicTacToePage
   }
 ]
 
