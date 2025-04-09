@@ -200,21 +200,21 @@ const computerHardMove = () => {
         
         let moveFound = false;
         
-        // Check if player is about to win and block
+        // Check if computer has a winning move
         for (const cell of emptyCells) {
-            // Temporarily place 'X' to check if player would win
-            mark.value[cell.row][cell.col].value = 'X';
+            // Temporarily place 'O' to check if computer would win
+            mark.value[cell.row][cell.col].value = 'O';
             
-            // Check if this would create a win for the player
+            // Check if this would create a win for the computer
             if (checkWin()) {
-                // Reset the cell
+                // Reset the cell and game state
                 mark.value[cell.row][cell.col].value = "";
+                gameOver.value = false;
                 
-                // Block the winning move by placing 'O'
+                // Make the winning move
                 mark.value[cell.row][cell.col].value = 'O';
                 mark.value[cell.row][cell.col].canHover = false;
                 mark.value[cell.row][cell.col].hoverValue = '';
-                gameOver.value = false; // don't forget or the game will end
                 moveFound = true;
                 break;
             }
@@ -223,7 +223,32 @@ const computerHardMove = () => {
             mark.value[cell.row][cell.col].value = "";
         }
         
-        // If no blocking move needed, make a random move
+        // If no winning move, check if player is about to win and block
+        if (!moveFound) {
+            for (const cell of emptyCells) {
+                // Temporarily place 'X' to check if player would win
+                mark.value[cell.row][cell.col].value = 'X';
+                
+                // Check if this would create a win for the player
+                if (checkWin()) {
+                    // Reset the cell
+                    mark.value[cell.row][cell.col].value = "";
+                    
+                    // Block the winning move by placing 'O'
+                    mark.value[cell.row][cell.col].value = 'O';
+                    mark.value[cell.row][cell.col].canHover = false;
+                    mark.value[cell.row][cell.col].hoverValue = '';
+                    gameOver.value = false; // don't forget or the game will end
+                    moveFound = true;
+                    break;
+                }
+                
+                // Reset the cell
+                mark.value[cell.row][cell.col].value = "";
+            }
+        }
+        
+        // If no winning move or blocking move needed, make a random move
         if (!moveFound && emptyCells.length > 0) {
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             const { row, col } = emptyCells[randomIndex];
