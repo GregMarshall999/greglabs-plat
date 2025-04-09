@@ -98,6 +98,7 @@ const play = (row, col) => {
             computerHardMove();
             break;
         case 'impossible':
+            computerImpossibleMove();
             break;
         default:
             if(playerTurn.value === 'X') {
@@ -266,6 +267,162 @@ const computerHardMove = () => {
         computerTurn.value = false;
     }, 1000);
 }
+
+const computerImpossibleMove = () => {
+    computerTurn.value = true;
+
+    // simulate computer thinking
+    setTimeout(() => {
+        // Find the best move using minimax
+        const bestMove = findBestMove();
+        
+        // Make the best move
+        if (bestMove) {
+            mark.value[bestMove.row][bestMove.col].value = 'O';
+            mark.value[bestMove.row][bestMove.col].canHover = false;
+            mark.value[bestMove.row][bestMove.col].hoverValue = '';
+            
+            // Check if computer won
+            if (checkWin()) {
+                return;
+            }
+        }
+        
+        computerTurn.value = false;
+    }, 1000);
+};
+
+// Helper function to find the best move using minimax
+const findBestMove = () => {
+    let bestScore = -Infinity;
+    let bestMove = null;
+    
+    // Find all empty cells
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+            if (mark.value[r][c].value === "") {
+                // Try this move
+                mark.value[r][c].value = 'O';
+                
+                // Get score for this move
+                const score = minimax(0, false);
+                
+                // Undo the move
+                mark.value[r][c].value = "";
+                
+                // Update best move if this is better
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = { row: r, col: c };
+                }
+            }
+        }
+    }
+    
+    return bestMove;
+};
+
+// Minimax algorithm implementation
+const minimax = (depth, isMaximizing) => {
+    // Check if game is over (win or draw)
+    const result = checkGameResult();
+    
+    // Return score based on game result
+    if (result !== null) {
+        return result;
+    }
+    
+    if (isMaximizing) {
+        // Computer's turn (maximizing player)
+        let bestScore = -Infinity;
+        
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 3; c++) {
+                if (mark.value[r][c].value === "") {
+                    // Try this move
+                    mark.value[r][c].value = 'O';
+                    
+                    // Get score for this move
+                    const score = minimax(depth + 1, false);
+                    
+                    // Undo the move
+                    mark.value[r][c].value = "";
+                    
+                    // Update best score
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+        }
+        
+        return bestScore;
+    } else {
+        // Player's turn (minimizing player)
+        let bestScore = Infinity;
+        
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 3; c++) {
+                if (mark.value[r][c].value === "") {
+                    // Try this move
+                    mark.value[r][c].value = 'X';
+                    
+                    // Get score for this move
+                    const score = minimax(depth + 1, true);
+                    
+                    // Undo the move
+                    mark.value[r][c].value = "";
+                    
+                    // Update best score
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+        }
+        
+        return bestScore;
+    }
+};
+
+// Helper function to check game result without modifying game state
+const checkGameResult = () => {
+    // Check diagonals
+    if (mark.value[0][0].value !== '' && mark.value[0][0].value === mark.value[1][1].value && mark.value[1][1].value === mark.value[2][2].value) {
+        return mark.value[0][0].value === 'O' ? 10 : -10;
+    }
+    
+    if (mark.value[0][2].value !== '' && mark.value[0][2].value === mark.value[1][1].value && mark.value[1][1].value === mark.value[2][0].value) {
+        return mark.value[0][2].value === 'O' ? 10 : -10;
+    }
+    
+    // Check rows and columns
+    for (let i = 0; i < 3; i++) {
+        // Check rows
+        if (mark.value[i][0].value !== '' && mark.value[i][0].value === mark.value[i][1].value && mark.value[i][1].value === mark.value[i][2].value) {
+            return mark.value[i][0].value === 'O' ? 10 : -10;
+        }
+        
+        // Check columns
+        if (mark.value[0][i].value !== '' && mark.value[0][i].value === mark.value[1][i].value && mark.value[1][i].value === mark.value[2][i].value) {
+            return mark.value[0][i].value === 'O' ? 10 : -10;
+        }
+    }
+    
+    // Check for draw
+    let isDraw = true;
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+            if (mark.value[r][c].value === "") {
+                isDraw = false;
+                break;
+            }
+        }
+        if (!isDraw) break;
+    }
+    
+    if (isDraw) {
+        return 0; // Draw
+    }
+    
+    return null; // Game not over
+};
 
 const resetGame = () => {
     mark.value = [
