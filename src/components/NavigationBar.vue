@@ -9,8 +9,14 @@
                     <li><RouterLink to="/" class="nav-link">Movies</RouterLink></li>
                     <li><RouterLink to="/countdown" class="nav-link">Countdown</RouterLink></li>
                     <li><RouterLink to="/shopping-cart" class="nav-link">Shopping Cart</RouterLink></li>
-                    <li><RouterLink to="/custom-directive" class="nav-link">Custom Directive</RouterLink></li>  
-                    <li><RouterLink to="/tic-tac-toe" class="nav-link">Tic Tac Toe</RouterLink></li>
+                    <li class="dropdown">
+                        <button class="nav-link dropdown-toggle">Other Challenges</button>
+                        <ul class="dropdown-menu">
+                            <li><RouterLink to="/custom-directive" class="nav-link">Custom Directive</RouterLink></li>
+                            <li><RouterLink to="/tic-tac-toe" class="nav-link">Tic Tac Toe</RouterLink></li>
+                            <li><RouterLink to="/aquarium" class="nav-link">Aquarium</RouterLink></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -43,6 +49,7 @@ import { RouterLink } from 'vue-router';
 .nav-links {
     display: flex;
     list-style: none;
+    align-items: center;
     gap: 1.5rem;
 }
 
@@ -58,5 +65,52 @@ import { RouterLink } from 'vue-router';
 .nav-link:hover, .router-link-active {
     background-color: #2d3748;
     color: #38b2ac;
+}
+
+.dropdown {
+    position: relative;
+    z-index: 1000;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 0.5rem 0.75rem;
+}
+
+.dropdown-menu {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1a2434;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu .nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+.dropdown-menu .nav-link:hover {
+    background-color: #2d3748;
 }
 </style>

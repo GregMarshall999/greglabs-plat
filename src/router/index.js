@@ -5,6 +5,8 @@ import CountdownPage from '../views/CountdownPage.vue'
 import ShoppingCartPage from '../views/ShoppingCartPage.vue'
 import CustomDirectivePage from '../views/CustomDirectivePage.vue'
 import TicTacToePage from '../views/TicTacToePage.vue'
+import AquariumPage from '../views/AquariumPage.vue'
+
 const routes = [
   {
     path: '/',
@@ -36,6 +38,11 @@ const routes = [
     path: '/tic-tac-toe',
     name: 'tic-tac-toe',
     component: TicTacToePage
+  },
+  {
+    path: '/aquarium',
+    name: 'aquarium',
+    component: AquariumPage
   }
 ]
 
