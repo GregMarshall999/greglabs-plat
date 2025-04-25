@@ -28,7 +28,7 @@
                     {{ fishActionText }}
                 </button>
 
-                <button @click="emptyTankButtonClicked = true" :disabled="prop.fishCount === 0" class="tank-button">
+                <button @click="emptyTankButtonClicked = true" :disabled="fishCount === 0" class="tank-button">
                     {{ tankActionText }}
                 </button>
             </div>

@@ -15,9 +15,6 @@
 <script setup>
 import TankOptions from './TankOptions.vue';
 import FishForm from './FishForm.vue';
-import { ref } from 'vue';
-
-const fishCount = ref(0);
 
 const props = defineProps({
     fishCount: {

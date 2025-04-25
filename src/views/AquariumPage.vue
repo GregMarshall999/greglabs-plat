@@ -38,6 +38,7 @@ const addFish = fish => {
 
 const handleFishClicked = (fish, index) => {
     selectedFish.value = fish;
+    editMode.value = true;
 };
 
 </script>
