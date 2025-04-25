@@ -1,8 +1,29 @@
 <template>
-    <div class="fish-tank">
-
+    <div class="fish-tank" ref="tankRef">
+        <Fish 
+            v-for="(fish, index) in fishes"
+            :key="index"
+            :fish="fish"
+            :tankRef="tankRef"
+            @click="emit('fishClicked', fish, index)"
+        />
     </div>
 </template>
+
+<script setup>
+import Fish from './Fish.vue';
+import { ref } from 'vue';
+
+const emit = defineEmits(['fishClicked']);
+
+const fishes = ref([]);
+const tankRef = ref(null);
+
+defineExpose({
+    fishes
+});
+
+</script>
 
 <style scoped>
 
