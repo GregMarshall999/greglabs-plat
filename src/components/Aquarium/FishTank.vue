@@ -1,5 +1,5 @@
 <template>
-    <div class="fish-tank" ref="tankRef">
+    <div class="fish-tank" ref="tankRef" @click="handleTankClick">
         <Fish 
             v-for="(fish, index) in fishes"
             :key="index"
@@ -7,17 +7,37 @@
             :tankRef="tankRef"
             @click="emit('fishClicked', fish, index)"
         />
+        <Food
+            v-for="(food, index) in foods"
+            :key="index"
+            :foodPos="food"
+            @destroy="handleDestroy(index)"
+        />
     </div>
 </template>
 
 <script setup>
 import Fish from './Fish.vue';
+import Food from './Food.vue';
 import { ref } from 'vue';
 
 const emit = defineEmits(['fishClicked']);
 
 const fishes = ref([]);
+const foods = ref([]);
 const tankRef = ref(null);
+
+const handleDestroy = index => {
+    foods.value.splice(index, 1);
+}
+
+const handleTankClick = event => {
+    const rect = tankRef.value.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    foods.value.push({ x, y });
+};
 
 defineExpose({
     fishes

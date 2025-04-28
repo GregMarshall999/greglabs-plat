@@ -1,28 +1,13 @@
 <template>
     <div class="tank-options">
-        <div class="cursor-mode">
-            <label>
-                <input type="radio" v-model="cursorMode" value="Select" />
-                Select
-            </label>
-            <label>
-                <input type="radio" v-model="cursorMode" value="Rod" />
-                Rod
-            </label>
-            <label>
-                <input type="radio" v-model="cursorMode" value="Feed" />
-                Feed
-            </label>
-        </div>
-
         <div class="fish-mode">
-            <button :class="{ active: fishMode[0] }" @click="toggleFishMode(0)">
+            <button :class="{ active: fishMode[0] }" @click="toggleFishMode(0)" disabled title="Coming soon">
                 Collision {{ fishMode[0] ? 'On' : 'Off' }}
             </button>
-            <button :class="{ active: fishMode[1] }" @click="toggleFishMode(1)">
+            <button :class="{ active: fishMode[1] }" @click="toggleFishMode(1)" disabled title="Coming soon">
                 Growth {{ fishMode[1] ? 'On' : 'Off' }}
             </button>
-            <button :class="{ active: fishMode[2] }" @click="toggleFishMode(2)">
+            <button :class="{ active: fishMode[2] }" @click="toggleFishMode(2)" disabled title="Coming soon">
                 Boid {{ fishMode[2] ? 'On' : 'Off' }}
             </button>
         </div>
@@ -31,8 +16,6 @@
 
 <script setup>
 import { ref } from 'vue';
-
-const cursorMode = ref('Select');
 
 const fishMode = ref([false, false, false]);
 const toggleFishMode = index => {
@@ -46,18 +29,6 @@ const toggleFishMode = index => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.cursor-mode {
-    display: flex;
-    justify-content: space-between;
-}
-
-.cursor-mode label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
 }
 
 .fish-mode {
@@ -76,6 +47,12 @@ const toggleFishMode = index => {
 
     &:hover {
         background: #111826;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: #424447;
+        color: #b6b0b0;
     }
 
     &.active {

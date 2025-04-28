@@ -1,5 +1,4 @@
 <template>
-    <p v-if="tankRef">{{ tankRef.fishes }}</p>
     <div class="aquarium">
         <TankBoard v-if="tankRef" 
             :fish-count="tankRef.fishes.length" :edit-mode="editMode"
