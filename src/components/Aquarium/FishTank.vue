@@ -1,11 +1,11 @@
 <template>
     <div class="fish-tank" ref="tankRef" @click="handleTankClick">
         <Fish 
-            v-for="(fish, index) in fishes"
-            :key="index"
+            v-for="fish in fishes"
+            :key="fish.id"
             :fish="fish"
             :tankRef="tankRef"
-            @click="emit('fishClicked', fish, index)"
+            @click="emit('fishClicked', fish)"
         />
         <Food
             v-for="(food, index) in foods"
@@ -32,11 +32,13 @@ const handleDestroy = index => {
 }
 
 const handleTankClick = event => {
-    const rect = tankRef.value.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    if(event.target.classList.contains('fish-tank')) {
+        const rect = tankRef.value.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
 
-    foods.value.push({ x, y });
+        foods.value.push({ x, y });
+    }
 };
 
 defineExpose({

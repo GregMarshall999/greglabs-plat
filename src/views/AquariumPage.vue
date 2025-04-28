@@ -19,38 +19,42 @@
 <script setup>
 import TankBoard from '../components/Aquarium/TankBoard.vue';
 import FishTank from '../components/Aquarium/FishTank.vue';
-import { ref } from 'vue';
+import { ref, onUnmounted } from 'vue';
 
 const editMode = ref(false);
 const tankRef = ref(null);
 const selectedFish = ref({});
+const id = ref(1);
 
 //TODO: for some reason, while the fish is selected, selecting another fish type in the form changes it's properties before the edit button ic clicked
 const addFish = () => {
-    tankRef.value.fishes.push({ ...selectedFish.value }); //I would have thought the spread prevented this...
+    tankRef.value.fishes.push({ ...selectedFish.value, id: id.value++ }); //I would have thought the spread prevented this...
 };
 const editFish = () => {
-    if(selectedFish.value.index !== undefined) {
-        tankRef.value.fishes[selectedFish.value.index] = { ...selectedFish.value };
+    let foundFish = tankRef.value.fishes.find(fish => fish.id === selectedFish.value.id);
+
+    if(foundFish) {
+        foundFish = { ...selectedFish.value };
     }
-    //TODO: Display error toast if index is not defined
 
     editMode.value = false;
 };
 const removeFish = () => {
-    if(selectedFish.value.index !== undefined) {
-        tankRef.value.fishes.splice(selectedFish.value.index, 1);
-    }
+    tankRef.value.fishes = tankRef.value.fishes.filter(fish => fish.id !== selectedFish.value.id);
+    
     //TODO: Display error toast if index is not defined
 
     editMode.value = false;
 }
 
-const handleFishClicked = (fish, index) => {
-    fish.index = index;
+const handleFishClicked = fish => {
     selectedFish.value = fish;
     editMode.value = true;
 };
+
+onUnmounted(() => {
+    id.value = 1;
+})
 
 </script>
 
