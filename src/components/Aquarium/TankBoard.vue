@@ -4,10 +4,11 @@
         <FishForm 
             :fish-count="fishCount" :edit-mode="editMode" 
             v-model="selectedFish"
-            @addFish="fish => emits('addFish', fish)"
-            @editFish="fish => emits('editFish', fish)"
+            @addFish="emits('addFish')"
+            @editFish="emits('editFish')"
             @removeFish="emits('removeFish')"
             @emptyTank="emits('emptyTank')"
+            @unSelectFish="emits('unSelectFish')"
         />
     </div>
 </template>
@@ -29,7 +30,7 @@ const props = defineProps({
 
 const selectedFish = defineModel();
 
-const emits = defineEmits(['addFish', 'editFish', 'removeFish', 'emptyTank']);
+const emits = defineEmits(['addFish', 'editFish', 'removeFish', 'emptyTank', 'unSelectFish']);
 </script>
 
 <style scoped>

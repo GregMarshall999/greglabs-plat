@@ -68,34 +68,22 @@ const selectFish = type => {
 const unSelectFish = e => {
     if (e.target.classList.contains('fish-selection')) {
         selectedFish.value = {};
+        emits('unSelectFish');
     }
 };
 
-const emptyTankButtonClicked = false;
+const emptyTankButtonClicked = ref(false);
 const fishActionText = computed(() => prop.editMode ? "Edit Fish" : "Add Fish");
 const tankActionText = computed(() => prop.editMode ? "Remove Fish" : "Empty Tank");
-const emits = defineEmits(['addFish', 'editFish', 'removeFish', 'emptyTank']);
+const emits = defineEmits(['addFish', 'editFish', 'removeFish', 'emptyTank', 'unSelectFish']);
 
 const handleFishForm = () => {
-    if(emptyTankButtonClicked) {
-        if (prop.editMode) {
-            emits('removeFish');
-        } else {
-            emits('emptyTank');
-        }
+    if(emptyTankButtonClicked.value) {
+        prop.editMode ? emits('removeFish') : emits('emptyTank');
     }
     else {
-        const fish = {
-            type: selectedFish.value.type,
-            name: fishName.value
-        };
-        
-        if (prop.editMode) {
-            emits('editFish', fish);
-        } 
-        else {
-            emits('addFish', fish);
-        }
+        selectedFish.value.name = fishName.value;
+        prop.editMode ? emits('editFish') : emits('addFish');
     }
 
     selectedFish.value = {};

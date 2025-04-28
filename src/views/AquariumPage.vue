@@ -1,12 +1,14 @@
 <template>
+    <p v-if="tankRef">{{ tankRef.fishes }}</p>
     <div class="aquarium">
         <TankBoard v-if="tankRef" 
             :fish-count="tankRef.fishes.length" :edit-mode="editMode"
             v-model="selectedFish"
             @addFish="addFish"
-            @editFish="fish => console.log('editFish', fish)"
-            @removeFish="console.log('removeFish')"
-            @emptyTank="console.log('emptyTank')"
+            @editFish="editFish"
+            @removeFish="removeFish"
+            @emptyTank="tankRef.fishes = []"
+            @unSelectFish="editMode = false"
         />
         <FishTank 
             ref="tankRef" 
@@ -19,24 +21,34 @@
 import TankBoard from '../components/Aquarium/TankBoard.vue';
 import FishTank from '../components/Aquarium/FishTank.vue';
 import { ref } from 'vue';
-import { fishTypes } from '../config/fishConfig';
 
 const editMode = ref(false);
 const tankRef = ref(null);
 const selectedFish = ref({});
 
-const addFish = fish => {
-    const newFish = {
-        ...fish,
-        image: fishTypes[fish.type].image,
-        type: fish.type,
-        speed: fishTypes[fish.type].speed
-    };
-
-    tankRef.value.fishes.push(newFish);
+//TODO: for some reason, while the fish is selected, selecting another fish type in the form changes it's properties before the edit button ic clicked
+const addFish = () => {
+    tankRef.value.fishes.push({ ...selectedFish.value }); //I would have thought the spread prevented this...
 };
+const editFish = () => {
+    if(selectedFish.value.index !== undefined) {
+        tankRef.value.fishes[selectedFish.value.index] = { ...selectedFish.value };
+    }
+    //TODO: Display error toast if index is not defined
+
+    editMode.value = false;
+};
+const removeFish = () => {
+    if(selectedFish.value.index !== undefined) {
+        tankRef.value.fishes.splice(selectedFish.value.index, 1);
+    }
+    //TODO: Display error toast if index is not defined
+
+    editMode.value = false;
+}
 
 const handleFishClicked = (fish, index) => {
+    fish.index = index;
     selectedFish.value = fish;
     editMode.value = true;
 };
