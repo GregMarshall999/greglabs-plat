@@ -8,10 +8,10 @@
             @click="emit('fishClicked', fish)"
         />
         <Food
-            v-for="(food, index) in foods"
-            :key="index"
+            v-for="food in foods"
+            :key="food.id"
             :foodPos="food"
-            @destroy="handleDestroy(index)"
+            @destroy="handleDestroy(food.id)"
         />
     </div>
 </template>
@@ -19,16 +19,17 @@
 <script setup>
 import Fish from './Fish.vue';
 import Food from './Food.vue';
-import { ref } from 'vue';
+import { ref, onUnmounted } from 'vue';
 
 const emit = defineEmits(['fishClicked']);
 
 const fishes = ref([]);
 const foods = ref([]);
 const tankRef = ref(null);
+const id = ref(1);
 
-const handleDestroy = index => {
-    foods.value.splice(index, 1);
+const handleDestroy = id => {
+    foods.value = foods.value.filter(food => food.id !== id);
 }
 
 const handleTankClick = event => {
@@ -37,13 +38,17 @@ const handleTankClick = event => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        foods.value.push({ x, y });
+        foods.value.push({ x, y, id: id.value++ });
     }
 };
 
 defineExpose({
     fishes
 });
+
+onUnmounted(() => {
+    id.value = 1;
+})
 
 </script>
 
