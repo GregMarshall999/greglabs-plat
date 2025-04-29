@@ -26,8 +26,14 @@ const props = defineProps({
     tankRef: {
         type: Object,
         required: true
+    }, 
+    food: {
+        type: Array,
+        default: []
     }
 });
+
+const emit = defineEmits(['ateFood']);
 
 const direction = ref(1);
 const tilt = ref(0);
@@ -35,6 +41,7 @@ const size = ref(1);
 
 const position = reactive({ x: 0, y: 0 });
 const target = reactive({ x: 0, y: 0 });
+const tracking = reactive({ id: null });
 
 const fishStyle = computed(() => ({
     position: 'absolute',
@@ -57,17 +64,54 @@ const getRandomPosition = horizontal => {
 };
 
 const updatePosition = () => {
+    // Check if there's food available
+    if (props.food && props.food.length > 0 && tracking.id === null) {
+        let closestFood = null;
+        let minDistance = Infinity;
+        
+        // Find the closest food
+        for (const foodItem of props.food) {
+            const dx = foodItem.x - position.x;
+            const dy = foodItem.y - position.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestFood = foodItem;
+            }
+        }
+        
+        // If we found food, set it as target
+        if (closestFood) {
+            target.x = closestFood.x;
+            target.y = closestFood.y;
+            tracking.id = closestFood.id;
+            direction.value = target.x < position.x ? -1 : 1;
+        }
+    }
+
     const dx = target.x - position.x;
     const dy = target.y - position.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
     tilt.value = Math.min(Math.max(dy * 0.1, -15), 15);
 
-    if(distance < 5) {
+    //fish reached target
+    if(tracking.id === null && distance < 5) {
         target.x = getRandomPosition(true);
         target.y = getRandomPosition(false);
         direction.value = target.x < position.x ? -1 : 1;
     }
+    //fish ate food
+    else if(distance < 1) {
+        target.x = getRandomPosition(true);
+        target.y = getRandomPosition(false);
+        direction.value = target.x < position.x ? -1 : 1;
+
+        emit('ateFood', tracking.id);
+        tracking.id = null;
+    }
+    //fish is swimming
     else {
         position.x += (dx / distance) * props.fish.speed;
         position.y += (dy / distance) * props.fish.speed;

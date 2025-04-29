@@ -5,7 +5,9 @@
             :key="fish.id"
             :fish="fish"
             :tankRef="tankRef"
+            :food="foods"
             @click="emit('fishClicked', fish)"
+            @ateFood="id => handleDestroy(id)"
         />
         <Food
             v-for="food in foods"
