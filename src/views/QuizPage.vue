@@ -38,7 +38,9 @@
                 {{ answerState }} !
             </p>
 
-            <button v-if="questionIndex < quizConfig.length" type="submit">{{ showResult ? 'Next' : 'Submit' }}</button>
+            <button v-if="questionIndex < quizConfig.length" type="submit" :disabled="!selectedAnswer && !showResult">
+                {{ showResult ? 'Next' : 'Submit' }}
+            </button>
             <button v-else type="submit">Restart</button>
         </div>
     </form>
@@ -178,6 +180,11 @@ button {
     &:hover {
         background-color: #2563eb;
     }
+
+    &:disabled {
+        background-color: #64748b;
+        cursor: not-allowed;
+    }
 }
 
 .correct {
@@ -202,16 +209,5 @@ button {
     height: 100%;
     background-color: #3b82f6;
     transition: width 0.3s ease;
-}
-
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 0.8em;
-    font-weight: bold;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 </style>
