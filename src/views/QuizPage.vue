@@ -1,8 +1,13 @@
 <template>
     <form @submit.prevent="submitForm" class="quiz-form">
-        <h1>{{ quizConfig[questionIndex].question }}</h1>
+        <div v-if="questionIndex < quizConfig.length" class="progress-bar">
+            <div class="progress-fill" :style="{ width: `${(questionIndex / quizConfig.length) * 100}%` }"></div>
+        </div>
 
-        <div class="options">
+        <h1 v-if="questionIndex < quizConfig.length">{{ quizConfig[questionIndex].question }}</h1>
+        <h1 v-else>Your final score:</h1>
+
+        <div v-if="questionIndex < quizConfig.length" class="options">
             <div v-for="(option, index) in quizConfig[questionIndex].options" :key="option" class="option">
                 <input 
                     type="radio" 
@@ -21,6 +26,9 @@
                 </label>
             </div>
         </div>
+        <div v-else class="options">
+            {{ score }} / {{ quizConfig.length }}
+        </div>
         
         <div class="result-section">
             <p 
@@ -30,7 +38,8 @@
                 {{ answerState }} !
             </p>
 
-            <button type="submit">{{ showResult ? 'Next' : 'Submit' }}</button>
+            <button v-if="questionIndex < quizConfig.length" type="submit">{{ showResult ? 'Next' : 'Submit' }}</button>
+            <button v-else type="submit">Restart</button>
         </div>
     </form>
 </template>
@@ -46,6 +55,12 @@ const showResult = ref(false);
 const answerState = ref(null);
 
 const submitForm = () => {
+    if(questionIndex.value === quizConfig.length) {
+        questionIndex.value = 0;
+        score.value = 0;
+        return;
+    }
+
     if(showResult.value) {
         nextQuestion();
         return;
@@ -171,5 +186,32 @@ button {
 
 .incorrect {
     background-color: #dc2626;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #1e293b;
+    border-radius: 10px;
+    margin-bottom: 2em;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #3b82f6;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 </style>
