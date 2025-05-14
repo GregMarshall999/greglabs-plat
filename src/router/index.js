@@ -7,6 +7,7 @@ import CustomDirectivePage from '../views/CustomDirectivePage.vue'
 import TicTacToePage from '../views/TicTacToePage.vue'
 import AquariumPage from '../views/AquariumPage.vue'
 import QuizPage from '../views/QuizPage.vue'
+import TaskPage from '../views/TaskPage.vue'
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/quiz',
     name: 'quiz',
     component: QuizPage
+  },
+  {
+    path: '/task',
+    name: 'task',
+    component: TaskPage
   }
 ]
 

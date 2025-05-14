@@ -16,6 +16,7 @@
                             <li><RouterLink to="/tic-tac-toe" class="nav-link">Tic Tac Toe</RouterLink></li>
                             <li><RouterLink to="/aquarium" class="nav-link">Aquarium</RouterLink></li>
                             <li><RouterLink to="/quiz" class="nav-link">Quiz</RouterLink></li>
+                            <li><RouterLink to="/task" class="nav-link">Task</RouterLink></li>
                         </ul>
                     </li>
                 </ul>

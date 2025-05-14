@@ -92,7 +92,6 @@ const checkAnswer = () => {
 </script>
 
 <style scoped>
-
 .quiz-form {
     display: flex;
     flex-direction: column;
