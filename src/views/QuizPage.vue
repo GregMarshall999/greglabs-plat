@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="checkAnswer" class="quiz-form">
+    <form @submit.prevent="submitForm" class="quiz-form">
         <h1>{{ quizConfig[questionIndex].question }}</h1>
 
         <div class="options">
@@ -11,14 +11,26 @@
                     v-model="selectedAnswer" 
                     name="quiz-option"
                 >
-                <label :for="'option-' + index">{{ option }}</label>
+                <label 
+                    :for="'option-' + index" 
+                    :class="{ 'correct': showResult && quizConfig[questionIndex].correctAnswer === option, 'incorrect': showResult && quizConfig[questionIndex].correctAnswer !== option }"
+                >
+                    {{ option }} 
+                    <span v-if="showResult && quizConfig[questionIndex].correctAnswer === option">✓</span>
+                    <span v-else-if="showResult && quizConfig[questionIndex].correctAnswer !== option">✗</span>
+                </label>
             </div>
         </div>
         
         <div class="result-section">
-            <span v-if="answerState">{{ answerState }}</span>
+            <p 
+                v-if="answerState" 
+                :class="{ 'correct': answerState === 'Correct', 'incorrect': answerState === 'Incorrect' }"
+            >
+                {{ answerState }} !
+            </p>
 
-            <button type="submit">Submit</button>
+            <button type="submit">{{ showResult ? 'Next' : 'Submit' }}</button>
         </div>
     </form>
 </template>
@@ -29,21 +41,35 @@ import { quizConfig } from '../config/quizConfig';
 
 const questionIndex = ref(0);
 const score = ref(0);
-const selectedAnswer = ref();
+const selectedAnswer = ref(null);
 const showResult = ref(false);
+const answerState = ref(null);
 
-const checkAnswer = () => {
+const submitForm = () => {
     if(showResult.value) {
-        showResult.value = false;
-        questionIndex.value++;
-        selectedAnswer.value = null;
+        nextQuestion();
         return;
     }
+    
+    checkAnswer();
+}
 
+const nextQuestion = () => {
+    questionIndex.value++;
+    showResult.value = false;
+    answerState.value = null;
+}
+
+const checkAnswer = () => {
     if(selectedAnswer.value === quizConfig[questionIndex.value].correctAnswer) {
         score.value++;
+        answerState.value = 'Correct';
+    }
+    else {
+        answerState.value = 'Incorrect';
     }
 
+    selectedAnswer.value = null;
     showResult.value = true;
 }
 </script>
@@ -95,21 +121,33 @@ input {
 
     &:checked + label {
         background-color: #3b82f6;
-        border-radius: 4px;
-        padding: 0.2em 0.5em;
     }
 }
 
 label {
     cursor: pointer;
-    display: block;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     font-size: larger;
+    border-radius: 4px;
+    padding: 0.2em 0.5em;
 }
 
 .result-section {
     display: flex;
     width: 100%;
+}
+
+p {
+    margin-left: 1em;
+    margin-right: 1em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    border-radius: 4px;
 }
 
 button {
@@ -125,5 +163,13 @@ button {
     &:hover {
         background-color: #2563eb;
     }
+}
+
+.correct {
+    background-color: #16a34a;
+}
+
+.incorrect {
+    background-color: #dc2626;
 }
 </style>
