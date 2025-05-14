@@ -60,7 +60,7 @@ onUnmounted(() => {
     position: relative;
     width: 100%;
     height: 80vh;
-    background-image: url('/aquarium/bg.jpg');
+    background-image: url('/src/assets/aquarium/bg.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 10px;

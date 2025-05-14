@@ -1,5 +1,5 @@
 <template>
-    <img src="/public/aquarium/fishfood.png" alt="fish food" :style="foodStyle" />
+    <img src="/src/assets/aquarium/fishfood.png" alt="fish food" :style="foodStyle" />
 </template>
 
 <script setup>

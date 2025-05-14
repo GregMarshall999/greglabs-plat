@@ -6,6 +6,7 @@ import ShoppingCartPage from '../views/ShoppingCartPage.vue'
 import CustomDirectivePage from '../views/CustomDirectivePage.vue'
 import TicTacToePage from '../views/TicTacToePage.vue'
 import AquariumPage from '../views/AquariumPage.vue'
+import QuizPage from '../views/QuizPage.vue'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/aquarium',
     name: 'aquarium',
     component: AquariumPage
+  },
+  {
+    path: '/quiz',
+    name: 'quiz',
+    component: QuizPage
   }
 ]
 
