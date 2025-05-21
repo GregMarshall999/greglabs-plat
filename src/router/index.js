@@ -8,6 +8,7 @@ import TicTacToePage from '../views/TicTacToePage.vue'
 import AquariumPage from '../views/AquariumPage.vue'
 import QuizPage from '../views/QuizPage.vue'
 import TaskPage from '../views/TaskPage.vue'
+import ProfilPage from '../views/ProfilePage.vue'
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
     path: '/task',
     name: 'task',
     component: TaskPage
+  }, 
+  {
+    path: '/profil',
+    name: 'profil',
+    component: ProfilPage
   }
 ]
 
