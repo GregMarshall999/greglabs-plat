@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: greglabs-plat
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
+    autoDeploy: true 
