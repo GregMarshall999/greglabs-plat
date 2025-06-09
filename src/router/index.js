@@ -10,12 +10,18 @@ import QuizPage from '../views/QuizPage.vue'
 import TaskPage from '../views/TaskPage.vue'
 import ProfilPage from '../views/ProfilePage.vue'
 import MoviesPage from '../views/MoviesPage.vue'
+import ContactPage from '../views/ContactPage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomePage
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: ContactPage
   },
   {
     path: '/movies',

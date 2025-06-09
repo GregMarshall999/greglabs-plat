@@ -3,7 +3,7 @@
         <div class="container">
             <div class="navbar-content">
                 <div class="logo">
-                    <h1 @click="router.push('/')">Vue JS Certification Mid Level</h1>
+                    <h1 @click="router.push('/')" title="Back to Home Page">Vue JS Certification Mid Level</h1>
                 </div>
                 <ul class="nav-links">
                     <li><RouterLink to="/movies" class="nav-link">Movies</RouterLink></li>

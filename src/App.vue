@@ -1,10 +1,17 @@
 <template>
-	<NavigationBar />
+	<NavigationBar v-if="currentRoute != 'home' && currentRoute != 'contact'" />
 	<RouterView />
 </template>
 
 <script setup>
 import NavigationBar from './components/NavigationBar.vue';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+
+const route = useRoute();
+
+const currentRoute = computed(() => route.name);
+
 </script>
 
 <style>
