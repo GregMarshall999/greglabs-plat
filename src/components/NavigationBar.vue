@@ -3,10 +3,10 @@
         <div class="container">
             <div class="navbar-content">
                 <div class="logo">
-                    <h1>Vue JS Certification Mid Level</h1>
+                    <h1 @click="router.push('/')">Vue JS Certification Mid Level</h1>
                 </div>
                 <ul class="nav-links">
-                    <li><RouterLink to="/" class="nav-link">Movies</RouterLink></li>
+                    <li><RouterLink to="/movies" class="nav-link">Movies</RouterLink></li>
                     <li><RouterLink to="/countdown" class="nav-link">Countdown</RouterLink></li>
                     <li><RouterLink to="/shopping-cart" class="nav-link">Shopping Cart</RouterLink></li>
                     <li class="dropdown">
@@ -27,7 +27,9 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+
+const router = useRouter();
 </script>
 
 <style scoped>
@@ -47,6 +49,7 @@ import { RouterLink } from 'vue-router';
     font-size: 1.5rem;
     font-weight: 700;
     color: #fff;
+    cursor: pointer;
 }
 
 .nav-links {

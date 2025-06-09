@@ -1,200 +1,282 @@
 <template>
-    <AsyncAppModal 
-		:display-modal="displayMovieModal" 
-		@close="closeMovieModal"
-		@submit="submitMovie"
-	>
-		<template #title>Add Movie</template>
+  	<div class="home-page">
 
-		<template #default>
-			<TextInput required v-model="newMovie.name" focus>
-				Name
-			</TextInput>
+		<section class="hero">
+			<div class="hero-content">
+				<h1>Welcome to the Greglabs</h1>
+				<p class="subtitle">Full Stack Developer & Software Engineer</p>
+				<p class="description">
+					Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code. This is my Lab. Welcome! Make yourself comfortable and explore!
+				</p>
+				<div class="cta-buttons">
+					<a href="#projects" class="btn primary">My Current work</a>
+					<a href="#contact" class="btn secondary">Contact Me</a>
+				</div>
+			</div>
+		</section>
 
-			<TextAreaInput v-model="newMovie.description">
-				Description
-			</TextAreaInput>
+		<section id="skills" class="skills">
+			<h2>My Skills</h2>
+			<div class="skills-grid">
+				<div class="skill-card">
+					<i class="fas fa-code"></i>
+					<h3>Frontend Development</h3>
+					<p>Vue.js, React, HTML5, CSS3, JavaScript</p>
+				</div>
+				<div class="skill-card">
+				<i class="fas fa-server"></i>
+				<h3>Backend Development</h3>
+				<p>Node.js, Python, REST APIs, Database Design</p>
+				</div>
+				<div class="skill-card">
+				<i class="fas fa-mobile-alt"></i>
+				<h3>Mobile Development</h3>
+				<p>React Native, Progressive Web Apps</p>
+				</div>
+				<div class="skill-card">
+				<i class="fas fa-tools"></i>
+				<h3>Tools & Technologies</h3>
+				<p>Git, Docker, AWS, CI/CD</p>
+				</div>
+			</div>
+		</section>
 
-			<TagsInput :tags="movieGenres" v-model="newMovie.genres">
-				Genres
-			</TagsInput>
-
-			<TextInput required v-model="newMovie.image">
-				Image
-			</TextInput>
-
-			<CheckboxInput id="in-theaters" v-model="newMovie.inTheaters">
-				In theaters
-			</CheckboxInput>
-		</template>
-
-		<template #close-button>Cancel</template>
-		<template #submit-button>{{ editMode ? 'Update' : 'Create' }}</template>
-	</AsyncAppModal>
-
-	<div class="container">
-    	<h1>Rate your Movies</h1>
-
-		<MoviesAnalytics 
-			:movies="movies" 
-			@remove-ratings="removeRatings"
-			@add-movie="addMovie"
-		/>
-		
-		<ul class="movies">
-			<MovieItem 
-				v-for="movie in movies" 
-				:key="movie.id" 
-				:movie="movie" 
-				@edit="editMovie"
-				@remove="removeMovie"
-				@update-rating="updateRating"
-			/>
-		</ul>
-  </div>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <img src="" alt="Project 1">
+          </div>
+          <div class="project-content">
+            <h3>Project Name</h3>
+            <p>Description of the project and technologies used.</p>
+            <div class="project-tags">
+              <span>Vue.js</span>
+              <span>Node.js</span>
+              <span>MongoDB</span>
+            </div>
+            <a href="#" class="btn">View Project</a>
+          </div>
+        </div>
+        <!-- Add more project cards as needed -->
+      </div>
+    </section>
+  	</div>
 </template>
 
-<script setup>
-import MoviesAnalytics from '../components/movies/MoviesAnalytics.vue';
-import MovieItem from '../components/movies/MovieItem.vue';
-import TextInput from '../components/form-inputs/TextInput.vue';
-import TextAreaInput from '../components/form-inputs/TextAreaInput.vue';
-import TagsInput from '../components/form-inputs/TagsInput.vue';
-import CheckboxInput from '../components/form-inputs/CheckboxInput.vue';
-import { items } from '../movies.json';
-import { reactive, ref, computed, defineAsyncComponent } from 'vue';
-
-const AsyncAppModal = defineAsyncComponent(() => import('../components/AppModal.vue'));
-
-const movies = ref(items);
-
-//Modal
-
-const displayMovieModal = ref(false);
-const editMode = ref(false);
-
-const movieGenres = computed(() => {
-	let allGenres = movies.value.flatMap(movie => movie.genres);
-    return [...new Set(allGenres)];
-});
-
-const closeMovieModal = () => {
-	displayMovieModal.value = false;
-	editMode.value = false;
-
-	newMovie.id = 0;
-	newMovie.name = '';
-	newMovie.description = '';
-	newMovie.image = '';
-	newMovie.rating = 0;
-	newMovie.genres = [];
-	newMovie.inTheaters = false;
-};
-
-//Movie CUD
-
-const newMovie = reactive({
-	id: 0,
-	name: '',
-	description: '',
-	image: '',
-	rating: 0,
-	genres: [],
-	inTheaters: false
-});
-
-const addMovie = () => {
-	displayMovieModal.value = true;
-	editMode.value = false;
-};
-
-const editMovie = movieId => {
-	displayMovieModal.value = true;
-	editMode.value = true;
-
-	const movie = movies.value.find(movie => movie.id === movieId);
-
-	newMovie.id = movie.id;
-	newMovie.name = movie.name;
-	newMovie.description = movie.description;
-	newMovie.image = movie.image;
-	newMovie.rating = movie.rating;
-	newMovie.genres = movie.genres;
-	newMovie.inTheaters = movie.inTheaters;
-};
-
-const removeMovie = movieId => {
-	movies.value = movies.value.filter(movie => movie.id !== movieId);
-};
-
-const submitMovie = () => {
-	if(editMode.value) {
-		const movie = movies.value.find(movie => movie.id === newMovie.id);
-
-		movie.name = newMovie.name;
-		movie.description = newMovie.description;
-		movie.image = newMovie.image;
-		movie.genres = newMovie.genres;
-		movie.inTheaters = newMovie.inTheaters;
-	}
-	else {
-		const movie = { ...newMovie };
-
-		let highestId = 0;
-		movies.value.forEach(movie => {
-			if(movie.id > highestId) {
-				highestId = movie.id;
-			}
-		});
-		movie.id = highestId + 1;
-
-		movies.value.push(movie);
-	}
-
-	closeMovieModal();
-};
-
-//Ratings
-
-const removeRatings = () => {
-	movies.value.forEach(movie => {
-		movie.rating = 0;
-	});
-};
-
-const updateRating = (movieId, starNum) => {
-	const movie = movies.value.find(movie => movie.id === movieId);
-	movie.rating = starNum;
-};
-
+<script>
+export default {
+  name: 'HomePage'
+}
 </script>
 
 <style scoped>
-
-h1 {
-	color: #fff;
-	font-size: 2rem;
-	margin-bottom: 1em;
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.movies {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-	gap: 20px;
-	list-style: none;
-	padding: 0;
+/* Hero Section */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 0;
 }
 
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #42b983;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background-color: #42b983;
+  color: white;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  border: 2px solid #42b983;
+  color: #42b983;
+}
+
+/* Skills Section */
+.skills {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+.skills h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.skill-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+.skill-card i {
+  font-size: 2.5rem;
+  color: #42b983;
+  margin-bottom: 20px;
+}
+
+/* Projects Section */
+.projects {
+  padding: 80px 0;
+}
+
+.projects h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.project-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 20px;
+}
+
+.project-tags {
+  margin: 15px 0;
+}
+
+.project-tags span {
+  background: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+/* Contact Section */
+.contact {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-item {
+  margin: 20px 0;
+}
+
+.contact-item i {
+  color: #42b983;
+  margin-right: 10px;
+}
+
+.social-links {
+  margin-top: 30px;
+}
+
+.social-link {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #42b983;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-	.movies {
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	}
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .btn {
+    margin: 0;
+  }
 }
-
-@media (max-width: 480px) {
-	.movies {
-		grid-template-columns: 1fr;
-	}
-}
-
 </style>
