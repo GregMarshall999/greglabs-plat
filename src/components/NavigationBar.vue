@@ -12,12 +12,10 @@
                     <li class="dropdown">
                         <button class="nav-link dropdown-toggle">Other Challenges</button>
                         <ul class="dropdown-menu">
-                            <li><RouterLink to="/custom-directive" class="nav-link">Custom Directive</RouterLink></li>
                             <li><RouterLink to="/tic-tac-toe" class="nav-link">Tic Tac Toe</RouterLink></li>
                             <li><RouterLink to="/aquarium" class="nav-link">Aquarium</RouterLink></li>
                             <li><RouterLink to="/quiz" class="nav-link">Quiz</RouterLink></li>
                             <li><RouterLink to="/task" class="nav-link">Task</RouterLink></li>
-                            <li><RouterLink to="/profil" class="nav-link">Profil</RouterLink></li>
                         </ul>
                     </li>
                 </ul>
