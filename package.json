@@ -6,7 +6,11 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "render:info": "node scripts/get-render-info.js"
   },
   "dependencies": {
     "@heroicons/vue": "^2.2.0",
@@ -19,16 +23,20 @@
   "devDependencies": {
     "@eslint/js": "^9.18.0",
     "@rushstack/eslint-patch": "^1.10.5",
+    "@testing-library/jest-dom": "^6.6.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/eslint-plugin": "1.1.25",
     "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.18.0",
     "eslint-plugin-vue": "^9.32.0",
+    "jsdom": "^26.1.0",
     "postcss": "^8.5.2",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.12",
-    "vite": "^6.0.11"
+    "vite": "^6.0.11",
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=18.3"
