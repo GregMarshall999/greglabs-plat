@@ -11,6 +11,7 @@ import TaskPage from '../views/TaskPage.vue'
 import ProfilPage from '../views/ProfilePage.vue'
 import MoviesPage from '../views/MoviesPage.vue'
 import ContactPage from '../views/ContactPage.vue'
+import pixiRoutes from './pixijs-projects'
 
 const routes = [
   {
@@ -78,7 +79,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes: [...routes, ...pixiRoutes]
 })
 
 export default router 

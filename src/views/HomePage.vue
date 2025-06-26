@@ -8,7 +8,7 @@
 					Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code. This is my Lab. Welcome! Make yourself comfortable and explore!
 				</p>
 				<div class="cta-buttons">
-					<RouterLink to="/movies" class="btn primary">My Current work</RouterLink>
+					<RouterLink :to="{ name: 'pixi-startup' }" class="btn primary">My Current work</RouterLink>
 					<RouterLink to="/contact" class="btn secondary">Contact Me</RouterLink>
 				</div>
 			</div>
