@@ -1,40 +1,59 @@
----
-difficulty: 1
-chapter: "Chapter 1: Vue.js Essentials"
-training: true
-tags: vue
----
+# GregLabs Portfolio - Vue.js Projects Showcase
 
-# Create a Movie Rating App
+Welcome to my portfolio! I'm Greg, a Full Stack Developer & Software Engineer who builds modern web applications with a focus on clean code and excellent user experience.
 
-# Challenge Description
-Your task is to create a Movie Rating App using Vue.js 3.
-During this challenge, we’ll code out the following features:
-- Rendering a list of movies.
+## About This Portfolio
 
-## Requirements
-- Define the movies as reactive data.
-- Use the Vue.js template syntax to display the movie information.
-- Render all the movies with a `v-for` loop.
-- Display the name, description, genres, and image of each movie.
-- Display the movie rating as stars, with a maximum of 5 stars
+This is my interactive portfolio showcasing various Vue.js projects and challenges I've completed. Each project demonstrates different aspects of Vue.js development, from basic concepts to more advanced features.
 
+## Tech Stack
 
-## Other Considerations
+- **Frontend**: Vue.js 3, Vue Router
+- **Build Tool**: Vite
+- **Testing**: Vitest
+- **Deployment**: Render
+- **Styling**: SASS
 
-- TailwindCSS is preinstalled with the default config. It might be helpful for you, if you want to have some styles. (Not obligatory)
+## Key Features
 
->
-> 😀 The movie list is provided as boilerplate, but feel free to add your favorite one into the list.
->
+- **Responsive Design**: All projects work seamlessly on desktop and mobile
+- **Modern UI/UX**: Clean, intuitive interfaces with smooth animations
+- **Component Architecture**: Well-structured, reusable Vue components
+- **State Management**: Proper use of Vue's reactivity system
+- **Routing**: Seamless navigation between projects
+- **Testing**: Comprehensive test coverage with Vitest
 
->
-> 👀 Don't peek at the solution until you've solved the exercise yourself or exhausted your resources. Challenging yourself will best prepare you for the exam
->
+## Getting Started
 
+### Prerequisites
+- Node.js >= 18.3
+- npm or yarn
 
-## Example of Finished App
+### Installation
 
-This is an example of what the functionality should look like for the completed exercise. If you’d like to mimic this style, feel free to do so, but it is not required.
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd greglabs-plat
 
-![Finished app in this challenge](https://i.imgur.com/HV3dXET.png)
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm run test
+```
+
+## Live Demo
+
+Address: https://greglabs-plat.onrender.com
+
+## 📈 Skills Demonstrated
+
+- **Frontend Development**: Vue.js, HTML5, CSS3, JavaScript
+- **Tools & Technologies**: Git, CI/CD, Trello, Figma, N8N

@@ -3,9 +3,11 @@
 		<section class="hero">
 			<div class="hero-content">
 				<h1>Welcome to the Greglabs</h1>
-				<p class="subtitle">Full Stack Developer & Software Engineer</p>
+				<p class="subtitle">A compilation of various IT mini projects</p>
 				<p class="description">
-					Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code. This is my Lab. Welcome! Make yourself comfortable and explore!
+					Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code. <br>
+					This is my Lab. <br>
+					Welcome! Make yourself comfortable and feel free to explore!
 				</p>
 				<div class="cta-buttons">
 					<RouterLink to="/movies" class="btn primary">My Current work</RouterLink>
