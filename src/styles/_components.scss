@@ -1,0 +1,158 @@
+.nav {
+  @include flex-between;
+  padding: $spacing-md $spacing-lg;
+  background-color: white;
+  box-shadow: $shadow-sm;
+  
+  &__logo {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $primary-color;
+  }
+  
+  &__menu {
+    @include flex-center;
+    gap: $spacing-md;
+  }
+  
+  &__link {
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-md;
+    transition: background-color $transition-fast;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+    }
+    
+    &.active {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}
+
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--small {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+  
+  &--large {
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+}
+
+.card {
+  @include card;
+  
+  &__header {
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    color: #1f2937;
+  }
+  
+  &__content {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__footer {
+    padding-top: $spacing-md;
+    border-top: 1px solid #e2e8f0;
+    @include flex-between;
+  }
+}
+
+.form {
+  &__group {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  &__input {
+    @include input-base;
+  }
+  
+  &__textarea {
+    @include input-base;
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  &__select {
+    @include input-base;
+  }
+  
+  &__error {
+    color: $error-color;
+    font-size: $font-size-sm;
+    margin-top: $spacing-xs;
+  }
+}
+
+.alert {
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-md;
+  
+  &--success {
+    background-color: rgba($success-color, 0.1);
+    color: darken($success-color, 20%);
+    border: 1px solid rgba($success-color, 0.3);
+  }
+  
+  &--warning {
+    background-color: rgba($warning-color, 0.1);
+    color: darken($warning-color, 20%);
+    border: 1px solid rgba($warning-color, 0.3);
+  }
+  
+  &--error {
+    background-color: rgba($error-color, 0.1);
+    color: darken($error-color, 20%);
+    border: 1px solid rgba($error-color, 0.3);
+  }
+  
+  &--info {
+    background-color: rgba($info-color, 0.1);
+    color: darken($info-color, 20%);
+    border: 1px solid rgba($info-color, 0.3);
+  }
+}
+
+.spinner {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid $primary-color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 

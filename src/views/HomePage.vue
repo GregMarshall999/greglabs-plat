@@ -10,7 +10,7 @@
 					Welcome! Make yourself comfortable and feel free to explore!
 				</p>
 				<div class="cta-buttons">
-					<RouterLink to="/movies" class="btn primary">My Current work</RouterLink>
+					<RouterLink to="/movies" class="btn primary">My Current project</RouterLink>
 					<RouterLink to="/contact" class="btn secondary">Contact Me</RouterLink>
 				</div>
 			</div>
