@@ -8,10 +8,9 @@ services:
     restart: unless-stopped
     container_name: greglabs-frontend
     networks:
-      - demo
+      - greglabs
     environment:
       - NODE_ENV=production
 
 networks:
-  demo:
-    external: true 
+  greglabs:
