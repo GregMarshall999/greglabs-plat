@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  greglabs-plat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    container_name: greglabs-plat-app
+
+# Optional: Add a network if you have multiple services
+# networks:
+#   default:
+#     name: greglabs-network 
