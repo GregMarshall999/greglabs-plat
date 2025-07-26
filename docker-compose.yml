@@ -13,5 +13,4 @@ services:
       - NODE_ENV=production
 
 networks:
-  demo:
-    external: true 
+  greglabs:
