@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: greglabs-frontend
+    ports:
+      - "3001:80"
     networks:
       - greglabs
     environment:
