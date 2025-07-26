@@ -1,16 +1,17 @@
-version: '3.8'
+version: '3.3'
 
 services:
-  greglabs-plat:
+  greglabs-frontend:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "8080:80"
     restart: unless-stopped
-    container_name: greglabs-plat-app
+    container_name: greglabs-frontend
+    networks:
+      - demo
+    environment:
+      - NODE_ENV=production
 
-# Optional: Add a network if you have multiple services
-# networks:
-#   default:
-#     name: greglabs-network 
+networks:
+  demo:
+    external: true 
