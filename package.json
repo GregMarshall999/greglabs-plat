@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "start": "node server.js",
+    "lint": "eslint .",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
@@ -22,6 +23,8 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.32.0",
+    "eslint-plugin-vue": "^10.3.0",
     "jsdom": "^26.1.0",
     "postcss": "^8.5.2",
     "sass": "^1.89.2",

@@ -1,0 +1,33 @@
+name: Deploy Frontend to Hetzner
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install deps & run build
+        run: |
+          npm install
+          npm run lint
+          npm run test
+          npm run build
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/greg-labs-frontend/greglabs-plat
+            git pull origin main
+            cd /opt/n8n-server
+            docker compose build frontend
+            docker compose up -d
