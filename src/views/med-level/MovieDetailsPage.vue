@@ -21,10 +21,10 @@
 </template>
 
 <script setup>
-import { items } from '../movies.json';
+import { items } from '@/config/med-level/movies.json';
 import { computed, ref } from 'vue';
-import RatedPicture from '../components/movies/RatedPicture.vue';
-import MovieDetails from '../components/movies/MovieDetails.vue';
+import RatedPicture from '@/components/med-level/movies/RatedPicture.vue';
+import MovieDetails from '@/components/med-level/movies/MovieDetails.vue';
 
 const props = defineProps({
     id: {

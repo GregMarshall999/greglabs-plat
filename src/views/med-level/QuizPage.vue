@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { quizConfig } from '../config/quizConfig';
+import { quizConfig } from '@/config/med-level/quizConfig';
 
 const questionIndex = ref(0);
 const score = ref(0);

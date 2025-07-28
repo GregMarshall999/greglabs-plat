@@ -17,8 +17,8 @@
 </template>
 
 <script setup>
-import TankBoard from '../components/Aquarium/TankBoard.vue';
-import FishTank from '../components/Aquarium/FishTank.vue';
+import TankBoard from '@/components/med-level/aquarium/TankBoard.vue';
+import FishTank from '@/components/med-level/aquarium/FishTank.vue';
 import { ref, onUnmounted } from 'vue';
 
 const editMode = ref(false);

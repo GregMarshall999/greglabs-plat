@@ -35,7 +35,7 @@
 
                     <div class="actions" v-if="hovering">
                         <RouterLink 
-                            :to="{ name: 'movie-details', params: { id: movie.id } }"
+                            :to="{ name: 'med-level-movie-details', params: { id: movie.id } }"
                             class="icon-button view"
                         >
                             <svg fill="#000000" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { fishTypes } from '../../config/fishConfig';
+import { fishTypes } from '@/config/med-level/fishConfig';
 
 const messages = [
     'Select a fish:'

@@ -2,17 +2,50 @@
   	<div class="home-page">
 		<section class="hero">
 			<div class="hero-content">
-				<h1>Welcome to the Greglabs</h1>
+				<h1>Welcome to the Greg-labs</h1>
 				<p class="subtitle">A compilation of various IT mini projects</p>
 				<p class="description">
-					Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code. <br>
-					This is my Lab. <br>
-					Welcome! Make yourself comfortable and feel free to explore!
+					Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code <br>
+					Welcome to my Lab <br>
+					Make yourself comfortable and feel free to explore!
 				</p>
 				<div class="cta-buttons">
-					<RouterLink to="/movies" class="btn primary">My Current project</RouterLink>
-					<RouterLink to="/contact" class="btn secondary">Contact Me</RouterLink>
+					<RouterLink :to="{ name: 'med-level-movies' }" class="btn primary">My Current project</RouterLink>
+					<RouterLink :to="{ name: 'contact' }" class="btn secondary">Contact Me</RouterLink>
 				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="about-greglabs">
+				<h2>What is Greg-labs?</h2>
+				<div class="about-content">
+					<div class="about-text">
+						<p>
+							Greglabs is my personal development playground where I experiment with new technologies, 
+							build innovative solutions, and showcase passion for software engineering. 
+							It's a collection of mini-projects that demonstrate skills across different 
+							technologies and frameworks.
+						</p>
+						<p>
+							Each project here represents a journey: 
+							-From a need or a problem to solve
+							-The exploration of new technologies for the solution
+							-To the final result, a working solution with the mindset of less is more
+							Full-stack web applications, mobile apps and automation tools, all have a story to tell. Will you be part of it?
+						</p>
+						<p>
+							Whether you're a fellow developer, a head hunter 😎, or just curious about my work 
+							This labs is yours to explore ! 
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div>
+				<h2>Who is Greg ?</h2>
 			</div>
 		</section>
 

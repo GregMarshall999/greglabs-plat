@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import CountdownHeader from '../components/countdown/CountdownHeader.vue';
-import CountdownSegment from '../components/countdown/CountdownSegment.vue';
+import CountdownHeader from '@/components/med-level/countdown/CountdownHeader.vue';
+import CountdownSegment from '@/components/med-level/countdown/CountdownSegment.vue';
 import { ref, onUnmounted } from 'vue';
 
 const days = ref(0);

@@ -1,27 +1,23 @@
 <template>
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <div class="logo">
-                    <h1 @click="router.push('/')" title="Back to Home Page">Vue JS Certification Mid Level</h1>
-                </div>
-                <ul class="nav-links">
-                    <li><RouterLink to="/movies" class="nav-link">Movies</RouterLink></li>
-                    <li><RouterLink to="/countdown" class="nav-link">Countdown</RouterLink></li>
-                    <li><RouterLink to="/shopping-cart" class="nav-link">Shopping Cart</RouterLink></li>
-                    <li class="dropdown">
-                        <button class="nav-link dropdown-toggle">Other Challenges</button>
-                        <ul class="dropdown-menu">
-                            <li><RouterLink to="/tic-tac-toe" class="nav-link">Tic Tac Toe</RouterLink></li>
-                            <li><RouterLink to="/aquarium" class="nav-link">Aquarium</RouterLink></li>
-                            <li><RouterLink to="/quiz" class="nav-link">Quiz</RouterLink></li>
-                            <li><RouterLink to="/task" class="nav-link">Task</RouterLink></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+    <div class="navbar-content">
+        <div class="logo">
+            <h1 @click="router.push('/')" title="Back to Home Page">Vue JS Certification Mid Level</h1>
         </div>
-    </nav>
+        <ul class="nav-links">
+            <li><RouterLink :to="{ name: 'med-level-movies' }" class="nav-link">Movies</RouterLink></li>
+            <li><RouterLink :to="{ name: 'med-level-countdown' }" class="nav-link">Countdown</RouterLink></li>
+            <li><RouterLink :to="{ name: 'med-level-shopping-cart' }" class="nav-link">Shopping Cart</RouterLink></li>
+            <li class="dropdown">
+                <button class="nav-link dropdown-toggle">Other Challenges</button>
+                <ul class="dropdown-menu">
+                    <li><RouterLink :to="{ name: 'med-level-tic-tac-toe' }" class="nav-link">Tic Tac Toe</RouterLink></li>
+                    <li><RouterLink :to="{ name: 'med-level-aquarium' }" class="nav-link">Aquarium</RouterLink></li>
+                    <li><RouterLink :to="{ name: 'med-level-quiz' }" class="nav-link">Quiz</RouterLink></li>
+                    <li><RouterLink :to="{ name: 'med-level-task' }" class="nav-link">Task</RouterLink></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script setup>
@@ -30,12 +26,7 @@ import { RouterLink, useRouter } from 'vue-router';
 const router = useRouter();
 </script>
 
-<style scoped>
-.navbar {
-    background-color: #1a2434;
-    padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
+<style>
 
 .navbar-content {
     display: flex;
@@ -117,4 +108,5 @@ const router = useRouter();
 .dropdown-menu .nav-link:hover {
     background-color: #2d3748;
 }
+
 </style>

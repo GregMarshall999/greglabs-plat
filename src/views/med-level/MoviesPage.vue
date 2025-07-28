@@ -1,5 +1,5 @@
 <template>
-    <AsyncAppModal 
+    <AsyncMovieModal 
 		:display-modal="displayMovieModal" 
 		@close="closeMovieModal"
 		@submit="submitMovie"
@@ -30,7 +30,7 @@
 
 		<template #close-button>Cancel</template>
 		<template #submit-button>{{ editMode ? 'Update' : 'Create' }}</template>
-	</AsyncAppModal>
+	</AsyncMovieModal>
 
 	<div class="container">
     	<h1>Rate your Movies</h1>
@@ -55,16 +55,16 @@
 </template>
 
 <script setup>
-import MoviesAnalytics from '../components/movies/MoviesAnalytics.vue';
-import MovieItem from '../components/movies/MovieItem.vue';
-import TextInput from '../components/form-inputs/TextInput.vue';
-import TextAreaInput from '../components/form-inputs/TextAreaInput.vue';
-import TagsInput from '../components/form-inputs/TagsInput.vue';
-import CheckboxInput from '../components/form-inputs/CheckboxInput.vue';
-import { items } from '../movies.json';
+import MoviesAnalytics from '@/components/med-level/movies/MoviesAnalytics.vue';
+import MovieItem from '@/components/med-level/movies/MovieItem.vue';
+import TextInput from '@/components/med-level/form-inputs/TextInput.vue';
+import TextAreaInput from '@/components/med-level/form-inputs/TextAreaInput.vue';
+import TagsInput from '@/components/med-level/form-inputs/TagsInput.vue';
+import CheckboxInput from '@/components/med-level/form-inputs/CheckboxInput.vue';
+import { items } from '@/config/med-level/movies.json';
 import { reactive, ref, computed, defineAsyncComponent } from 'vue';
 
-const AsyncAppModal = defineAsyncComponent(() => import('../components/AppModal.vue'));
+const AsyncMovieModal = defineAsyncComponent(() => import('@/components/med-level/movies/MovieModal.vue'));
 
 const movies = ref(items);
 
