@@ -1,23 +1,30 @@
 <template>
-    <div class="container">
-        <article>
-            <span class="picture">
-                <RatedPicture 
-                    :movie-rating="movie.rating"
-                    :movie-image="movie.image"
-                    :movie-name="movie.name"
-                />    
-            </span>
+  <div class="container">
+    <article>
+      <span class="picture">
+        <RatedPicture 
+          :movie-rating="movie.rating"
+          :movie-image="movie.image"
+          :movie-name="movie.name"
+        />    
+      </span>
 
-            <div class="details">
-                <MovieDetails :genres="movie.genres" style="height: 100%;">
-                    <template #title>{{ movie.name }}</template>
+      <div class="details">
+        <MovieDetails
+          :genres="movie.genres"
+          style="height: 100%;"
+        >
+          <template #title>
+            {{ movie.name }}
+          </template>
 
-                    <template #description>{{ movie.description }}</template>
-                </MovieDetails>
-            </div>
-        </article>
-    </div>
+          <template #description>
+            {{ movie.description }}
+          </template>
+        </MovieDetails>
+      </div>
+    </article>
+  </div>
 </template>
 
 <script setup>

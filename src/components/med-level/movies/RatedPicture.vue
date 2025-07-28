@@ -1,10 +1,17 @@
 <template>
-    <div v-if="!notRated" class="top-right-rating">
-        <StarIcon class="big-star" />
-        <label>{{ movieRating }}</label>
-    </div>
+  <div
+    v-if="!notRated"
+    class="top-right-rating"
+  >
+    <StarIcon class="big-star" />
+    <label>{{ movieRating }}</label>
+  </div>
 
-    <img :src="movieImage" :alt="movieName" crossorigin="anonymous"/>
+  <img
+    :src="movieImage"
+    :alt="movieName"
+    crossorigin="anonymous"
+  >
 </template>
 
 <script setup>

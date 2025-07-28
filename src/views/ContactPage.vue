@@ -2,35 +2,45 @@
   <div class="contact-page">
     <section class="contact-hero">
       <h1>Get in Touch</h1>
-      <p class="subtitle">How may I help you?</p>
-      <RouterLink to="/" class="back-button">Go Back</RouterLink>
+      <p class="subtitle">
+        How may I help you?
+      </p>
+      <RouterLink
+        to="/"
+        class="back-button"
+      >
+        Go Back
+      </RouterLink>
     </section>
 
     <div class="contact-container">
       <div class="contact-info">
         <div class="info-card">
-          <i class="fas fa-envelope"></i>
+          <i class="fas fa-envelope" />
           <h3>Email</h3>
           <p>gregory.marshall999@gmail.com</p>
         </div>
         <div class="info-card">
-          <i class="fas fa-phone"></i>
+          <i class="fas fa-phone" />
           <h3>Phone</h3>
           <p>+33 6 51 14 72 19</p>
         </div>
         <div class="info-card">
-          <i class="fas fa-map-marker-alt"></i>
+          <i class="fas fa-map-marker-alt" />
           <h3>Location</h3>
           <p>France</p>
         </div>
         <div class="info-card">
-          <i class="fas fa-clock"></i>
+          <i class="fas fa-clock" />
           <h3>Availability</h3>
           <p>Open to new opportunities</p>
         </div>
       </div>
 
-      <form class="contact-form" @submit.prevent="handleSubmit">
+      <form
+        class="contact-form"
+        @submit.prevent="handleSubmit"
+      >
         <div class="form-overlay">
           <div class="coming-soon">
             <h2>WIP - Coming Soon</h2>
@@ -78,14 +88,21 @@
             required
             placeholder="Your message"
             rows="5"
-          ></textarea>
+          />
         </div>
 
-        <button type="submit" class="submit-btn" :disabled="isSubmitting">
+        <button
+          type="submit"
+          class="submit-btn"
+          :disabled="isSubmitting"
+        >
           {{ isSubmitting ? 'Sending...' : 'Send Message' }}
         </button>
 
-        <div v-if="submitStatus" :class="['status-message', submitStatus.type]">
+        <div
+          v-if="submitStatus"
+          :class="['status-message', submitStatus.type]"
+        >
           {{ submitStatus.message }}
         </div>
       </form>

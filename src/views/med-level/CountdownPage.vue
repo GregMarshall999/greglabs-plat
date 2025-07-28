@@ -1,15 +1,27 @@
 <template>
-    <div class="container">
-        <div class="countdown-container">
-            <CountdownHeader />
-            <div class="countdown-segment-container">
-                <CountdownSegment label="Days" :number="days" />
-                <CountdownSegment label="Hours" :number="hours" />
-                <CountdownSegment label="Minutes" :number="minutes" />
-                <CountdownSegment label="Seconds" :number="seconds" />
-            </div>
-        </div>
+  <div class="container">
+    <div class="countdown-container">
+      <CountdownHeader />
+      <div class="countdown-segment-container">
+        <CountdownSegment
+          label="Days"
+          :number="days"
+        />
+        <CountdownSegment
+          label="Hours"
+          :number="hours"
+        />
+        <CountdownSegment
+          label="Minutes"
+          :number="minutes"
+        />
+        <CountdownSegment
+          label="Seconds"
+          :number="seconds"
+        />
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>

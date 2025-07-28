@@ -1,17 +1,32 @@
 <template>
-    <div class="tank-options">
-        <div class="fish-mode">
-            <button :class="{ active: fishMode[0] }" @click="toggleFishMode(0)" disabled title="Coming soon">
-                Collision {{ fishMode[0] ? 'On' : 'Off' }}
-            </button>
-            <button :class="{ active: fishMode[1] }" @click="toggleFishMode(1)" disabled title="Coming soon">
-                Growth {{ fishMode[1] ? 'On' : 'Off' }}
-            </button>
-            <button :class="{ active: fishMode[2] }" @click="toggleFishMode(2)" disabled title="Coming soon">
-                Boid {{ fishMode[2] ? 'On' : 'Off' }}
-            </button>
-        </div>
+  <div class="tank-options">
+    <div class="fish-mode">
+      <button
+        :class="{ active: fishMode[0] }"
+        @click="toggleFishMode(0)"
+        disabled
+        title="Coming soon"
+      >
+        Collision {{ fishMode[0] ? 'On' : 'Off' }}
+      </button>
+      <button
+        :class="{ active: fishMode[1] }"
+        @click="toggleFishMode(1)"
+        disabled
+        title="Coming soon"
+      >
+        Growth {{ fishMode[1] ? 'On' : 'Off' }}
+      </button>
+      <button
+        :class="{ active: fishMode[2] }"
+        @click="toggleFishMode(2)"
+        disabled
+        title="Coming soon"
+      >
+        Boid {{ fishMode[2] ? 'On' : 'Off' }}
+      </button>
     </div>
+  </div>
 </template>
 
 <script setup>

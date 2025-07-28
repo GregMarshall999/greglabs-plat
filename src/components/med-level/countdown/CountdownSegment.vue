@@ -1,8 +1,14 @@
 <template>
   <div class="segment">
     <div class="number-wrapper">
-      <transition name="fall" mode="out-in">
-        <span :key="number" class="number">{{ number }}</span>
+      <transition
+        name="fall"
+        mode="out-in"
+      >
+        <span
+          :key="number"
+          class="number"
+        >{{ number }}</span>
       </transition>
     </div>
     <span class="block pt-2 label">{{ label }}</span>
@@ -11,8 +17,14 @@
 
 <script setup>
 defineProps({
-  label: String,
-  number: Number
+  label: {
+    type: String,
+    default: ''
+  },
+  number: {
+    type: Number,
+    default: 0
+  }
 });
 </script>
 

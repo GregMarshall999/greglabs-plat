@@ -1,7 +1,7 @@
 <template>
-	<NavigationBar />
-	<RouterView />
-	<AppFooter />
+  <NavigationBar />
+  <RouterView />
+  <AppFooter />
 </template>
 
 <script setup>

@@ -1,19 +1,21 @@
 <template>
-    <div class="aquarium">
-        <TankBoard v-if="tankRef" 
-            :fish-count="tankRef.fishes.length" :edit-mode="editMode"
-            v-model="selectedFish"
-            @addFish="addFish"
-            @editFish="editFish"
-            @removeFish="removeFish"
-            @emptyTank="tankRef.fishes = []"
-            @unSelectFish="editMode = false"
-        />
-        <FishTank 
-            ref="tankRef" 
-            @fishClicked="handleFishClicked"
-        />
-    </div>
+  <div class="aquarium">
+    <TankBoard
+      v-if="tankRef" 
+      :fish-count="tankRef.fishes.length"
+      :edit-mode="editMode"
+      v-model="selectedFish"
+      @add-fish="addFish"
+      @edit-fish="editFish"
+      @remove-fish="removeFish"
+      @empty-tank="tankRef.fishes = []"
+      @un-select-fish="editMode = false"
+    />
+    <FishTank 
+      ref="tankRef" 
+      @fish-clicked="handleFishClicked"
+    />
+  </div>
 </template>
 
 <script setup>

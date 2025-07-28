@@ -1,12 +1,12 @@
 <template>
-    <div class="form-item">
-        <label><slot></slot></label>
-        <textarea 
-            v-model="modelValue"
-            class="form-input form-text"
-            :required="required"
-        ></textarea>
-    </div>
+  <div class="form-item">
+    <label><slot /></label>
+    <textarea 
+      v-model="modelValue"
+      class="form-input form-text"
+      :required="required"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -17,7 +17,7 @@ const props = defineProps({
     }
 });
 
-const modelValue = defineModel({ required: true });
+const modelValue = defineModel({ required: true, type: String });
 </script>
 
 <style scoped>

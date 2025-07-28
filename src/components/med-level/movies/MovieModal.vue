@@ -1,35 +1,49 @@
 <template>
-    <transition @enter="slideForm = true" @after-leave="slideForm = false" name="fade">
-        <div v-if="displayModal" class="modal-background">
-            <div class="modal">
-                <h2>
-                    <slot name="title"></slot>
-                </h2>
+  <transition
+    @enter="slideForm = true"
+    @after-leave="slideForm = false"
+    name="fade"
+  >
+    <div
+      v-if="displayModal"
+      class="modal-background"
+    >
+      <div class="modal">
+        <h2>
+          <slot name="title" />
+        </h2>
 
-                <transition name="slide">
-                    <form v-if="slideForm" @submit.prevent="emits('submit')">
-                        <slot></slot>
+        <transition name="slide">
+          <form
+            v-if="slideForm"
+            @submit.prevent="emits('submit')"
+          >
+            <slot />
 
-                        <div class="form-actions">
-                            <button 
-                                class="form-button gray" 
-                                type="button" 
-                                @click="emits('close')"
-                            >
-                                <slot name="close-button">X</slot>
-                            </button>
-                            <button 
-                                class="form-button blue" 
-                                type="submit"
-                            >
-                                <slot name="submit-button">Submit</slot>
-                            </button>
-                        </div>
-                    </form>
-                </transition>
+            <div class="form-actions">
+              <button 
+                class="form-button gray" 
+                type="button" 
+                @click="emits('close')"
+              >
+                <slot name="close-button">
+                  X
+                </slot>
+              </button>
+              <button 
+                class="form-button blue" 
+                type="submit"
+              >
+                <slot name="submit-button">
+                  Submit
+                </slot>
+              </button>
             </div>
-        </div>
-    </transition>
+          </form>
+        </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script setup>

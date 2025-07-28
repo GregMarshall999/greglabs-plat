@@ -1,13 +1,13 @@
 <template>
-    <div class="checkbox-container">
-        <input 
-            v-model="modelValue"
-            class="checkbox"
-            type="checkbox"
-            :id="id"
-        />
-        <label :for="id"><slot></slot></label>
-    </div>
+  <div class="checkbox-container">
+    <input 
+      v-model="modelValue"
+      class="checkbox"
+      type="checkbox"
+      :id="id"
+    >
+    <label :for="id"><slot /></label>
+  </div>
 </template>
 
 <script setup>
@@ -18,7 +18,7 @@ const props = defineProps({
     }
 });
 
-const modelValue = defineModel({ required: true });
+const modelValue = defineModel({ required: true, type: Boolean });
 </script>
 
 <style scoped>

@@ -1,14 +1,14 @@
 <template>
-    <div class="form-item">
-        <label><slot></slot></label>
-        <input 
-            v-model="modelValue"
-            class="form-input"
-            type="text"
-            :required="required"
-            ref="focusInput"
-        />
-    </div>
+  <div class="form-item">
+    <label><slot /></label>
+    <input 
+      v-model="modelValue"
+      class="form-input"
+      type="text"
+      :required="required"
+      ref="focusInput"
+    >
+  </div>
 </template>
 
 <script setup>
@@ -25,7 +25,10 @@ const props = defineProps({
     }
 });
 
-const modelValue = defineModel({ required: true });
+const modelValue = defineModel({ 
+    required: true, 
+    type: String
+});
 
 
 const focusInput = ref(null);

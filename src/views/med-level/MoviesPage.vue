@@ -1,56 +1,75 @@
 <template>
-    <AsyncMovieModal 
-		:display-modal="displayMovieModal" 
-		@close="closeMovieModal"
-		@submit="submitMovie"
-	>
-		<template #title>Add Movie</template>
+  <AsyncMovieModal 
+    :display-modal="displayMovieModal" 
+    @close="closeMovieModal"
+    @submit="submitMovie"
+  >
+    <template #title>
+      Add Movie
+    </template>
 
-		<template #default>
-			<TextInput required v-model="newMovie.name" focus>
-				Name
-			</TextInput>
+    <template #default>
+      <TextInput
+        required
+        v-model="newMovie.name"
+        focus
+      >
+        Name
+      </TextInput>
 
-			<TextAreaInput v-model="newMovie.description">
-				Description
-			</TextAreaInput>
+      <TextAreaInput v-model="newMovie.description">
+        Description
+      </TextAreaInput>
 
-			<TagsInput :tags="movieGenres" v-model="newMovie.genres">
-				Genres
-			</TagsInput>
+      <TagsInput
+        :tags="movieGenres"
+        v-model="newMovie.genres"
+      >
+        Genres
+      </TagsInput>
 
-			<TextInput required v-model="newMovie.image">
-				Image
-			</TextInput>
+      <TextInput
+        required
+        v-model="newMovie.image"
+      >
+        Image
+      </TextInput>
 
-			<CheckboxInput id="in-theaters" v-model="newMovie.inTheaters">
-				In theaters
-			</CheckboxInput>
-		</template>
+      <CheckboxInput
+        id="in-theaters"
+        v-model="newMovie.inTheaters"
+      >
+        In theaters
+      </CheckboxInput>
+    </template>
 
-		<template #close-button>Cancel</template>
-		<template #submit-button>{{ editMode ? 'Update' : 'Create' }}</template>
-	</AsyncMovieModal>
+    <template #close-button>
+      Cancel
+    </template>
+    <template #submit-button>
+      {{ editMode ? 'Update' : 'Create' }}
+    </template>
+  </AsyncMovieModal>
 
-	<div class="container">
-    	<h1>Rate your Movies</h1>
+  <div class="container">
+    <h1>Rate your Movies</h1>
 
-		<MoviesAnalytics 
-			:movies="movies" 
-			@remove-ratings="removeRatings"
-			@add-movie="addMovie"
-		/>
+    <MoviesAnalytics 
+      :movies="movies" 
+      @remove-ratings="removeRatings"
+      @add-movie="addMovie"
+    />
 		
-		<ul class="movies">
-			<MovieItem 
-				v-for="movie in movies" 
-				:key="movie.id" 
-				:movie="movie" 
-				@edit="editMovie"
-				@remove="removeMovie"
-				@update-rating="updateRating"
-			/>
-		</ul>
+    <ul class="movies">
+      <MovieItem 
+        v-for="movie in movies" 
+        :key="movie.id" 
+        :movie="movie" 
+        @edit="editMovie"
+        @remove="removeMovie"
+        @update-rating="updateRating"
+      />
+    </ul>
   </div>
 </template>
 

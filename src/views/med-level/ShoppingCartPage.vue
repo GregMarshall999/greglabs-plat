@@ -1,28 +1,36 @@
 <template>
-    <div class="container">
+  <div class="container">
+    <h1 class="title-band">
+      Shopping Cart
+    </h1>
 
-        <h1 class="title-band">Shopping Cart</h1>
+    <div class="cart-container">
+      <ul class="product-list">
+        <li
+          v-for="(product, index) in products"
+          :key="product.id"
+          :class="{ zebra: index % 2 === 0 }"
+        >
+          <span class="product-name">{{ truncateName(product.name) }}</span>
+          <span class="product-price">${{ displayFullNumericPrice(product.price) }}</span>
+          <span class="quantity-controls">
+            <button
+              @click="decreaseQuantity(product)"
+              :disabled="!canDecreaseQuantity(product.quantity)"
+            >-</button>
+            <span>{{ product.quantity }}</span>
+            <button @click="increaseQuantity(product)">+</button>
+          </span>
+          <span class="product-total">${{ displayFullNumericPrice(product.price * product.quantity) }}</span>
+        </li>
+      </ul>
 
-        <div class="cart-container">
-            <ul class="product-list">
-                <li v-for="(product, index) in products" :key="product.id" :class="{ zebra: index % 2 === 0 }">
-                    <span class="product-name">{{ truncateName(product.name) }}</span>
-                    <span class="product-price">${{ displayFullNumericPrice(product.price) }}</span>
-                    <span class="quantity-controls">
-                        <button @click="decreaseQuantity(product)" :disabled="!canDecreaseQuantity(product.quantity)">-</button>
-                        <span>{{ product.quantity }}</span>
-                        <button @click="increaseQuantity(product)">+</button>
-                    </span>
-                    <span class="product-total">${{ displayFullNumericPrice(product.price * product.quantity) }}</span>
-                </li>
-            </ul>
-
-            <div class="cart-total">
-                <span>Total:</span>
-                <span>${{ displayFullNumericPrice(total) }}</span>
-            </div>
-        </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span>${{ displayFullNumericPrice(total) }}</span>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>

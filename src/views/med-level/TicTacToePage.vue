@@ -1,58 +1,109 @@
 <template>
-    <div class="container">
-        <h1>Tic-Tac-Toe</h1>
+  <div class="container">
+    <h1>Tic-Tac-Toe</h1>
 
-        <div class="difficulty-selection" v-if="!gameStarted">
-            <h3>Select Difficulty:</h3>
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="difficulty" value="pvp" v-model="difficulty" checked>
-                    PVP
-                </label>
-                <label>
-                    <input type="radio" name="difficulty" value="easy" v-model="difficulty">
-                    PVE - Easy
-                </label>
-                <label>
-                    <input type="radio" name="difficulty" value="hard" v-model="difficulty">
-                    PVE - Hard
-                </label>
-                <label>
-                    <input type="radio" name="difficulty" value="impossible" v-model="difficulty">
-                    PVE - Impossible
-                </label>
-            </div>
-        </div>
-
-        <h2 v-if="!gameStarted && !gameOver">Click a cell to play !</h2>
-
-        <h2 v-if="difficulty === 'pvp' && gameStarted && !gameOver">Player {{ playerTurn }}'s turn</h2>
-        <h2 v-if="difficulty === 'pvp' && gameOver && !draw">Player {{ playerTurn }} wins!</h2>
-
-        <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && computerTurn">Let me think...</h2>
-        <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && !computerTurn">Your turn !</h2>
-        <h2 v-if="difficulty !== 'pvp' && gameOver && computerTurn && !draw">I win ! An other game ?</h2>
-        <h2 v-if="difficulty !== 'pvp' && gameOver && !computerTurn && !draw">You win ! Well played !</h2>
-        
-        <h2 v-if="gameOver && draw">It's a draw !</h2>
-
-        <div class="board">
-            <div v-for="row in 3" :key="row" class="board-row">
-                <button 
-                    v-for="col in 3" :key="row  + col" 
-                    @click="play(row - 1, col - 1)" 
-                    @mouseover="hover(row - 1, col - 1)"
-                    @mouseleave="unhover(row - 1, col - 1)"
-                    class="cell" :class="{ borderBot : row < 3, borderRight : col < 3, green : mark[row - 1][col - 1].value === 'X', orange : mark[row - 1][col - 1].value === 'O' }"
-                    :disabled="gameOver"
-                >
-                    {{ mark[row - 1][col - 1].value }} {{ mark[row - 1][col - 1].hoverValue }}
-                </button>
-            </div>
-        </div>
-        
-        <button class="reset" @click="resetGame">Reset Game</button>
+    <div
+      class="difficulty-selection"
+      v-if="!gameStarted"
+    >
+      <h3>Select Difficulty:</h3>
+      <div class="radio-group">
+        <label>
+          <input
+            type="radio"
+            name="difficulty"
+            value="pvp"
+            v-model="difficulty"
+            checked
+          >
+          PVP
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="difficulty"
+            value="easy"
+            v-model="difficulty"
+          >
+          PVE - Easy
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="difficulty"
+            value="hard"
+            v-model="difficulty"
+          >
+          PVE - Hard
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="difficulty"
+            value="impossible"
+            v-model="difficulty"
+          >
+          PVE - Impossible
+        </label>
+      </div>
     </div>
+
+    <h2 v-if="!gameStarted && !gameOver">
+      Click a cell to play !
+    </h2>
+
+    <h2 v-if="difficulty === 'pvp' && gameStarted && !gameOver">
+      Player {{ playerTurn }}'s turn
+    </h2>
+    <h2 v-if="difficulty === 'pvp' && gameOver && !draw">
+      Player {{ playerTurn }} wins!
+    </h2>
+
+    <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && computerTurn">
+      Let me think...
+    </h2>
+    <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && !computerTurn">
+      Your turn !
+    </h2>
+    <h2 v-if="difficulty !== 'pvp' && gameOver && computerTurn && !draw">
+      I win ! An other game ?
+    </h2>
+    <h2 v-if="difficulty !== 'pvp' && gameOver && !computerTurn && !draw">
+      You win ! Well played !
+    </h2>
+        
+    <h2 v-if="gameOver && draw">
+      It's a draw !
+    </h2>
+
+    <div class="board">
+      <div
+        v-for="row in 3"
+        :key="row"
+        class="board-row"
+      >
+        <button 
+          v-for="col in 3"
+          :key="row + col" 
+          @click="play(row - 1, col - 1)" 
+          @mouseover="hover(row - 1, col - 1)"
+          @mouseleave="unhover(row - 1, col - 1)"
+          class="cell"
+          :class="{ borderBot : row < 3, borderRight : col < 3, green : mark[row - 1][col - 1].value === 'X', orange : mark[row - 1][col - 1].value === 'O' }"
+          :disabled="gameOver"
+        >
+          {{ mark[row - 1][col - 1].value }} {{ mark[row - 1][col - 1].hoverValue }}
+        </button>
+      </div>
+    </div>
+        
+    <button
+      class="reset"
+      @click="resetGame"
+    >
+      Reset Game
+    </button>
+  </div>
 </template>
 
 <script setup>

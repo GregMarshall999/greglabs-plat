@@ -1,18 +1,24 @@
 <template>
-    <div v-if="fish"
-        class="fish" 
-        :style="fishStyle"
+  <div
+    v-if="fish"
+    class="fish" 
+    :style="fishStyle"
+  >
+    <img 
+      :src="fish.image" 
+      :alt="fish.type" 
+      :style="{
+        transform: `scaleX(${direction}) rotate(${tilt}deg)`,
+        transition: 'transform 0.3s ease'
+      }"
     >
-        <img 
-            :src="fish.image" 
-            :alt="fish.type" 
-            :style="{
-                transform: `scaleX(${direction}) rotate(${tilt}deg)`,
-                transition: 'transform 0.3s ease'
-            }"
-        />
-        <div v-if="fish.name" class="fish-name">{{ fish.name }}</div>
+    <div
+      v-if="fish.name"
+      class="fish-name"
+    >
+      {{ fish.name }}
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -28,8 +34,8 @@ const props = defineProps({
         required: true
     }, 
     food: {
-        type: Array,
-        default: []
+        type: Array, 
+        default: () => []
     }
 });
 

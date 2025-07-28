@@ -1,26 +1,30 @@
 <template>
-    <div class="fish-tank" ref="tankRef" @click="handleTankClick">
-        <Fish 
-            v-for="fish in fishes"
-            :key="fish.id"
-            :fish="fish"
-            :tankRef="tankRef"
-            :food="foods"
-            @click="emit('fishClicked', fish)"
-            @ateFood="id => handleDestroy(id)"
-        />
-        <Food
-            v-for="food in foods"
-            :key="food.id"
-            :foodPos="food"
-            @destroy="handleDestroy(food.id)"
-        />
-    </div>
+  <div
+    class="fish-tank"
+    ref="tankRef"
+    @click="handleTankClick"
+  >
+    <Fish 
+      v-for="fish in fishes"
+      :key="fish.id"
+      :fish="fish"
+      :tank-ref="tankRef"
+      :food="foods"
+      @click="emit('fishClicked', fish)"
+      @ate-food="id => handleDestroy(id)"
+    />
+    <Food
+      v-for="food in foods"
+      :key="food.id"
+      :food-pos="food"
+      @destroy="handleDestroy(food.id)"
+    />
+  </div>
 </template>
 
 <script setup>
-import Fish from './Fish.vue';
-import Food from './Food.vue';
+import Fish from './FishComp.vue';
+import Food from './FoodComp.vue';
 import { ref, onUnmounted } from 'vue';
 
 const emit = defineEmits(['fishClicked']);

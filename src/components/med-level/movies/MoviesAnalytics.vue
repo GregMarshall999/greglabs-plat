@@ -1,16 +1,20 @@
 <template>
-    <header>
-        <div class="info">
-            <p>Total movies: {{ movies.length }}</p>
-            <p>/</p>
-            <p>Average rating: {{ averageRating }}</p>
-        </div>  
+  <header>
+    <div class="info">
+      <p>Total movies: {{ movies.length }}</p>
+      <p>/</p>
+      <p>Average rating: {{ averageRating }}</p>
+    </div>  
 
-        <div class="actions">
-            <button @click="emits('removeRatings')">Remove Ratings</button>
-            <button @click="emits('addMovie')">Add Movie</button>
-        </div>
-    </header>
+    <div class="actions">
+      <button @click="emits('removeRatings')">
+        Remove Ratings
+      </button>
+      <button @click="emits('addMovie')">
+        Add Movie
+      </button>
+    </div>
+  </header>
 </template>
 
 <script setup>

@@ -1,49 +1,81 @@
 <template>
-    <form @submit.prevent="submitForm" class="quiz-form">
-        <div v-if="questionIndex < quizConfig.length" class="progress-bar">
-            <div class="progress-fill" :style="{ width: `${(questionIndex / quizConfig.length) * 100}%` }"></div>
-        </div>
+  <form
+    @submit.prevent="submitForm"
+    class="quiz-form"
+  >
+    <div
+      v-if="questionIndex < quizConfig.length"
+      class="progress-bar"
+    >
+      <div
+        class="progress-fill"
+        :style="{ width: `${(questionIndex / quizConfig.length) * 100}%` }"
+      />
+    </div>
 
-        <h1 v-if="questionIndex < quizConfig.length">{{ quizConfig[questionIndex].question }}</h1>
-        <h1 v-else>Your final score:</h1>
+    <h1 v-if="questionIndex < quizConfig.length">
+      {{ quizConfig[questionIndex].question }}
+    </h1>
+    <h1 v-else>
+      Your final score:
+    </h1>
 
-        <div v-if="questionIndex < quizConfig.length" class="options">
-            <div v-for="(option, index) in quizConfig[questionIndex].options" :key="option" class="option">
-                <input 
-                    type="radio" 
-                    :id="'option-' + index" 
-                    :value="option" 
-                    v-model="selectedAnswer" 
-                    name="quiz-option"
-                >
-                <label 
-                    :for="'option-' + index" 
-                    :class="{ 'correct': showResult && quizConfig[questionIndex].correctAnswer === option, 'incorrect': showResult && quizConfig[questionIndex].correctAnswer !== option }"
-                >
-                    {{ option }} 
-                    <span v-if="showResult && quizConfig[questionIndex].correctAnswer === option">✓</span>
-                    <span v-else-if="showResult && quizConfig[questionIndex].correctAnswer !== option">✗</span>
-                </label>
-            </div>
-        </div>
-        <div v-else class="options">
-            {{ score }} / {{ quizConfig.length }}
-        </div>
+    <div
+      v-if="questionIndex < quizConfig.length"
+      class="options"
+    >
+      <div
+        v-for="(option, index) in quizConfig[questionIndex].options"
+        :key="option"
+        class="option"
+      >
+        <input 
+          type="radio" 
+          :id="'option-' + index" 
+          :value="option" 
+          v-model="selectedAnswer" 
+          name="quiz-option"
+        >
+        <label 
+          :for="'option-' + index" 
+          :class="{ 'correct': showResult && quizConfig[questionIndex].correctAnswer === option, 'incorrect': showResult && quizConfig[questionIndex].correctAnswer !== option }"
+        >
+          {{ option }} 
+          <span v-if="showResult && quizConfig[questionIndex].correctAnswer === option">✓</span>
+          <span v-else-if="showResult && quizConfig[questionIndex].correctAnswer !== option">✗</span>
+        </label>
+      </div>
+    </div>
+    <div
+      v-else
+      class="options"
+    >
+      {{ score }} / {{ quizConfig.length }}
+    </div>
         
-        <div class="result-section">
-            <p 
-                v-if="answerState" 
-                :class="{ 'correct': answerState === 'Correct', 'incorrect': answerState === 'Incorrect' }"
-            >
-                {{ answerState }} !
-            </p>
+    <div class="result-section">
+      <p 
+        v-if="answerState" 
+        :class="{ 'correct': answerState === 'Correct', 'incorrect': answerState === 'Incorrect' }"
+      >
+        {{ answerState }} !
+      </p>
 
-            <button v-if="questionIndex < quizConfig.length" type="submit" :disabled="!selectedAnswer && !showResult">
-                {{ showResult ? 'Next' : 'Submit' }}
-            </button>
-            <button v-else type="submit">Restart</button>
-        </div>
-    </form>
+      <button
+        v-if="questionIndex < quizConfig.length"
+        type="submit"
+        :disabled="!selectedAnswer && !showResult"
+      >
+        {{ showResult ? 'Next' : 'Submit' }}
+      </button>
+      <button
+        v-else
+        type="submit"
+      >
+        Restart
+      </button>
+    </div>
+  </form>
 </template>
 
 <script setup>

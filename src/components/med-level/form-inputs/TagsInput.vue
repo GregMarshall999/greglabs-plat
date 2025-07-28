@@ -1,30 +1,30 @@
 <template>
-    <div class="form-item">
-        <label><slot></slot></label>
-        <div class="tags-input-container">
-            <div class="tags-list">
-                <span
-                    v-for="tag in availableTags"
-                    :key="tag"
-                    class="tag-item"
-                    :class="{ 'selected': modelValue.includes(tag) }"
-                    @click="toggleTag(tag)"
-                >
-                    {{ tag }}
-                </span>
-            </div>
+  <div class="form-item">
+    <label><slot /></label>
+    <div class="tags-input-container">
+      <div class="tags-list">
+        <span
+          v-for="tag in availableTags"
+          :key="tag"
+          class="tag-item"
+          :class="{ 'selected': modelValue.includes(tag) }"
+          @click="toggleTag(tag)"
+        >
+          {{ tag }}
+        </span>
+      </div>
 
-            <div class="new-tag-input">
-                <input 
-                    v-model="newTag"
-                    class="form-input"
-                    type="text"
-                    placeholder="New tag... (space to add)"
-                    @keypress.space="addNewTag"
-                />
-            </div>
-        </div>
+      <div class="new-tag-input">
+        <input 
+          v-model="newTag"
+          class="form-input"
+          type="text"
+          placeholder="New tag... (space to add)"
+          @keypress.space="addNewTag"
+        >
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -37,7 +37,7 @@ const props = defineProps({
     }
 });
 
-const modelValue = defineModel({ required: true });
+const modelValue = defineModel({ required: true, type: Array });
 
 const newTag = ref('');
 const newTags = ref([]);

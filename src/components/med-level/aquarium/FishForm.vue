@@ -1,39 +1,70 @@
 <template>
-    <form @submit.prevent="handleFishForm" class="fish-form">
-        <h3>{{ formMessage }}</h3>
+  <form
+    @submit.prevent="handleFishForm"
+    class="fish-form"
+  >
+    <h3>{{ formMessage }}</h3>
 
-        <div class="fish-selection" @click="unSelectFish">
-            <div v-for="(fish, type) in fishTypes" :key="type"
-                class="fish-option" :class="{ selected: selectedFish.type === type }"
-                @click="selectFish(type)"
-            >
-                <img :src="fish.image" :alt="type" />
-                <span>{{ fish.label }}</span>
-            </div>
+    <div
+      class="fish-selection"
+      @click="unSelectFish"
+    >
+      <div
+        v-for="(fish, type) in fishTypes"
+        :key="type"
+        class="fish-option"
+        :class="{ selected: selectedFish.type === type }"
+        @click="selectFish(type)"
+      >
+        <img
+          :src="fish.image"
+          :alt="type"
+        >
+        <span>{{ fish.label }}</span>
+      </div>
+    </div>
+
+    <div class="fish-properties">
+      <div
+        class="selected-fish-info"
+        v-if="selectedFish.type"
+      >
+        <img
+          :src="selectedFish.image"
+          :alt="selectedFish.type"
+        >
+        <div class="fish-details">
+          <h4>{{ selectedFish.type }}</h4>
+          <p>Speed: {{ selectedFish.speed }}</p>
         </div>
+      </div>
 
-        <div class="fish-properties">
-            <div class="selected-fish-info" v-if="selectedFish.type">
-                <img :src="selectedFish.image" :alt="selectedFish.type" />
-                <div class="fish-details">
-                    <h4>{{ selectedFish.type }}</h4>
-                    <p>Speed: {{ selectedFish.speed }}</p>
-                </div>
-            </div>
+      <input
+        v-model="fishName"
+        type="text"
+        placeholder="Fish name (optional)"
+      >
 
-            <input v-model="fishName" type="text" placeholder="Fish name (optional)" />
+      <div class="action-buttons">
+        <button
+          v-if="fishActionText"
+          @click="emptyTankButtonClicked = false"
+          :disabled="!selectedFish.type"
+          class="fish-button"
+        >
+          {{ fishActionText }}
+        </button>
 
-            <div class="action-buttons">
-                <button v-if="fishActionText" @click="emptyTankButtonClicked = false" :disabled="!selectedFish.type" class="fish-button">
-                    {{ fishActionText }}
-                </button>
-
-                <button @click="emptyTankButtonClicked = true" :disabled="fishCount === 0" class="tank-button">
-                    {{ tankActionText }}
-                </button>
-            </div>
-        </div>
-    </form>
+        <button
+          @click="emptyTankButtonClicked = true"
+          :disabled="fishCount === 0"
+          class="tank-button"
+        >
+          {{ tankActionText }}
+        </button>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script setup>
@@ -47,7 +78,10 @@ const messages = [
 const formMessage = ref(messages[0]);
 const fishName = ref('');
 
-const selectedFish = defineModel();
+const selectedFish = defineModel({
+    type: Object,
+    default: () => ({})
+});
 
 const prop = defineProps({
     fishCount: {

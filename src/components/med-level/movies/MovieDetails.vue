@@ -1,23 +1,25 @@
 <template>
-    <div class="details">
-        <div class="details-content">
-            <h2><slot name="title"></slot></h2>
+  <div class="details">
+    <div class="details-content">
+      <h2><slot name="title" /></h2>
 
-            <ul class="genres">
-                <li 
-                    v-for="genre in genres" 
-                    :key="genre"
-                    class="genre"
-                >
-                    {{ genre }}
-                </li>
-            </ul>
+      <ul class="genres">
+        <li 
+          v-for="genre in genres" 
+          :key="genre"
+          class="genre"
+        >
+          {{ genre }}
+        </li>
+      </ul>
 
-            <p class="description"><slot name="description"></slot></p>
-        </div>
-
-        <slot></slot>
+      <p class="description">
+        <slot name="description" />
+      </p>
     </div>
+
+    <slot />
+  </div>
 </template>
 
 <script setup>

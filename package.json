@@ -8,6 +8,7 @@
     "preview": "vite preview --port 4173",
     "start": "node server.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"

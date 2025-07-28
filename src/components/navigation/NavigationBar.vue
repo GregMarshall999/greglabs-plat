@@ -1,8 +1,8 @@
 <template>
-    <nav>
-        <BaseNav v-if="projectGroup === 'base'" />
-        <MedLevelNav v-else-if="projectGroup === 'med-level'" />
-    </nav>
+  <nav>
+    <BaseNav v-if="projectGroup === 'base'" />
+    <MedLevelNav v-else-if="projectGroup === 'med-level'" />
+  </nav>
 </template>
 
 <script setup>

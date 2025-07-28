@@ -1,23 +1,79 @@
 <template>
-    <div class="navbar-content">
-        <div class="logo">
-            <h1 @click="router.push('/')" title="Back to Home Page">Vue JS Certification Mid Level</h1>
-        </div>
-        <ul class="nav-links">
-            <li><RouterLink :to="{ name: 'med-level-movies' }" class="nav-link">Movies</RouterLink></li>
-            <li><RouterLink :to="{ name: 'med-level-countdown' }" class="nav-link">Countdown</RouterLink></li>
-            <li><RouterLink :to="{ name: 'med-level-shopping-cart' }" class="nav-link">Shopping Cart</RouterLink></li>
-            <li class="dropdown">
-                <button class="nav-link dropdown-toggle">Other Challenges</button>
-                <ul class="dropdown-menu">
-                    <li><RouterLink :to="{ name: 'med-level-tic-tac-toe' }" class="nav-link">Tic Tac Toe</RouterLink></li>
-                    <li><RouterLink :to="{ name: 'med-level-aquarium' }" class="nav-link">Aquarium</RouterLink></li>
-                    <li><RouterLink :to="{ name: 'med-level-quiz' }" class="nav-link">Quiz</RouterLink></li>
-                    <li><RouterLink :to="{ name: 'med-level-task' }" class="nav-link">Task</RouterLink></li>
-                </ul>
-            </li>
-        </ul>
+  <div class="navbar-content">
+    <div class="logo">
+      <h1
+        @click="router.push('/')"
+        title="Back to Home Page"
+      >
+        Vue JS Certification Mid Level
+      </h1>
     </div>
+    <ul class="nav-links">
+      <li>
+        <RouterLink
+          :to="{ name: 'med-level-movies' }"
+          class="nav-link"
+        >
+          Movies
+        </RouterLink>
+      </li>
+      <li>
+        <RouterLink
+          :to="{ name: 'med-level-countdown' }"
+          class="nav-link"
+        >
+          Countdown
+        </RouterLink>
+      </li>
+      <li>
+        <RouterLink
+          :to="{ name: 'med-level-shopping-cart' }"
+          class="nav-link"
+        >
+          Shopping Cart
+        </RouterLink>
+      </li>
+      <li class="dropdown">
+        <button class="nav-link dropdown-toggle">
+          Other Challenges
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <RouterLink
+              :to="{ name: 'med-level-tic-tac-toe' }"
+              class="nav-link"
+            >
+              Tic Tac Toe
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              :to="{ name: 'med-level-aquarium' }"
+              class="nav-link"
+            >
+              Aquarium
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              :to="{ name: 'med-level-quiz' }"
+              class="nav-link"
+            >
+              Quiz
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              :to="{ name: 'med-level-task' }"
+              class="nav-link"
+            >
+              Task
+            </RouterLink>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup>

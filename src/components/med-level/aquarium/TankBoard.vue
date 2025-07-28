@@ -1,16 +1,17 @@
 <template>
-    <div class="tank-board">
-        <TankOptions />
-        <FishForm 
-            :fish-count="fishCount" :edit-mode="editMode" 
-            v-model="selectedFish"
-            @addFish="emits('addFish')"
-            @editFish="emits('editFish')"
-            @removeFish="emits('removeFish')"
-            @emptyTank="emits('emptyTank')"
-            @unSelectFish="emits('unSelectFish')"
-        />
-    </div>
+  <div class="tank-board">
+    <TankOptions />
+    <FishForm 
+      :fish-count="fishCount"
+      :edit-mode="editMode" 
+      v-model="selectedFish"
+      @add-fish="emits('addFish')"
+      @edit-fish="emits('editFish')"
+      @remove-fish="emits('removeFish')"
+      @empty-tank="emits('emptyTank')"
+      @un-select-fish="emits('unSelectFish')"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -28,7 +29,10 @@ const props = defineProps({
     }
 });
 
-const selectedFish = defineModel();
+const selectedFish = defineModel({
+    type: Object,
+    default: () => ({})
+});
 
 const emits = defineEmits(['addFish', 'editFish', 'removeFish', 'emptyTank', 'unSelectFish']);
 </script>
