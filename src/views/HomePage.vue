@@ -27,25 +27,27 @@
 							It's a collection of mini-projects that demonstrate skills across different 
 							technologies and frameworks.
 						</p>
-						<p>
-							Each project here represents a journey: 
-							-From a need or a problem to solve
-							-The exploration of new technologies for the solution
-							-To the final result, a working solution with the mindset of less is more
-							Full-stack web applications, mobile apps and automation tools, all have a story to tell. Will you be part of it?
-						</p>
+						<div>
+							<p>Each project here represents a journey:</p> 
+							<ul>
+								<li>
+									From a need or a problem to solve
+								</li>
+								<li>
+									The exploration of new technologies for the solution
+								</li>
+								<li>
+									To the final result, a working solution with the mindset of less is more
+								</li>
+							</ul>
+							<p>Full-stack web applications, mobile apps and automation tools, all have a story to tell. Will you be part of it?</p>
+						</div>
 						<p>
 							Whether you're a fellow developer, a head hunter 😎, or just curious about my work 
 							This labs is yours to explore ! 
 						</p>
 					</div>
 				</div>
-			</div>
-		</section>
-
-		<section>
-			<div>
-				<h2>Who is Greg ?</h2>
 			</div>
 		</section>
 
@@ -213,6 +215,66 @@
 	}
 }
 
+/* About Section */
+.about-greglabs {
+	padding: 80px 0;
+	background-color: #1a2438;
+}
+
+.about-greglabs h2 {
+	text-align: center;
+	margin-bottom: 40px;
+	color: #71808f;
+	font-size: 2.5rem;
+}
+
+.about-content {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.about-text p {
+	font-size: 1.1rem;
+	line-height: 1.8;
+	color: #ffffff;
+	margin-bottom: 20px;
+}
+
+.about-text div {
+	margin: 30px 0;
+}
+
+.about-text div p {
+	font-weight: 600;
+	color: #71808f;
+	margin-bottom: 15px;
+}
+
+.about-text ul {
+	margin: 20px 0;
+	padding-left: 20px;
+}
+
+.about-text li {
+	font-size: 1.1rem;
+	line-height: 1.8;
+	color: #ffffff;
+	margin-bottom: 10px;
+	list-style-type: none;
+	position: relative;
+	padding-left: 25px;
+}
+
+.about-text li::before {
+	content: "→";
+	color: #42b983;
+	font-weight: bold;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
 /* Skills Section */
 .skills {
 	padding: 80px 20px;
@@ -318,6 +380,18 @@
 	
 	.btn {
 		margin: 0;
+	}
+
+	.about-greglabs h2 {
+		font-size: 2rem;
+	}
+
+	.about-text p {
+		font-size: 1rem;
+	}
+
+	.about-text li {
+		font-size: 1rem;
 	}
 }
 </style>
