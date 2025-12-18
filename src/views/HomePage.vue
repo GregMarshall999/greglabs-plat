@@ -207,6 +207,27 @@
             </RouterLink>
           </div>
         </div>
+        <div class="project-card">
+          <div class="project-image">
+            <img src="../assets/relays/relays.jpg" alt="IoT Relay Control System" />
+          </div>
+          <div class="project-content">
+            <h3>IoT Relay Control System</h3>
+            <p>Remote control of house appliances through a secure Android application</p>
+            <div class="project-tags">
+              <span>Android</span>
+              <span>Java Spring</span>
+              <span>Arduino</span>
+              <span>IoT</span>
+            </div>
+            <RouterLink
+              :to="{ name: 'relays' }"
+              class="btn"
+            >
+              View Project
+            </RouterLink>
+          </div>
+        </div>
       </div>
     </section>
   </div>

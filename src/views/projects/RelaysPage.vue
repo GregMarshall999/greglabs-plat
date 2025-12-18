@@ -1,0 +1,610 @@
+<template>
+  <div class="relays-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>IoT Relay Control System</h1>
+        <p class="subtitle">
+          Remote control of house appliances through a secure Android application
+        </p>
+        <p class="description">
+          A comprehensive IoT solution enabling remote control of 16 relays connected to house appliances, 
+          with secure authentication and local network integration.
+        </p>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview">
+      <div class="section-content">
+        <h2>Project Overview</h2>
+        <div class="overview-text">
+          <p>
+            This project provides a complete solution for remote control of household appliances through 
+            a network of 16 relays. The system combines an Android mobile application, a secure Java Spring 
+            backend, and an Arduino Giga R1 microcontroller with tactile screen for local interaction.
+          </p>
+          <p>
+            Users can control relays remotely through the Android app, which requires authentication to 
+            ensure security. The backend communicates with the local network where the relays are located, 
+            passing toggle instructions and status requests. The Arduino Giga R1 provides direct local 
+            control via its tactile screen interface.
+          </p>
+          <p>
+            The system is designed with future expansion in mind, including integration with solar water 
+            heating systems for remote temperature control and automation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+      <div class="section-content">
+        <h2>System Architecture</h2>
+        <div class="architecture-flow">
+          <div class="arch-component">
+            <div class="arch-icon">
+              <i class="fas fa-mobile-alt" />
+            </div>
+            <h3>Android App</h3>
+            <p>User interface displaying relay status and allowing remote switching</p>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-component">
+            <div class="arch-icon">
+              <i class="fas fa-server" />
+            </div>
+            <h3>Java Spring Backend</h3>
+            <p>Secure API with user authentication and authorization</p>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-component">
+            <div class="arch-icon">
+              <i class="fas fa-network-wired" />
+            </div>
+            <h3>Local Network</h3>
+            <p>WiFi communication between backend and Arduino</p>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-component">
+            <div class="arch-icon">
+              <i class="fas fa-microchip" />
+            </div>
+            <h3>Arduino Giga R1</h3>
+            <p>Microcontroller with tactile screen for local control</p>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-component">
+            <div class="arch-icon">
+              <i class="fas fa-plug" />
+            </div>
+            <h3>16 Relays</h3>
+            <p>Control switches for house appliances</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="section-content">
+        <h2>Current Features</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-shield-alt" />
+            <h3>Secure Authentication</h3>
+            <p>User login required to access and control relays through the backend API</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-mobile-alt" />
+            <h3>Android Application</h3>
+            <p>Mobile app displaying real-time relay status and enabling remote switching</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-plug" />
+            <h3>16 Relay Channels</h3>
+            <p>Control up to 16 different house appliances independently</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-touch" />
+            <h3>Local Control Interface</h3>
+            <p>Arduino Giga R1 with tactile screen for direct user interaction</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-wifi" />
+            <h3>WiFi Connectivity</h3>
+            <p>Arduino connected to local WiFi network for seamless communication</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-sync-alt" />
+            <h3>Real-time Status</h3>
+            <p>Live relay status updates and toggle instructions</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+      <div class="section-content">
+        <h2>Project Gallery</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img 
+              :src="relaysApp01" 
+              alt="Relays Android App Screenshot 1"
+              @click="openLightbox(relaysApp01)"
+            />
+            <p>Android App - Main View</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="relaysApp02" 
+              alt="Relays Android App Screenshot 2"
+              @click="openLightbox(relaysApp02)"
+            />
+            <p>Android App - Interface</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="relaysBackend" 
+              alt="Backend Controllers Architecture"
+              @click="openLightbox(relaysBackend)"
+            />
+            <p>Backend Controllers</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="relaysMain" 
+              alt="Relay Setup"
+              @click="openLightbox(relaysMain)"
+            />
+            <p>Relay Setup</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="serverRelays" 
+              alt="Server with Relays"
+              @click="openLightbox(serverRelays)"
+            />
+            <p>Server - Relays</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="serverRelaysBatteries" 
+              alt="Server with Relays and Batteries"
+              @click="openLightbox(serverRelaysBatteries)"
+            />
+            <p>Server - Relays & Batteries</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="tactileScreen" 
+              alt="Arduino Tactile Screen"
+              @click="openLightbox(tactileScreen)"
+            />
+            <p>Tactile Screen Interface</p>
+          </div>
+          <div class="gallery-item">
+            <img 
+              :src="solarHeater" 
+              alt="Solar Heater Integration"
+              @click="openLightbox(solarHeater)"
+            />
+            <p>Solar Heater Integration</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Expansion Section -->
+    <section class="future">
+      <div class="section-content">
+        <h2>Future Expansion Plans</h2>
+        <div class="future-grid">
+          <div class="future-card">
+            <i class="fas fa-cog" />
+            <h3>User Customization</h3>
+            <p>Allow users to customize button naming and relay labels in the app interface</p>
+          </div>
+          <div class="future-card">
+            <i class="fas fa-thermometer-half" />
+            <h3>Temperature Monitoring</h3>
+            <p>Data gathering with temperature probes showing evolution over time with graph display</p>
+          </div>
+          <div class="future-card">
+            <i class="fas fa-robot" />
+            <h3>Automation Control</h3>
+            <p>Automated relay toggling based on temperature thresholds for valves and pumps</p>
+          </div>
+          <div class="future-card">
+            <i class="fas fa-ethernet" />
+            <h3>Ethernet Connectivity</h3>
+            <p>RJ45 port integration for more stable connection with relays</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div 
+      v-if="lightboxImage" 
+      class="lightbox" 
+      @click="closeLightbox"
+    >
+      <span class="lightbox-close">&times;</span>
+      <img :src="lightboxImage" alt="Enlarged view" />
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import relaysApp01 from '@/assets/relays/relays app 01.jpg';
+import relaysApp02 from '@/assets/relays/relays app 02.jpg';
+import relaysBackend from '@/assets/relays/relays backend controllers.png';
+import relaysMain from '@/assets/relays/relays.jpg';
+import serverRelays from '@/assets/relays/server - relays.jpg';
+import serverRelaysBatteries from '@/assets/relays/server - relays - batteries.jpg';
+import tactileScreen from '@/assets/relays/tactile screen.jpg';
+import solarHeater from '@/assets/relays/solar heater.jpg';
+
+const lightboxImage = ref(null);
+
+const openLightbox = (image) => {
+  lightboxImage.value = image;
+  document.body.style.overflow = 'hidden';
+};
+
+const closeLightbox = () => {
+  lightboxImage.value = null;
+  document.body.style.overflow = 'auto';
+};
+</script>
+
+<style scoped>
+.relays-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #42b983;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Section Content */
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #71808f;
+  font-size: 2.5rem;
+}
+
+/* Overview Section */
+.overview {
+  background-color: #1a2438;
+}
+
+.overview-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ffffff;
+  margin-bottom: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Architecture Section */
+.architecture-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.arch-component {
+  background: #2c3c56;
+  padding: 30px 20px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 180px;
+  max-width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.arch-component:hover {
+  transform: translateY(-5px);
+}
+
+.arch-icon {
+  font-size: 2.5rem;
+  color: #42b983;
+  margin-bottom: 15px;
+}
+
+.arch-component h3 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.arch-component p {
+  color: #71808f;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.arch-arrow {
+  font-size: 2rem;
+  color: #42b983;
+  font-weight: bold;
+}
+
+/* Features Section */
+.features {
+  background-color: #1a2438;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background: #2c3c56;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card i {
+  font-size: 2.5rem;
+  color: #42b983;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.feature-card p {
+  color: #71808f;
+  line-height: 1.6;
+}
+
+/* Gallery Section */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.gallery-item {
+  background: #1a2438;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item img:hover {
+  opacity: 0.8;
+}
+
+.gallery-item p {
+  padding: 15px;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+/* Future Section */
+.future {
+  background-color: #1a2438;
+}
+
+.future-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.future-card {
+  background: #2c3c56;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.future-card:hover {
+  transform: translateY(-5px);
+}
+
+.future-card i {
+  font-size: 2.5rem;
+  color: #42b983;
+  margin-bottom: 20px;
+}
+
+.future-card h3 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.future-card p {
+  color: #71808f;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.lightbox-close:hover {
+  color: #42b983;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+  }
+
+  .architecture-flow {
+    flex-direction: column;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
+
+  .arch-component {
+    max-width: 100%;
+  }
+
+  .features-grid,
+  .future-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lightbox-close {
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 40vh;
+    padding: 40px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .overview-text p {
+    font-size: 1rem;
+  }
+}
+</style>
