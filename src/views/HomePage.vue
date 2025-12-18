@@ -12,12 +12,7 @@
           Make yourself comfortable and feel free to explore!
         </p>
         <div class="cta-buttons">
-          <RouterLink
-            :to="{ name: 'med-level-movies' }"
-            class="btn primary"
-          >
-            My Current project
-          </RouterLink>
+          <a href="https://simubank.greg-labs.com" class="btn primary">My Current project</a>
           <RouterLink
             :to="{ name: 'contact' }"
             class="btn secondary"
@@ -98,6 +93,25 @@
     >
       <h2>Featured Projects</h2>
       <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <img src="../assets/icons/simubank.ico" alt="Simum Bank" class="simubank-icon" />
+          </div>
+          <div class="project-content">
+            <h3>Simu Bank</h3>
+            <p>A web App for banking simulation.</p>
+            <div class="project-tags">
+              <span>Vue.js</span>
+              <span>Java Spring</span>
+              <span>PostgreSQL</span>
+              <span>Docker</span>
+            </div>
+            <a
+              href="https://simubank.greg-labs.com"
+              class="btn"
+            >View Project</a>
+          </div>
+        </div>
         <div class="project-card">
           <div class="project-image">
             <svg
@@ -199,6 +213,13 @@
 </template>
 
 <style scoped>
+.simubank-icon {
+  margin-left: 10px;
+  margin-top: 10px;
+	width: 50px !important;
+	height: 50px !important;
+}
+
 .home-page {
 	max-width: 1200px;
 	margin: 0 auto;
