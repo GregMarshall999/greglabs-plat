@@ -26,8 +26,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /opt/greg-labs-frontend/greglabs-plat
+            cd /opt/greglabs-plat
+            git fetch
             git pull origin main
-            cd /opt/n8n-server
-            docker compose build frontend
-            docker compose up -d
+            cd
+            cd docker
+            docker compose build greg-labs
+            docker compose up -d greg-labs
