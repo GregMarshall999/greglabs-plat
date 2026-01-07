@@ -3,6 +3,7 @@ import HomePage from '@/views/HomePage.vue'
 import ContactPage from '@/views/ContactPage.vue'
 import RelaysPage from '@/views/projects/RelaysPage.vue'
 import medLevelRoutes from './med-level.routes'
+import { pixijsRoutes } from './pixijs.routes'
 
 const base = 'base';
 
@@ -31,7 +32,8 @@ const routes = [
     },
     component: RelaysPage
   }, 
-  ...medLevelRoutes
+  ...medLevelRoutes, 
+  ...pixijsRoutes
 ]
 
 const router = createRouter({
