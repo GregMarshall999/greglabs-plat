@@ -5,6 +5,7 @@ export const BOARD_CONFIG = {
   hexSize: 30,
   hexColors: [0xffffff, 0x808080, 0x000000], // white, grey, black
   borderColor: 0x666666,
+  hoverColor: 0x4a90e2, // Blue color for hover state
   centerCol: 5, // Column with 11 hexagons (0-indexed)
   totalCols: 11, // 0-10 columns
   maxHexagons: 11, // Maximum hexagons in center column
@@ -26,11 +27,48 @@ export const createHexagon = (color, hexSize, borderColor) => {
     points.push(x, y)
   }
   
+  // Store hexagon data for hover functionality
+  hex.userData = {
+    originalColor: color,
+    borderColor,
+    hexSize,
+    points
+  }
+  
+  // Draw the hexagon
   hex.poly(points)
     .fill({ color })
     .stroke({ width: 2, color: borderColor })
   
+  // Make hexagon interactive for hover
+  hex.eventMode = 'static'
+  hex.cursor = 'pointer'
+  
   return hex
+}
+
+/**
+ * Redraws a hexagon with a new fill color
+ */
+const redrawHexagon = (hex, fillColor) => {
+  const { points, borderColor } = hex.userData
+  hex.clear()
+  hex.poly(points)
+    .fill({ color: fillColor })
+    .stroke({ width: 2, color: borderColor })
+}
+
+/**
+ * Sets up hover functionality for a hexagon
+ */
+export const setupHexagonHover = (hex, hoverColor) => {
+  hex.on('pointerenter', () => {
+    redrawHexagon(hex, hoverColor)
+  })
+  
+  hex.on('pointerleave', () => {
+    redrawHexagon(hex, hex.userData.originalColor)
+  })
 }
 
 /**
@@ -86,7 +124,7 @@ export const calculateHexagonPosition = (col, row, startRow, spacing, colOffset)
  */
 export const generateBoard = (config, spacing) => {
   const board = []
-  const { centerCol, totalCols, maxHexagons, hexSize, hexColors, borderColor } = config
+  const { centerCol, totalCols, maxHexagons, hexSize, hexColors, borderColor, hoverColor } = config
 
   for (let col = 0; col < totalCols; col++) {
     const mirroredCol = getMirroredColumn(col, centerCol, totalCols)
@@ -98,6 +136,9 @@ export const generateBoard = (config, spacing) => {
       const colorIndex = getColorIndex(mirroredCol, row)
       const color = hexColors[colorIndex]
       const hex = createHexagon(color, hexSize, borderColor)
+      
+      // Set up hover functionality
+      setupHexagonHover(hex, hoverColor)
       
       const position = calculateHexagonPosition(col, row, startRow, spacing, colOffset)
       hex.x = position.x
