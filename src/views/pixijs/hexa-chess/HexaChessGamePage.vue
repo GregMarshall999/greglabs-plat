@@ -25,16 +25,46 @@ onMounted(async () => {
 
   pixiContainer.value.appendChild(app.canvas)
 
-  // Simple blank scene example: a centered hexagon placeholder
-  const hex = new Graphics()
-    .circle(0, 0, 80)
-    .fill({ color: 0xffcc00, alpha: 0.2 })
-    .stroke({ width: 2, color: 0xffcc00, alpha: 0.8 })
+  // Function to draw a hexagon
+  const drawHexagon = (color, size = 60) => {
+    const hex = new Graphics()
+    const points = []
+    
+    // Calculate 6 vertices of a hexagon (pointy-top orientation)
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 3) * i - Math.PI / 2 // Start from top
+      const x = Math.cos(angle) * size
+      const y = Math.sin(angle) * size
+      points.push(x, y)
+    }
+    
+    hex.poly(points)
+      .fill({ color })
+      .stroke({ width: 2, color: 0x666666 })
+    
+    return hex
+  }
 
-  hex.x = app.renderer.width / 2
-  hex.y = app.renderer.height / 2
+  // Create 3 hexagons: white, grey, black
+  const whiteHex = drawHexagon(0xffffff)
+  const greyHex = drawHexagon(0x808080)
+  const blackHex = drawHexagon(0x000000)
 
-  app.stage.addChild(hex)
+  // Position them horizontally centered
+  const centerX = app.renderer.width / 2
+  const centerY = app.renderer.height / 2
+  const spacing = 150
+
+  whiteHex.x = centerX - spacing
+  whiteHex.y = centerY
+
+  greyHex.x = centerX
+  greyHex.y = centerY
+
+  blackHex.x = centerX + spacing
+  blackHex.y = centerY
+
+  app.stage.addChild(whiteHex, greyHex, blackHex)
 })
 
 onBeforeUnmount(() => {
