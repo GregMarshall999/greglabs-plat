@@ -63,13 +63,17 @@ onMounted(async () => {
   const totalCols = 11 // 0-10 columns
 
   for (let col = 0; col < totalCols; col++) {
+    // For columns 6-10, mirror columns 4-0 (column 5 is center, not mirrored)
+    const mirroredCol = col > centerCol ? (totalCols - 1 - col) : col
+    
     // Calculate number of hexagons in this column
     // Column 0: 6, Column 1: 7, ..., Column 5: 11 (center), then mirror
     let hexagonsInCol
     if (col <= centerCol) {
       hexagonsInCol = 6 + col
     } else {
-      hexagonsInCol = 6 + (2 * centerCol - col)
+      // Mirror: use the same count as the mirrored column
+      hexagonsInCol = 6 + mirroredCol
     }
 
     // Calculate starting row offset to center the column vertically
@@ -77,8 +81,9 @@ onMounted(async () => {
     const startRow = Math.floor((maxHexagons - hexagonsInCol) / 2)
 
     // Determine starting color for this column
+    // For columns 6-10, use the same color pattern as the mirrored column
     // Column 0: white-grey-black, Column 1: grey-black-white, Column 2: black-white-grey, then cycles
-    const colorStartIndex = col % 3
+    const colorStartIndex = mirroredCol % 3
 
     for (let row = 0; row < hexagonsInCol; row++) {
       // Color pattern:
