@@ -123,7 +123,7 @@ export const calculateHexagonPosition = (col, row, startRow, spacing, colOffset)
  * Gets the file letter (A-K) from column index
  */
 export const getFileLetter = (col) => {
-  return String.fromCharCode(65 + col) // A=65, so A, B, C, ..., K
+  return String.fromCodePoint(65 + col) // A=65, so A, B, C, ..., K
 }
 
 /**
@@ -160,15 +160,19 @@ export const createCoordinateLabel = (file, rank, hexSize) => {
     style: {
       fontFamily: 'Arial',
       fontSize: Math.max(8, hexSize * 0.25),
-      fill: 0x333333,
-      align: 'center'
+      fill: 0x4a90e2,
+      align: 'left'
     }
   })
   
-  // Center the text on the hexagon
-  label.anchor.set(0.5)
-  label.x = 0
-  label.y = 0
+  // Position label at top-left corner of hexagon
+  // For a flat-top hexagon with pointy end on left, top-left is approximately at:
+  // x: -hexSize (left edge), y: -hexSize * sqrt(3)/2 (top edge)
+  // Add small padding to keep it inside the hexagon
+  const padding = hexSize * 0.1
+  label.anchor.set(0, 0) // Top-left anchor
+  label.x = -hexSize/2 + padding
+  label.y = -hexSize * Math.sqrt(3) / 2 + padding
   
   return label
 }
