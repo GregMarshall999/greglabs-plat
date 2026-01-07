@@ -1,4 +1,4 @@
-import { Graphics } from 'pixi.js'
+import { Graphics, Text } from 'pixi.js'
 
 // Board configuration constants
 export const BOARD_CONFIG = {
@@ -120,6 +120,60 @@ export const calculateHexagonPosition = (col, row, startRow, spacing, colOffset)
 }
 
 /**
+ * Gets the file letter (A-K) from column index
+ */
+export const getFileLetter = (col) => {
+  return String.fromCharCode(65 + col) // A=65, so A, B, C, ..., K
+}
+
+/**
+ * Calculates the rank (1-11) for a hexagon
+ * Ranks go diagonally from top-left to bottom-right
+ * Rank 1: from top-left (A1) to top of F file (F1)
+ * Rank 11: from bottom of F file to bottom-right
+ */
+export const calculateRank = (col, row, startRow, maxHexagons, centerCol) => {
+  // Rank is based on the diagonal position
+  // Rank 1 includes first hex of columns A-F (row 0 in each column)
+  // Rank 2 includes second hex of A-F and first hex of G
+  // The pattern continues diagonally
+  
+  if (col <= centerCol) {
+    // Columns A-F: rank = row + 1 (first hex is rank 1, second is rank 2, etc.)
+    return row + 1
+  } else {
+    // Columns G-K: rank continues the diagonal
+    // For column G (col 6), first hex (row 0) is on rank 2 (since F's second hex is rank 2)
+    // The rank = startRow + row + 1, but we need to adjust for the diagonal
+    // Actually, rank = row + (col - centerCol) + 1
+    // This makes G1 = rank 2, H1 = rank 3, etc.
+    return row + (col - centerCol) + 1
+  }
+}
+
+/**
+ * Creates a text label for a hexagon coordinate
+ */
+export const createCoordinateLabel = (file, rank, hexSize) => {
+  const label = new Text({
+    text: `${file}${rank}`,
+    style: {
+      fontFamily: 'Arial',
+      fontSize: Math.max(8, hexSize * 0.25),
+      fill: 0x333333,
+      align: 'center'
+    }
+  })
+  
+  // Center the text on the hexagon
+  label.anchor.set(0.5)
+  label.x = 0
+  label.y = 0
+  
+  return label
+}
+
+/**
  * Generates all hexagons for the board
  */
 export const generateBoard = (config, spacing) => {
@@ -136,6 +190,20 @@ export const generateBoard = (config, spacing) => {
       const colorIndex = getColorIndex(mirroredCol, row)
       const color = hexColors[colorIndex]
       const hex = createHexagon(color, hexSize, borderColor)
+      
+      // Calculate coordinates
+      const file = getFileLetter(col)
+      const rank = calculateRank(col, row, startRow, maxHexagons, centerCol)
+      
+      // Store coordinates in userData
+      hex.userData.file = file
+      hex.userData.rank = rank
+      hex.userData.col = col
+      hex.userData.row = row
+      
+      // Create and add coordinate label
+      const label = createCoordinateLabel(file, rank, hexSize)
+      hex.addChild(label)
       
       // Set up hover functionality
       setupHexagonHover(hex, hoverColor)
