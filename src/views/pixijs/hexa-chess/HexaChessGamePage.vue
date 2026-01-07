@@ -77,33 +77,24 @@ onMounted(async () => {
     const startRow = Math.floor((maxHexagons - hexagonsInCol) / 2)
 
     // Determine starting color for this column
-    // Column 0: white-grey-black, Column 1: grey-black-white, Column 2: black-grey-white, then cycles
+    // Column 0: white-grey-black, Column 1: grey-black-white, Column 2: black-white-grey, then cycles
     const colorStartIndex = col % 3
 
     for (let row = 0; row < hexagonsInCol; row++) {
       // Color pattern:
       // Column 0 (0): white-grey-black -> (0 + row) % 3
       // Column 1 (1): grey-black-white -> (1 + row) % 3
-      // Column 2 (2): black-grey-white -> reverse pattern
-      let colorIndex
-      if (colorStartIndex === 2) {
-        // black-grey-white pattern (reverse: 2, 1, 0, 2, 1, 0, ...)
-        const mod = row % 3
-        if (mod === 0) colorIndex = 2
-        else if (mod === 1) colorIndex = 1
-        else colorIndex = 0
-      } else {
-        // white-grey-black or grey-black-white pattern (forward)
-        colorIndex = (colorStartIndex + row) % 3
-      }
+      // Column 2 (2): black-white-grey -> (2 + row) % 3
+      const colorIndex = (colorStartIndex + row) % 3
+
       const color = hexColors[colorIndex]
 
       // Create hexagon
       const hex = drawHexagon(color)
 
       // Calculate position
-      // In a hexagonal grid, odd columns are offset vertically
-      const colOffset = (col % 2) * (verticalSpacing / 2)
+      // In a hexagonal grid, even columns need to be shifted down by one hexagon
+      const colOffset = (col % 2 === 0) ? verticalSpacing/2 : 0
       const x = col * horizontalSpacing
       const y = (startRow + row) * verticalSpacing + colOffset
 
