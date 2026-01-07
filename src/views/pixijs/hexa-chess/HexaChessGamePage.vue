@@ -114,7 +114,7 @@ onMounted(async () => {
   const boardWidth = totalCols * horizontalSpacing
   const boardHeight = 11 * verticalSpacing // Height based on center column
   const offsetX = (app.renderer.width - boardWidth) / 2
-  const offsetY = (app.renderer.height - boardHeight) / 2
+  const offsetY = (app.renderer.height - boardHeight) / 2 + 20 // Shift down by 20 pixels
 
   board.forEach(hex => {
     hex.x += offsetX
