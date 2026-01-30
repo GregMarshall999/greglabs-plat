@@ -1,7 +1,7 @@
 <template>
   <img
     src="/src/assets/med-level/aquarium/fishfood.png"
-    alt="fish food"
+    :alt="$t('medLevel.aquarium.fishFoodAlt')"
     :style="foodStyle"
   >
 </template>

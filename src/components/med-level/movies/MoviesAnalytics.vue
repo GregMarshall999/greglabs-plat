@@ -1,17 +1,17 @@
 <template>
   <header>
     <div class="info">
-      <p>Total movies: {{ movies.length }}</p>
+      <p>{{ $t('medLevel.movies.totalMovies') }} {{ movies.length }}</p>
       <p>/</p>
-      <p>Average rating: {{ averageRating }}</p>
+      <p>{{ $t('medLevel.movies.averageRating') }} {{ averageRating }}</p>
     </div>  
 
     <div class="actions">
       <button @click="emits('removeRatings')">
-        Remove Ratings
+        {{ $t('medLevel.movies.removeRatings') }}
       </button>
       <button @click="emits('addMovie')">
-        Add Movie
+        {{ $t('medLevel.movies.addMovie') }}
       </button>
     </div>
   </header>

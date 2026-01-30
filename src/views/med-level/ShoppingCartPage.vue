@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title-band">
-      Shopping Cart
+      {{ $t('medLevel.shoppingCart.title') }}
     </h1>
 
     <div class="cart-container">
@@ -26,7 +26,7 @@
       </ul>
 
       <div class="cart-total">
-        <span>Total:</span>
+        <span>{{ $t('medLevel.shoppingCart.total') }}</span>
         <span>${{ displayFullNumericPrice(total) }}</span>
       </div>
     </div>

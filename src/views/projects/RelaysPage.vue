@@ -3,13 +3,12 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h1>IoT Relay Control System</h1>
+        <h1>{{ $t('projects.relays.title') }}</h1>
         <p class="subtitle">
-          Remote control of house appliances through a secure Android application
+          {{ $t('projects.relays.subtitle') }}
         </p>
         <p class="description">
-          A comprehensive IoT solution enabling remote control of 16 relays connected to house appliances, 
-          with secure authentication and local network integration.
+          {{ $t('projects.relays.description') }}
         </p>
       </div>
     </section>
@@ -17,23 +16,11 @@
     <!-- Overview Section -->
     <section class="overview">
       <div class="section-content">
-        <h2>Project Overview</h2>
+        <h2>{{ $t('projects.relays.overview') }}</h2>
         <div class="overview-text">
-          <p>
-            This project provides a complete solution for remote control of household appliances through 
-            a network of 16 relays. The system combines an Android mobile application, a secure Java Spring 
-            backend, and an Arduino Giga R1 microcontroller with tactile screen for local interaction.
-          </p>
-          <p>
-            Users can control relays remotely through the Android app, which requires authentication to 
-            ensure security. The backend communicates with the local network where the relays are located, 
-            passing toggle instructions and status requests. The Arduino Giga R1 provides direct local 
-            control via its tactile screen interface.
-          </p>
-          <p>
-            The system is designed with future expansion in mind, including integration with solar water 
-            heating systems for remote temperature control and automation.
-          </p>
+          <p>{{ $t('projects.relays.overview1') }}</p>
+          <p>{{ $t('projects.relays.overview2') }}</p>
+          <p>{{ $t('projects.relays.overview3') }}</p>
         </div>
       </div>
     </section>
@@ -41,46 +28,46 @@
     <!-- Architecture Section -->
     <section class="architecture">
       <div class="section-content">
-        <h2>System Architecture</h2>
+        <h2>{{ $t('projects.relays.architecture') }}</h2>
         <div class="architecture-flow">
           <div class="arch-component">
             <div class="arch-icon">
               <i class="fas fa-mobile-alt" />
             </div>
-            <h3>Android App</h3>
-            <p>User interface displaying relay status and allowing remote switching</p>
+            <h3>{{ $t('projects.relays.androidApp') }}</h3>
+            <p>{{ $t('projects.relays.androidAppDesc') }}</p>
           </div>
           <div class="arch-arrow">→</div>
           <div class="arch-component">
             <div class="arch-icon">
               <i class="fas fa-server" />
             </div>
-            <h3>Java Spring Backend</h3>
-            <p>Secure API with user authentication and authorization</p>
+            <h3>{{ $t('projects.relays.javaBackend') }}</h3>
+            <p>{{ $t('projects.relays.javaBackendDesc') }}</p>
           </div>
           <div class="arch-arrow">→</div>
           <div class="arch-component">
             <div class="arch-icon">
               <i class="fas fa-network-wired" />
             </div>
-            <h3>Local Network</h3>
-            <p>WiFi communication between backend and Arduino</p>
+            <h3>{{ $t('projects.relays.localNetwork') }}</h3>
+            <p>{{ $t('projects.relays.localNetworkDesc') }}</p>
           </div>
           <div class="arch-arrow">→</div>
           <div class="arch-component">
             <div class="arch-icon">
               <i class="fas fa-microchip" />
             </div>
-            <h3>Arduino Giga R1</h3>
-            <p>Microcontroller with tactile screen for local control</p>
+            <h3>{{ $t('projects.relays.arduino') }}</h3>
+            <p>{{ $t('projects.relays.arduinoDesc') }}</p>
           </div>
           <div class="arch-arrow">→</div>
           <div class="arch-component">
             <div class="arch-icon">
               <i class="fas fa-plug" />
             </div>
-            <h3>16 Relays</h3>
-            <p>Control switches for house appliances</p>
+            <h3>{{ $t('projects.relays.relays16') }}</h3>
+            <p>{{ $t('projects.relays.relays16Desc') }}</p>
           </div>
         </div>
       </div>
@@ -89,37 +76,37 @@
     <!-- Features Section -->
     <section class="features">
       <div class="section-content">
-        <h2>Current Features</h2>
+        <h2>{{ $t('projects.relays.features') }}</h2>
         <div class="features-grid">
           <div class="feature-card">
             <i class="fas fa-shield-alt" />
-            <h3>Secure Authentication</h3>
-            <p>User login required to access and control relays through the backend API</p>
+            <h3>{{ $t('projects.relays.secureAuth') }}</h3>
+            <p>{{ $t('projects.relays.secureAuthDesc') }}</p>
           </div>
           <div class="feature-card">
             <i class="fas fa-mobile-alt" />
-            <h3>Android Application</h3>
-            <p>Mobile app displaying real-time relay status and enabling remote switching</p>
+            <h3>{{ $t('projects.relays.androidAppFeature') }}</h3>
+            <p>{{ $t('projects.relays.androidAppFeatureDesc') }}</p>
           </div>
           <div class="feature-card">
             <i class="fas fa-plug" />
-            <h3>16 Relay Channels</h3>
-            <p>Control up to 16 different house appliances independently</p>
+            <h3>{{ $t('projects.relays.relayChannels') }}</h3>
+            <p>{{ $t('projects.relays.relayChannelsDesc') }}</p>
           </div>
           <div class="feature-card">
             <i class="fas fa-touch" />
-            <h3>Local Control Interface</h3>
-            <p>Arduino Giga R1 with tactile screen for direct user interaction</p>
+            <h3>{{ $t('projects.relays.localControl') }}</h3>
+            <p>{{ $t('projects.relays.localControlDesc') }}</p>
           </div>
           <div class="feature-card">
             <i class="fas fa-wifi" />
-            <h3>WiFi Connectivity</h3>
-            <p>Arduino connected to local WiFi network for seamless communication</p>
+            <h3>{{ $t('projects.relays.wifiConnectivity') }}</h3>
+            <p>{{ $t('projects.relays.wifiConnectivityDesc') }}</p>
           </div>
           <div class="feature-card">
             <i class="fas fa-sync-alt" />
-            <h3>Real-time Status</h3>
-            <p>Live relay status updates and toggle instructions</p>
+            <h3>{{ $t('projects.relays.realtimeStatus') }}</h3>
+            <p>{{ $t('projects.relays.realtimeStatusDesc') }}</p>
           </div>
         </div>
       </div>
@@ -128,71 +115,71 @@
     <!-- Gallery Section -->
     <section class="gallery">
       <div class="section-content">
-        <h2>Project Gallery</h2>
+        <h2>{{ $t('projects.relays.gallery') }}</h2>
         <div class="gallery-grid">
           <div class="gallery-item">
             <img 
               :src="relaysApp01" 
-              alt="Relays Android App Screenshot 1"
+              :alt="$t('projects.relays.galleryApp1')"
               @click="openLightbox(relaysApp01)"
             />
-            <p>Android App - Main View</p>
+            <p>{{ $t('projects.relays.captionAppMain') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="relaysApp02" 
-              alt="Relays Android App Screenshot 2"
+              :alt="$t('projects.relays.galleryApp2')"
               @click="openLightbox(relaysApp02)"
             />
-            <p>Android App - Interface</p>
+            <p>{{ $t('projects.relays.captionAppInterface') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="relaysBackend" 
-              alt="Backend Controllers Architecture"
+              :alt="$t('projects.relays.galleryBackend')"
               @click="openLightbox(relaysBackend)"
             />
-            <p>Backend Controllers</p>
+            <p>{{ $t('projects.relays.captionBackend') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="relaysMain" 
-              alt="Relay Setup"
+              :alt="$t('projects.relays.galleryRelaySetup')"
               @click="openLightbox(relaysMain)"
             />
-            <p>Relay Setup</p>
+            <p>{{ $t('projects.relays.captionRelaySetup') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="serverRelays" 
-              alt="Server with Relays"
+              :alt="$t('projects.relays.galleryServer')"
               @click="openLightbox(serverRelays)"
             />
-            <p>Server - Relays</p>
+            <p>{{ $t('projects.relays.captionServer') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="serverRelaysBatteries" 
-              alt="Server with Relays and Batteries"
+              :alt="$t('projects.relays.galleryServerBatteries')"
               @click="openLightbox(serverRelaysBatteries)"
             />
-            <p>Server - Relays & Batteries</p>
+            <p>{{ $t('projects.relays.captionServerBatteries') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="tactileScreen" 
-              alt="Arduino Tactile Screen"
+              :alt="$t('projects.relays.galleryTactile')"
               @click="openLightbox(tactileScreen)"
             />
-            <p>Tactile Screen Interface</p>
+            <p>{{ $t('projects.relays.captionTactile') }}</p>
           </div>
           <div class="gallery-item">
             <img 
               :src="solarHeater" 
-              alt="Solar Heater Integration"
+              :alt="$t('projects.relays.gallerySolar')"
               @click="openLightbox(solarHeater)"
             />
-            <p>Solar Heater Integration</p>
+            <p>{{ $t('projects.relays.captionSolar') }}</p>
           </div>
         </div>
       </div>
@@ -201,27 +188,27 @@
     <!-- Future Expansion Section -->
     <section class="future">
       <div class="section-content">
-        <h2>Future Expansion Plans</h2>
+        <h2>{{ $t('projects.relays.future') }}</h2>
         <div class="future-grid">
           <div class="future-card">
             <i class="fas fa-cog" />
-            <h3>User Customization</h3>
-            <p>Allow users to customize button naming and relay labels in the app interface</p>
+            <h3>{{ $t('projects.relays.userCustomization') }}</h3>
+            <p>{{ $t('projects.relays.userCustomizationDesc') }}</p>
           </div>
           <div class="future-card">
             <i class="fas fa-thermometer-half" />
-            <h3>Temperature Monitoring</h3>
-            <p>Data gathering with temperature probes showing evolution over time with graph display</p>
+            <h3>{{ $t('projects.relays.tempMonitoring') }}</h3>
+            <p>{{ $t('projects.relays.tempMonitoringDesc') }}</p>
           </div>
           <div class="future-card">
             <i class="fas fa-robot" />
-            <h3>Automation Control</h3>
-            <p>Automated relay toggling based on temperature thresholds for valves and pumps</p>
+            <h3>{{ $t('projects.relays.automationControl') }}</h3>
+            <p>{{ $t('projects.relays.automationControlDesc') }}</p>
           </div>
           <div class="future-card">
             <i class="fas fa-ethernet" />
-            <h3>Ethernet Connectivity</h3>
-            <p>RJ45 port integration for more stable connection with relays</p>
+            <h3>{{ $t('projects.relays.ethernetConnectivity') }}</h3>
+            <p>{{ $t('projects.relays.ethernetConnectivityDesc') }}</p>
           </div>
         </div>
       </div>
@@ -234,7 +221,7 @@
       @click="closeLightbox"
     >
       <span class="lightbox-close">&times;</span>
-      <img :src="lightboxImage" alt="Enlarged view" />
+      <img :src="lightboxImage" :alt="$t('projects.relays.lightboxAlt')" />
     </div>
   </div>
 </template>

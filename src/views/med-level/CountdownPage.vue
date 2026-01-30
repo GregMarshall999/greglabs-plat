@@ -4,19 +4,19 @@
       <CountdownHeader />
       <div class="countdown-segment-container">
         <CountdownSegment
-          label="Days"
+          :label="$t('medLevel.countdown.days')"
           :number="days"
         />
         <CountdownSegment
-          label="Hours"
+          :label="$t('medLevel.countdown.hours')"
           :number="hours"
         />
         <CountdownSegment
-          label="Minutes"
+          :label="$t('medLevel.countdown.minutes')"
           :number="minutes"
         />
         <CountdownSegment
-          label="Seconds"
+          :label="$t('medLevel.countdown.seconds')"
           :number="seconds"
         />
       </div>

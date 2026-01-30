@@ -17,7 +17,7 @@
       {{ quizConfig[questionIndex].question }}
     </h1>
     <h1 v-else>
-      Your final score:
+      {{ $t('medLevel.quiz.yourFinalScore') }}
     </h1>
 
     <div
@@ -56,9 +56,9 @@
     <div class="result-section">
       <p 
         v-if="answerState" 
-        :class="{ 'correct': answerState === 'Correct', 'incorrect': answerState === 'Incorrect' }"
+        :class="{ 'correct': answerState === 'correct', 'incorrect': answerState === 'incorrect' }"
       >
-        {{ answerState }} !
+        {{ $t('medLevel.quiz.' + answerState) }} !
       </p>
 
       <button
@@ -66,13 +66,13 @@
         type="submit"
         :disabled="!selectedAnswer && !showResult"
       >
-        {{ showResult ? 'Next' : 'Submit' }}
+        {{ showResult ? $t('medLevel.quiz.next') : $t('medLevel.quiz.submit') }}
       </button>
       <button
         v-else
         type="submit"
       >
-        Restart
+        {{ $t('medLevel.quiz.restart') }}
       </button>
     </div>
   </form>
@@ -112,10 +112,10 @@ const nextQuestion = () => {
 const checkAnswer = () => {
     if(selectedAnswer.value === quizConfig[questionIndex.value].correctAnswer) {
         score.value++;
-        answerState.value = 'Correct';
+        answerState.value = 'correct';
     }
     else {
-        answerState.value = 'Incorrect';
+        answerState.value = 'incorrect';
     }
 
     selectedAnswer.value = null;

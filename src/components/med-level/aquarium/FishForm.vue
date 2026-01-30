@@ -3,7 +3,7 @@
     @submit.prevent="handleFishForm"
     class="fish-form"
   >
-    <h3>{{ formMessage }}</h3>
+    <h3>{{ $t('medLevel.aquarium.selectFish') }}</h3>
 
     <div
       class="fish-selection"
@@ -35,7 +35,7 @@
         >
         <div class="fish-details">
           <h4>{{ selectedFish.type }}</h4>
-          <p>Speed: {{ selectedFish.speed }}</p>
+          <p>{{ $t('medLevel.aquarium.speed') }} {{ selectedFish.speed }}</p>
         </div>
       </div>
 
@@ -69,13 +69,11 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { fishTypes } from '@/config/med-level/fishConfig';
 
-const messages = [
-    'Select a fish:'
-];
+const { t } = useI18n();
 
-const formMessage = ref(messages[0]);
 const fishName = ref('');
 
 const selectedFish = defineModel({
@@ -107,8 +105,8 @@ const unSelectFish = e => {
 };
 
 const emptyTankButtonClicked = ref(false);
-const fishActionText = computed(() => prop.editMode ? "Edit Fish" : "Add Fish");
-const tankActionText = computed(() => prop.editMode ? "Remove Fish" : "Empty Tank");
+const fishActionText = computed(() => prop.editMode ? t('medLevel.aquarium.editFish') : t('medLevel.aquarium.addFish'));
+const tankActionText = computed(() => prop.editMode ? t('medLevel.aquarium.removeFish') : t('medLevel.aquarium.emptyTank'));
 const emits = defineEmits(['addFish', 'editFish', 'removeFish', 'emptyTank', 'unSelectFish']);
 
 const handleFishForm = () => {

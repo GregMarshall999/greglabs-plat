@@ -5,7 +5,7 @@
     @submit="submitMovie"
   >
     <template #title>
-      Add Movie
+      {{ $t('medLevel.movies.addMovie') }}
     </template>
 
     <template #default>
@@ -14,45 +14,45 @@
         v-model="newMovie.name"
         focus
       >
-        Name
+        {{ $t('medLevel.movies.name') }}
       </TextInput>
 
       <TextAreaInput v-model="newMovie.description">
-        Description
+        {{ $t('medLevel.movies.description') }}
       </TextAreaInput>
 
       <TagsInput
         :tags="movieGenres"
         v-model="newMovie.genres"
       >
-        Genres
+        {{ $t('medLevel.movies.genres') }}
       </TagsInput>
 
       <TextInput
         required
         v-model="newMovie.image"
       >
-        Image
+        {{ $t('medLevel.movies.image') }}
       </TextInput>
 
       <CheckboxInput
         id="in-theaters"
         v-model="newMovie.inTheaters"
       >
-        In theaters
+        {{ $t('medLevel.movies.inTheaters') }}
       </CheckboxInput>
     </template>
 
     <template #close-button>
-      Cancel
+      {{ $t('medLevel.movies.cancel') }}
     </template>
     <template #submit-button>
-      {{ editMode ? 'Update' : 'Create' }}
+      {{ editMode ? $t('medLevel.movies.update') : $t('medLevel.movies.create') }}
     </template>
   </AsyncMovieModal>
 
   <div class="container">
-    <h1>Rate your Movies</h1>
+    <h1>{{ $t('medLevel.movies.title') }}</h1>
 
     <MoviesAnalytics 
       :movies="movies" 

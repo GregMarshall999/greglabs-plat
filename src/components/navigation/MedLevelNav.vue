@@ -3,9 +3,9 @@
     <div class="logo">
       <h1
         @click="router.push('/')"
-        title="Back to Home Page"
+        :title="$t('medLevel.nav.backToHome')"
       >
-        Vue JS Certification Mid Level
+        {{ $t('medLevel.nav.title') }}
       </h1>
     </div>
     <ul class="nav-links">
@@ -14,7 +14,7 @@
           :to="{ name: 'med-level-movies' }"
           class="nav-link"
         >
-          Movies
+          {{ $t('medLevel.nav.movies') }}
         </RouterLink>
       </li>
       <li>
@@ -22,7 +22,7 @@
           :to="{ name: 'med-level-countdown' }"
           class="nav-link"
         >
-          Countdown
+          {{ $t('medLevel.nav.countdown') }}
         </RouterLink>
       </li>
       <li>
@@ -30,12 +30,12 @@
           :to="{ name: 'med-level-shopping-cart' }"
           class="nav-link"
         >
-          Shopping Cart
+          {{ $t('medLevel.nav.shoppingCart') }}
         </RouterLink>
       </li>
       <li class="dropdown">
         <button class="nav-link dropdown-toggle">
-          Other Challenges
+          {{ $t('medLevel.nav.otherChallenges') }}
         </button>
         <ul class="dropdown-menu">
           <li>
@@ -43,7 +43,7 @@
               :to="{ name: 'med-level-tic-tac-toe' }"
               class="nav-link"
             >
-              Tic Tac Toe
+              {{ $t('medLevel.nav.ticTacToe') }}
             </RouterLink>
           </li>
           <li>
@@ -51,7 +51,7 @@
               :to="{ name: 'med-level-aquarium' }"
               class="nav-link"
             >
-              Aquarium
+              {{ $t('medLevel.nav.aquarium') }}
             </RouterLink>
           </li>
           <li>
@@ -59,7 +59,7 @@
               :to="{ name: 'med-level-quiz' }"
               class="nav-link"
             >
-              Quiz
+              {{ $t('medLevel.nav.quiz') }}
             </RouterLink>
           </li>
           <li>
@@ -67,7 +67,7 @@
               :to="{ name: 'med-level-task' }"
               class="nav-link"
             >
-              Task
+              {{ $t('medLevel.nav.task') }}
             </RouterLink>
           </li>
         </ul>

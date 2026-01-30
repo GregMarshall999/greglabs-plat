@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1>Task List</h1>
+    <h1>{{ $t('medLevel.task.title') }}</h1>
     <ul>
       <li
         v-for="task in tasks"
@@ -22,7 +22,7 @@
       @click="addTask"
       data-test="button-add"
     >
-      Add Task
+      {{ $t('medLevel.task.addTask') }}
     </button>
   </div>
 </template>

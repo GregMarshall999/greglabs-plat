@@ -5,25 +5,25 @@
         :class="{ active: fishMode[0] }"
         @click="toggleFishMode(0)"
         disabled
-        title="Coming soon"
+        :title="$t('medLevel.aquarium.comingSoon')"
       >
-        Collision {{ fishMode[0] ? 'On' : 'Off' }}
+        {{ $t('medLevel.aquarium.collision') }} {{ fishMode[0] ? $t('medLevel.aquarium.on') : $t('medLevel.aquarium.off') }}
       </button>
       <button
         :class="{ active: fishMode[1] }"
         @click="toggleFishMode(1)"
         disabled
-        title="Coming soon"
+        :title="$t('medLevel.aquarium.comingSoon')"
       >
-        Growth {{ fishMode[1] ? 'On' : 'Off' }}
+        {{ $t('medLevel.aquarium.growth') }} {{ fishMode[1] ? $t('medLevel.aquarium.on') : $t('medLevel.aquarium.off') }}
       </button>
       <button
         :class="{ active: fishMode[2] }"
         @click="toggleFishMode(2)"
         disabled
-        title="Coming soon"
+        :title="$t('medLevel.aquarium.comingSoon')"
       >
-        Boid {{ fishMode[2] ? 'On' : 'Off' }}
+        {{ $t('medLevel.aquarium.boid') }} {{ fishMode[2] ? $t('medLevel.aquarium.on') : $t('medLevel.aquarium.off') }}
       </button>
     </div>
   </div>

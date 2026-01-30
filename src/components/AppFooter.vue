@@ -1,5 +1,6 @@
 <template>
   <footer class="app-footer">
+    <LocaleSwitcher />
     <div class="footer-links">
       <a
         href="https://www.linkedin.com/in/gregorymarshall999"
@@ -63,10 +64,14 @@
       </a>
     </div>
     <div class="footer-text">
-      © {{ new Date().getFullYear() }} Greglabs. All rights reserved.
+      © {{ new Date().getFullYear() }} {{ $t('footer.copyright') }}
     </div>
   </footer>
 </template>
+
+<script setup>
+import LocaleSwitcher from './LocaleSwitcher.vue';
+</script>
 
 <style scoped>
 .app-footer {

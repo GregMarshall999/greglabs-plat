@@ -2,22 +2,22 @@
   <div class="home-page">
     <section class="hero">
       <div class="hero-content">
-        <h1>Welcome to the Greg-labs</h1>
+        <h1>{{ $t('home.title') }}</h1>
         <p class="subtitle">
-          A compilation of various IT mini projects
+          {{ $t('home.subtitle') }}
         </p>
         <p class="description">
-          Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code <br>
-          Welcome to my Lab <br>
-          Make yourself comfortable and feel free to explore!
+          {{ $t('home.descriptionIntro') }} <br>
+          {{ $t('home.descriptionWelcome') }} <br>
+          {{ $t('home.descriptionExplore') }}
         </p>
         <div class="cta-buttons">
-          <a href="https://simubank.greg-labs.com" class="btn primary">My Current project</a>
+          <a href="https://simubank.greg-labs.com" class="btn primary">{{ $t('home.currentProject') }}</a>
           <RouterLink
             :to="{ name: 'contact' }"
             class="btn secondary"
           >
-            Contact Me
+            {{ $t('nav.contact') }}
           </RouterLink>
         </div>
       </div>
@@ -25,34 +25,22 @@
 
     <section>
       <div class="about-greglabs">
-        <h2>What is Greg-labs?</h2>
+        <h2>{{ $t('home.whatIs') }}</h2>
         <div class="about-content">
           <div class="about-text">
             <p>
-              Greglabs is my personal development playground where I experiment with new technologies, 
-              build innovative solutions, and showcase passion for software engineering. 
-              It's a collection of mini-projects that demonstrate skills across different 
-              technologies and frameworks.
+              {{ $t('home.about1') }}
             </p>
             <div>
-              <p>Each project here represents a journey:</p> 
+              <p>{{ $t('home.journeyTitle') }}</p>
               <ul>
-                <li>
-                  From a need or a problem to solve
-                </li>
-                <li>
-                  The exploration of new technologies for the solution
-                </li>
-                <li>
-                  To the final result, a working solution with the mindset of less is more
-                </li>
+                <li>{{ $t('home.journey1') }}</li>
+                <li>{{ $t('home.journey2') }}</li>
+                <li>{{ $t('home.journey3') }}</li>
               </ul>
-              <p>Full-stack web applications, mobile apps and automation tools, all have a story to tell. Will you be part of it?</p>
+              <p>{{ $t('home.journeyEnd') }}</p>
             </div>
-            <p>
-              Whether you're a fellow developer, a head hunter 😎, or just curious about my work 
-              This labs is yours to explore ! 
-            </p>
+            <p>{{ $t('home.aboutEnd') }}</p>
           </div>
         </div>
       </div>
@@ -62,27 +50,27 @@
       id="skills"
       class="skills"
     >
-      <h2>My Skills</h2>
+      <h2>{{ $t('home.skills') }}</h2>
       <div class="skills-grid">
         <div class="skill-card">
           <i class="fas fa-code" />
-          <h3>Frontend Development</h3>
-          <p>Vue.js, React, HTML5, CSS3, SASS, JavaScript, TypeScript</p>
+          <h3>{{ $t('home.frontend') }}</h3>
+          <p>{{ $t('home.frontendTech') }}</p>
         </div>
         <div class="skill-card">
           <i class="fas fa-server" />
-          <h3>Backend Development</h3>
-          <p>Java Spring, Python Django, C# .Net, Database Design</p>
+          <h3>{{ $t('home.backend') }}</h3>
+          <p>{{ $t('home.backendTech') }}</p>
         </div>
         <div class="skill-card">
           <i class="fas fa-mobile-alt" />
-          <h3>Mobile Development</h3>
-          <p>Vue Volar, React Native, Android Studio, Progressive Web Apps</p>
+          <h3>{{ $t('home.mobile') }}</h3>
+          <p>{{ $t('home.mobileTech') }}</p>
         </div>
         <div class="skill-card">
           <i class="fas fa-tools" />
-          <h3>Tools & Technologies</h3>
-          <p>Git, Docker, CI/CD, Trello, Figma, N8N</p>
+          <h3>{{ $t('home.tools') }}</h3>
+          <p>{{ $t('home.toolsTech') }}</p>
         </div>
       </div>
     </section>
@@ -91,15 +79,15 @@
       id="projects"
       class="projects"
     >
-      <h2>Featured Projects</h2>
+      <h2>{{ $t('home.featuredProjects') }}</h2>
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-image">
-            <img src="../assets/icons/simubank.ico" alt="Simum Bank" class="simubank-icon" />
+            <img src="../assets/icons/simubank.ico" :alt="$t('home.simubankAlt')" class="simubank-icon" />
           </div>
           <div class="project-content">
-            <h3>Simu Bank</h3>
-            <p>A web App for banking simulation.</p>
+            <h3>{{ $t('home.simubank') }}</h3>
+            <p>{{ $t('home.simubankDesc') }}</p>
             <div class="project-tags">
               <span>Vue.js</span>
               <span>Java Spring</span>
@@ -109,7 +97,7 @@
             <a
               href="https://simubank.greg-labs.com"
               class="btn"
-            >View Project</a>
+            >{{ $t('common.viewProject') }}</a>
           </div>
         </div>
         <div class="project-card">
@@ -161,8 +149,8 @@
             </svg>
           </div>
           <div class="project-content">
-            <h3>En Recherche Active</h3>
-            <p>A French web App for job seekers in training.</p>
+            <h3>{{ $t('home.enRechercheActive') }}</h3>
+            <p>{{ $t('home.enRechercheActiveDesc') }}</p>
             <div class="project-tags">
               <span>Vue.js</span>
               <span>Java Spring</span>
@@ -171,7 +159,7 @@
             <a
               href="https://en-recherche-active.com"
               class="btn"
-            >View Project</a>
+            >{{ $t('common.viewProject') }}</a>
           </div>
         </div>
         <div class="project-card">
@@ -194,8 +182,8 @@
             </svg>
           </div>
           <div class="project-content">
-            <h3>GregLabs Med-Level</h3>
-            <p>Vue.js Certification Mid-Level Training projects</p>
+            <h3>{{ $t('home.greglabsMedLevel') }}</h3>
+            <p>{{ $t('home.greglabsMedLevelDesc') }}</p>
             <div class="project-tags">
               <span>Vue.js</span>
             </div>
@@ -203,17 +191,17 @@
               :to="{ name: 'med-level-movies' }"
               class="btn"
             >
-              View Project
+              {{ $t('common.viewProject') }}
             </RouterLink>
           </div>
         </div>
         <div class="project-card">
           <div class="project-image">
-            <img src="../assets/relays/relays.jpg" alt="IoT Relay Control System" />
+            <img src="../assets/relays/relays.jpg" :alt="$t('home.relaysAlt')" />
           </div>
           <div class="project-content">
-            <h3>IoT Relay Control System</h3>
-            <p>Remote control of house appliances through a secure Android application</p>
+            <h3>{{ $t('home.relays') }}</h3>
+            <p>{{ $t('home.relaysDesc') }}</p>
             <div class="project-tags">
               <span>Android</span>
               <span>Java Spring</span>
@@ -224,7 +212,7 @@
               :to="{ name: 'relays' }"
               class="btn"
             >
-              View Project
+              {{ $t('common.viewProject') }}
             </RouterLink>
           </div>
         </div>

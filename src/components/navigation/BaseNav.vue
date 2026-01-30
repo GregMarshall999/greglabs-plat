@@ -1,5 +1,5 @@
 <template>
-  <h1>Greg-Labs</h1>
+  <h1>{{ $t('nav.home') }}</h1>
 </template>
 
 <style scoped>

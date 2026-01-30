@@ -1,15 +1,15 @@
 <template>
   <div class="contact-page">
     <section class="contact-hero">
-      <h1>Get in Touch</h1>
+      <h1>{{ $t('contact.title') }}</h1>
       <p class="subtitle">
-        How may I help you?
+        {{ $t('contact.subtitle') }}
       </p>
       <RouterLink
         to="/"
         class="back-button"
       >
-        Go Back
+        {{ $t('common.back') }}
       </RouterLink>
     </section>
 
@@ -17,23 +17,23 @@
       <div class="contact-info">
         <div class="info-card">
           <i class="fas fa-envelope" />
-          <h3>Email</h3>
+          <h3>{{ $t('contact.email') }}</h3>
           <p>gregory.marshall999@gmail.com</p>
         </div>
         <div class="info-card">
           <i class="fas fa-phone" />
-          <h3>Phone</h3>
+          <h3>{{ $t('contact.phone') }}</h3>
           <p>+33 6 51 14 72 19</p>
         </div>
         <div class="info-card">
           <i class="fas fa-map-marker-alt" />
-          <h3>Location</h3>
+          <h3>{{ $t('contact.location') }}</h3>
           <p>France</p>
         </div>
         <div class="info-card">
           <i class="fas fa-clock" />
-          <h3>Availability</h3>
-          <p>Open to new opportunities</p>
+          <h3>{{ $t('contact.availability') }}</h3>
+          <p>{{ $t('contact.availabilityText') }}</p>
         </div>
       </div>
 
@@ -43,50 +43,50 @@
       >
         <div class="form-overlay">
           <div class="coming-soon">
-            <h2>WIP - Coming Soon</h2>
-            <p>Contact form functionality is under development</p>
+            <h2>{{ $t('contact.comingSoonTitle') }}</h2>
+            <p>{{ $t('contact.comingSoonText') }}</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">{{ $t('contact.name') }}</label>
           <input 
             type="text" 
             id="name" 
             v-model="formData.name" 
             required
-            placeholder="Your name"
+            :placeholder="$t('contact.namePlaceholder')"
           >
         </div>
 
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">{{ $t('contact.email') }}</label>
           <input 
             type="email" 
             id="email" 
             v-model="formData.email" 
             required
-            placeholder="Your email"
+            :placeholder="$t('contact.emailPlaceholder')"
           >
         </div>
 
         <div class="form-group">
-          <label for="subject">Subject</label>
+          <label for="subject">{{ $t('contact.subject') }}</label>
           <input 
             type="text" 
             id="subject" 
             v-model="formData.subject" 
             required
-            placeholder="What's this about?"
+            :placeholder="$t('contact.subjectPlaceholder')"
           >
         </div>
 
         <div class="form-group">
-          <label for="message">Message</label>
+          <label for="message">{{ $t('contact.message') }}</label>
           <textarea 
             id="message" 
             v-model="formData.message" 
             required
-            placeholder="Your message"
+            :placeholder="$t('contact.messagePlaceholder')"
             rows="5"
           />
         </div>
@@ -96,7 +96,7 @@
           class="submit-btn"
           :disabled="isSubmitting"
         >
-          {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+          {{ isSubmitting ? $t('contact.sending') : $t('contact.sendMessage') }}
         </button>
 
         <div
@@ -134,12 +134,12 @@ export default {
         // Here you would typically send the form data to your backend
         // For now, we'll simulate a successful submission
         await new Promise(resolve => setTimeout(resolve, 1000))
-        
+
         this.submitStatus = {
           type: 'success',
-          message: 'Message sent successfully! I\'ll get back to you soon.'
+          message: this.$t('contact.successMessage')
         }
-        
+
         // Reset form
         this.formData = {
           name: '',
@@ -150,7 +150,7 @@ export default {
       } catch (error) {
         this.submitStatus = {
           type: 'error',
-          message: 'Sorry, there was an error sending your message. Please try again.'
+          message: this.$t('contact.errorMessage')
         }
       } finally {
         this.isSubmitting = false

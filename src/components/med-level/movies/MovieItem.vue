@@ -21,7 +21,7 @@
       <template #default>
         <footer>
           <span class="rating">
-            Rating: ({{ movie.rating }}/5)
+            {{ $t('medLevel.movies.rating') }} ({{ movie.rating }}/5)
                         
             <span class="stars">
               <StarIcon 

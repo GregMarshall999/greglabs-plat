@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <h1>Tic-Tac-Toe</h1>
+    <h1>{{ $t('medLevel.ticTacToe.title') }}</h1>
 
     <div
       class="difficulty-selection"
       v-if="!gameStarted"
     >
-      <h3>Select Difficulty:</h3>
+      <h3>{{ $t('medLevel.ticTacToe.selectDifficulty') }}</h3>
       <div class="radio-group">
         <label>
           <input
@@ -16,7 +16,7 @@
             v-model="difficulty"
             checked
           >
-          PVP
+          {{ $t('medLevel.ticTacToe.pvp') }}
         </label>
         <label>
           <input
@@ -25,7 +25,7 @@
             value="easy"
             v-model="difficulty"
           >
-          PVE - Easy
+          {{ $t('medLevel.ticTacToe.pveEasy') }}
         </label>
         <label>
           <input
@@ -34,7 +34,7 @@
             value="hard"
             v-model="difficulty"
           >
-          PVE - Hard
+          {{ $t('medLevel.ticTacToe.pveHard') }}
         </label>
         <label>
           <input
@@ -43,37 +43,37 @@
             value="impossible"
             v-model="difficulty"
           >
-          PVE - Impossible
+          {{ $t('medLevel.ticTacToe.pveImpossible') }}
         </label>
       </div>
     </div>
 
     <h2 v-if="!gameStarted && !gameOver">
-      Click a cell to play !
+      {{ $t('medLevel.ticTacToe.clickToPlay') }}
     </h2>
 
     <h2 v-if="difficulty === 'pvp' && gameStarted && !gameOver">
-      Player {{ playerTurn }}'s turn
+      {{ $t('medLevel.ticTacToe.playerTurn', { n: playerTurn }) }}
     </h2>
     <h2 v-if="difficulty === 'pvp' && gameOver && !draw">
-      Player {{ playerTurn }} wins!
+      {{ $t('medLevel.ticTacToe.playerWins', { n: playerTurn }) }}
     </h2>
 
     <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && computerTurn">
-      Let me think...
+      {{ $t('medLevel.ticTacToe.letMeThink') }}
     </h2>
     <h2 v-if="difficulty !== 'pvp' && gameStarted && !gameOver && !computerTurn">
-      Your turn !
+      {{ $t('medLevel.ticTacToe.yourTurn') }}
     </h2>
     <h2 v-if="difficulty !== 'pvp' && gameOver && computerTurn && !draw">
-      I win ! An other game ?
+      {{ $t('medLevel.ticTacToe.iWin') }}
     </h2>
     <h2 v-if="difficulty !== 'pvp' && gameOver && !computerTurn && !draw">
-      You win ! Well played !
+      {{ $t('medLevel.ticTacToe.youWin') }}
     </h2>
         
     <h2 v-if="gameOver && draw">
-      It's a draw !
+      {{ $t('medLevel.ticTacToe.itsADraw') }}
     </h2>
 
     <div class="board">
@@ -101,7 +101,7 @@
       class="reset"
       @click="resetGame"
     >
-      Reset Game
+      {{ $t('medLevel.ticTacToe.resetGame') }}
     </button>
   </div>
 </template>
