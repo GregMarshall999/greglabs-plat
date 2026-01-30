@@ -112,25 +112,89 @@
       </div>
     </section>
 
+    <!-- Android Interface Section -->
+    <section class="android-interface">
+      <div class="section-content">
+        <h2>{{ $t('projects.relays.androidInterface') }}</h2>
+        <p class="android-interface-intro">
+          {{ $t('projects.relays.androidInterfaceIntro') }}
+        </p>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              :src="relaysInterface"
+              :alt="$t('projects.relays.galleryMainInterface')"
+              @click="openLightbox(relaysInterface)"
+            />
+            <p>{{ $t('projects.relays.captionMainInterface') }}</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              :src="relayReg"
+              :alt="$t('projects.relays.galleryRegister')"
+              @click="openLightbox(relayReg)"
+            />
+            <p>{{ $t('projects.relays.captionRegister') }}</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              :src="relayEdit"
+              :alt="$t('projects.relays.galleryEdit')"
+              @click="openLightbox(relayEdit)"
+            />
+            <p>{{ $t('projects.relays.captionEdit') }}</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              :src="relayEmod"
+              :alt="$t('projects.relays.galleryEditMode')"
+              @click="openLightbox(relayEmod)"
+            />
+            <p>{{ $t('projects.relays.captionEditMode') }}</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              :src="relayDmod"
+              :alt="$t('projects.relays.galleryDelete')"
+              @click="openLightbox(relayDmod)"
+            />
+            <p>{{ $t('projects.relays.captionDelete') }}</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              :src="relayPage"
+              :alt="$t('projects.relays.galleryRelayPage')"
+              @click="openLightbox(relayPage)"
+            />
+            <p>{{ $t('projects.relays.captionRelayPage') }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="gallery">
       <div class="section-content">
         <h2>{{ $t('projects.relays.gallery') }}</h2>
         <div class="gallery-grid">
-          <div class="gallery-item">
-            <img 
-              :src="relaysApp01" 
-              :alt="$t('projects.relays.galleryApp1')"
-              @click="openLightbox(relaysApp01)"
-            />
+          <div class="gallery-item gallery-item-previous">
+            <div class="gallery-item-blur-wrap">
+              <img 
+                :src="relaysApp01" 
+                :alt="$t('projects.relays.galleryApp1')"
+              />
+              <span class="gallery-item-previous-label">{{ $t('projects.relays.previousVersion') }}</span>
+            </div>
             <p>{{ $t('projects.relays.captionAppMain') }}</p>
           </div>
-          <div class="gallery-item">
-            <img 
-              :src="relaysApp02" 
-              :alt="$t('projects.relays.galleryApp2')"
-              @click="openLightbox(relaysApp02)"
-            />
+          <div class="gallery-item gallery-item-previous">
+            <div class="gallery-item-blur-wrap">
+              <img 
+                :src="relaysApp02" 
+                :alt="$t('projects.relays.galleryApp2')"
+              />
+              <span class="gallery-item-previous-label">{{ $t('projects.relays.previousVersion') }}</span>
+            </div>
             <p>{{ $t('projects.relays.captionAppInterface') }}</p>
           </div>
           <div class="gallery-item">
@@ -228,6 +292,12 @@
 
 <script setup>
 import { ref } from 'vue';
+import relayReg from '@/assets/relays/android-interface/relay-reg.jpg';
+import relayEdit from '@/assets/relays/android-interface/relay-edit.jpg';
+import relayEmod from '@/assets/relays/android-interface/relay-emod.jpg';
+import relayDmod from '@/assets/relays/android-interface/relay-dmod.jpg';
+import relayPage from '@/assets/relays/android-interface/relay-page.jpg';
+import relaysInterface from '@/assets/relays/android-interface/relays-interface.jpg';
 import relaysApp01 from '@/assets/relays/relays app 01.jpg';
 import relaysApp02 from '@/assets/relays/relays app 02.jpg';
 import relaysBackend from '@/assets/relays/relays backend controllers.png';
@@ -411,6 +481,22 @@ section h2 {
   line-height: 1.6;
 }
 
+/* Android Interface Section */
+.android-interface {
+  background-color: #1a2438;
+}
+
+.android-interface-intro {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ffffff;
+  margin-bottom: 30px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 /* Gallery Section */
 .gallery-grid {
   display: grid;
@@ -448,6 +534,37 @@ section h2 {
   color: #ffffff;
   text-align: center;
   margin: 0;
+}
+
+.gallery-item-previous .gallery-item-blur-wrap {
+  position: relative;
+  display: block;
+  height: 250px;
+}
+
+.gallery-item-previous .gallery-item-blur-wrap img {
+  filter: blur(6px);
+  cursor: default;
+  pointer-events: none;
+}
+
+.gallery-item-previous .gallery-item-blur-wrap img:hover {
+  opacity: 1;
+}
+
+.gallery-item-previous-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* Future Section */
