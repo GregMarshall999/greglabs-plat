@@ -14,7 +14,7 @@
         <div class="cta-buttons">
           <a href="https://simubank.greg-labs.com" class="btn primary">{{ $t('home.currentProject') }}</a>
           <RouterLink
-            :to="{ name: 'contact' }"
+            :to="localePath({ name: 'contact' })"
             class="btn secondary"
           >
             {{ $t('nav.contact') }}
@@ -188,7 +188,7 @@
               <span>Vue.js</span>
             </div>
             <RouterLink
-              :to="{ name: 'med-level-movies' }"
+              :to="localePath({ name: 'med-level-movies' })"
               class="btn"
             >
               {{ $t('common.viewProject') }}
@@ -209,7 +209,7 @@
               <span>IoT</span>
             </div>
             <RouterLink
-              :to="{ name: 'relays' }"
+              :to="localePath({ name: 'relays' })"
               class="btn"
             >
               {{ $t('common.viewProject') }}
@@ -220,6 +220,12 @@
     </section>
   </div>
 </template>
+
+<script setup>
+import { useLocalePath } from '@/composables/useLocalePath';
+
+const { localePath } = useLocalePath();
+</script>
 
 <style scoped>
 .simubank-icon {

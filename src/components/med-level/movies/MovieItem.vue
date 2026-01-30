@@ -42,7 +42,7 @@
             v-if="hovering"
           >
             <RouterLink 
-              :to="{ name: 'med-level-movie-details', params: { id: movie.id } }"
+              :to="localePath({ name: 'med-level-movie-details', params: { id: movie.id } })"
               class="icon-button view"
             >
               <svg
@@ -97,6 +97,9 @@ import { StarIcon } from "@heroicons/vue/24/solid";
 import RatedPicture from "./RatedPicture.vue";
 import MovieDetails from "./MovieDetails.vue";
 import { computed, ref } from "vue";
+import { useLocalePath } from "@/composables/useLocalePath";
+
+const { localePath } = useLocalePath();
 
 const props = defineProps({
     movie: {

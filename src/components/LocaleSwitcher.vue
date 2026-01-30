@@ -23,14 +23,29 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { STORAGE_KEY } from '@/i18n';
 
+const router = useRouter();
 const { locale } = useI18n();
 
 function setLocale(newLocale) {
+  const fullPath = router.currentRoute.value.fullPath;
+  const basePath = fullPath.replace(/^\/fr/, '') || '/';
+  let newPath;
+  if (newLocale === 'fr') {
+    newPath = basePath === '/' ? '/fr' : `/fr${basePath}`;
+  } else {
+    newPath = basePath;
+  }
   locale.value = newLocale;
-  localStorage.setItem(STORAGE_KEY, newLocale);
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem(STORAGE_KEY, newLocale);
+  }
+  if (router.currentRoute.value.fullPath !== newPath) {
+    router.push(newPath);
+  }
 }
 </script>
 

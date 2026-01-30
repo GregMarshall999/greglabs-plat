@@ -2,7 +2,7 @@
   <div class="navbar-content">
     <div class="logo">
       <h1
-        @click="router.push('/')"
+        @click="router.push(localePath({ name: 'home' }))"
         :title="$t('medLevel.nav.backToHome')"
       >
         {{ $t('medLevel.nav.title') }}
@@ -11,7 +11,7 @@
     <ul class="nav-links">
       <li>
         <RouterLink
-          :to="{ name: 'med-level-movies' }"
+          :to="localePath({ name: 'med-level-movies' })"
           class="nav-link"
         >
           {{ $t('medLevel.nav.movies') }}
@@ -19,7 +19,7 @@
       </li>
       <li>
         <RouterLink
-          :to="{ name: 'med-level-countdown' }"
+          :to="localePath({ name: 'med-level-countdown' })"
           class="nav-link"
         >
           {{ $t('medLevel.nav.countdown') }}
@@ -27,7 +27,7 @@
       </li>
       <li>
         <RouterLink
-          :to="{ name: 'med-level-shopping-cart' }"
+          :to="localePath({ name: 'med-level-shopping-cart' })"
           class="nav-link"
         >
           {{ $t('medLevel.nav.shoppingCart') }}
@@ -40,7 +40,7 @@
         <ul class="dropdown-menu">
           <li>
             <RouterLink
-              :to="{ name: 'med-level-tic-tac-toe' }"
+              :to="localePath({ name: 'med-level-tic-tac-toe' })"
               class="nav-link"
             >
               {{ $t('medLevel.nav.ticTacToe') }}
@@ -48,7 +48,7 @@
           </li>
           <li>
             <RouterLink
-              :to="{ name: 'med-level-aquarium' }"
+              :to="localePath({ name: 'med-level-aquarium' })"
               class="nav-link"
             >
               {{ $t('medLevel.nav.aquarium') }}
@@ -56,7 +56,7 @@
           </li>
           <li>
             <RouterLink
-              :to="{ name: 'med-level-quiz' }"
+              :to="localePath({ name: 'med-level-quiz' })"
               class="nav-link"
             >
               {{ $t('medLevel.nav.quiz') }}
@@ -64,7 +64,7 @@
           </li>
           <li>
             <RouterLink
-              :to="{ name: 'med-level-task' }"
+              :to="localePath({ name: 'med-level-task' })"
               class="nav-link"
             >
               {{ $t('medLevel.nav.task') }}
@@ -78,8 +78,10 @@
 
 <script setup>
 import { RouterLink, useRouter } from 'vue-router';
+import { useLocalePath } from '@/composables/useLocalePath';
 
 const router = useRouter();
+const { localePath } = useLocalePath();
 </script>
 
 <style>

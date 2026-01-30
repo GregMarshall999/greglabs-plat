@@ -6,7 +6,7 @@
         {{ $t('contact.subtitle') }}
       </p>
       <RouterLink
-        to="/"
+        :to="localePath({ name: 'home' })"
         class="back-button"
       >
         {{ $t('common.back') }}
@@ -113,6 +113,7 @@
 <script>
 export default {
   name: 'ContactPage',
+  inject: ['localePath'],
   data() {
     return {
       formData: {

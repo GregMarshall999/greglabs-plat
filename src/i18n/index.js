@@ -7,6 +7,9 @@ const STORAGE_KEY = 'greglabs-locale';
 const SUPPORTED = new Set(['en', 'fr']);
 
 function getInitialLocale() {
+  if (typeof window !== 'undefined' && window.location?.pathname?.startsWith('/fr')) {
+    return 'fr';
+  }
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored && SUPPORTED.has(stored)) return stored;
   const browser = navigator.language?.slice(0, 2);

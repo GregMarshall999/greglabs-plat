@@ -5,8 +5,13 @@
 </template>
 
 <script setup>
+import { provide } from 'vue';
 import NavigationBar from './components/navigation/NavigationBar.vue';
 import AppFooter from './components/AppFooter.vue';
+import { useLocalePath } from './composables/useLocalePath';
+
+const { localePath } = useLocalePath();
+provide('localePath', localePath);
 </script>
 
 <style>
