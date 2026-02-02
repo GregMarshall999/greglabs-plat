@@ -1,4 +1,4 @@
-name: Deploy Frontend to Hetzner
+name: Deploy Frontend to ianslab
 
 on:
   push:
@@ -24,7 +24,8 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_KEY }}, 
+          port: ${{ secrets.SSH_PORT }}
           script: |
             cd /opt/greglabs-plat
             git fetch
