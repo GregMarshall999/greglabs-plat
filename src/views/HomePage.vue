@@ -12,7 +12,13 @@
           {{ $t('home.descriptionExplore') }}
         </p>
         <div class="cta-buttons">
-          <a href="https://simubank.greg-labs.com" class="btn primary">{{ $t('home.currentProject') }}</a>
+          <a v-if="false" href="https://simubank.greg-labs.com" class="btn primary">{{ $t('home.currentProject') }}</a>
+          <RouterLink
+            :to="localePath({ name: 'growatt-modbus' })"
+            class="btn primary"
+          >
+            {{ $t('home.currentProject') }}
+          </RouterLink>
           <RouterLink
             :to="localePath({ name: 'contact' })"
             class="btn secondary"
@@ -210,6 +216,27 @@
             </div>
             <RouterLink
               :to="localePath({ name: 'relays' })"
+              class="btn"
+            >
+              {{ $t('common.viewProject') }}
+            </RouterLink>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <img src="../assets/growatt-modbus/ba.jpg" :alt="$t('home.growattModbusAlt')" />
+          </div>
+          <div class="project-content">
+            <h3>{{ $t('home.growattModbus') }}</h3>
+            <p>{{ $t('home.growattModbusDesc') }}</p>
+            <div class="project-tags">
+              <span>Raspberry Pi</span>
+              <span>FastAPI</span>
+              <span>Python</span>
+              <span>Modbus</span>
+            </div>
+            <RouterLink
+              :to="localePath({ name: 'growatt-modbus' })"
               class="btn"
             >
               {{ $t('common.viewProject') }}

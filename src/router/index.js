@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import ContactPage from '@/views/ContactPage.vue'
 import RelaysPage from '@/views/projects/RelaysPage.vue'
+import GrowattModbusPage from '@/views/projects/GrowattModbusPage.vue'
 import medLevelRoutes from './med-level.routes'
 import i18n, { STORAGE_KEY, syncDocumentLang } from '@/i18n'
 
@@ -25,6 +26,12 @@ const baseRoutes = [
     name: 'relays',
     meta: { projectGroup: base },
     component: RelaysPage
+  },
+  {
+    path: '/projects/growatt-modbus',
+    name: 'growatt-modbus',
+    meta: { projectGroup: base },
+    component: GrowattModbusPage
   },
   ...medLevelRoutes
 ]
