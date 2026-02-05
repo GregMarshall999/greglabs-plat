@@ -130,11 +130,19 @@
           </div>
           <div class="gallery-item">
             <img
-              :src="imgMbi"
-              :alt="$t('projects.growattModbus.galleryMbi')"
-              @click="openLightbox(imgMbi)"
+              :src="imgIdd"
+              :alt="$t('projects.growattModbus.galleryIdd')"
+              @click="openLightbox(imgIdd)"
             />
-            <p>{{ $t('projects.growattModbus.captionMbi') }}</p>
+            <p>{{ $t('projects.growattModbus.captionIdd') }}</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              :src="imgInd"
+              :alt="$t('projects.growattModbus.galleryInd')"
+              @click="openLightbox(imgInd)"
+            />
+            <p>{{ $t('projects.growattModbus.captionInd') }}</p>
           </div>
           <div class="gallery-item">
             <img
@@ -193,7 +201,8 @@
 import { ref } from 'vue';
 import imgBa from '@/assets/growatt-modbus/ba.jpg';
 import imgGwi from '@/assets/growatt-modbus/gwi.jpg';
-import imgMbi from '@/assets/growatt-modbus/mbi.jpg';
+import imgIdd from '@/assets/growatt-modbus/idd.jpg';
+import imgInd from '@/assets/growatt-modbus/ind.jpg';
 import imgRbp from '@/assets/growatt-modbus/rbp.jpg';
 
 const lightboxImage = ref(null);
