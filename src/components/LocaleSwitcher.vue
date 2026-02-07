@@ -49,35 +49,36 @@ function setLocale(newLocale) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/scss/variables' as *;
+
 .locale-switcher {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  margin-bottom: 0.5rem;
 }
 .locale-btn {
   background: none;
-  border: 1px solid #71808f;
-  color: #71808f;
+  border: 1px solid $slate-500;
+  color: $slate-500;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  border-radius: $radius;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 .locale-btn:hover {
-  border-color: #42b983;
-  color: #42b983;
+  border-color: $primary;
+  color: $primary;
 }
 .locale-btn.active {
-  background: #42b983;
-  border-color: #42b983;
-  color: #1a2438;
+  background: $primary;
+  border-color: $primary;
+  color: white;
 }
 .locale-sep {
-  color: #71808f;
+  color: $slate-500;
   font-size: 0.875rem;
 }
 </style>

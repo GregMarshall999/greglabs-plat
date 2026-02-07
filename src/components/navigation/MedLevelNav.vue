@@ -84,7 +84,8 @@ const router = useRouter();
 const { localePath } = useLocalePath();
 </script>
 
-<style>
+<style scoped lang="scss">
+@use '@/scss/variables' as *;
 
 .navbar-content {
     display: flex;
@@ -95,7 +96,7 @@ const { localePath } = useLocalePath();
 .logo h1 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
+    color: white;
     cursor: pointer;
 }
 
@@ -107,17 +108,18 @@ const { localePath } = useLocalePath();
 }
 
 .nav-link {
-    color: #fff;
+    color: white;
     text-decoration: none;
     font-weight: 500;
     padding: 0.5rem 0.75rem;
-    border-radius: 4px;
+    border-radius: $radius;
     transition: background-color 0.2s, color 0.2s;
 }
 
-.nav-link:hover, .router-link-active {
-    background-color: #2d3748;
-    color: #38b2ac;
+.nav-link:hover,
+:deep(.router-link-active) {
+    background-color: $slate-800;
+    color: $primary;
 }
 
 .dropdown {
@@ -140,8 +142,8 @@ const { localePath } = useLocalePath();
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #1a2434;
-    border-radius: 4px;
+    background-color: $slate-800;
+    border-radius: $radius;
     padding: 0.5rem 0;
     min-width: 200px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -164,7 +166,7 @@ const { localePath } = useLocalePath();
 }
 
 .dropdown-menu .nav-link:hover {
-    background-color: #2d3748;
+    background-color: $slate-700;
 }
 
 </style>

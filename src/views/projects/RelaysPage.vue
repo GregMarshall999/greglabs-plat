@@ -1,15 +1,18 @@
 <template>
   <div class="relays-page">
     <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>{{ $t('projects.relays.title') }}</h1>
-        <p class="subtitle">
-          {{ $t('projects.relays.subtitle') }}
-        </p>
-        <p class="description">
-          {{ $t('projects.relays.description') }}
-        </p>
+    <section class="project-hero">
+      <div class="project-hero-image">
+        <img :src="relaysMain" :alt="$t('projects.relays.title')" />
+        <div class="project-hero-overlay"></div>
+        <div class="project-hero-content">
+          <nav class="project-hero-breadcrumb">
+            <RouterLink :to="localePath({ name: 'projects' })" class="breadcrumb-link">{{ $t('nav.projects') }}</RouterLink>
+            <span class="material-symbols-outlined breadcrumb-chevron">chevron_right</span>
+            <span>{{ $t('projects.relays.title') }}</span>
+          </nav>
+          <h1 class="project-hero-title">{{ $t('projects.relays.title') }}</h1>
+        </div>
       </div>
     </section>
 
@@ -292,6 +295,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useLocalePath } from '@/composables/useLocalePath';
 import relayReg from '@/assets/relays/android-interface/relay-reg.jpg';
 import relayEdit from '@/assets/relays/android-interface/relay-edit.jpg';
 import relayEmod from '@/assets/relays/android-interface/relay-emod.jpg';
@@ -307,6 +312,7 @@ import serverRelaysBatteries from '@/assets/relays/server - relays - batteries.j
 import tactileScreen from '@/assets/relays/tactile screen.jpg';
 import solarHeater from '@/assets/relays/solar heater.jpg';
 
+const { localePath } = useLocalePath();
 const lightboxImage = ref(null);
 
 const openLightbox = (image) => {
@@ -320,72 +326,113 @@ const closeLightbox = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/scss/variables' as *;
+
 .relays-page {
-  max-width: 1200px;
+  width: 100%;
+  max-width: $max-w-7xl;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 2rem 1.5rem;
 }
 
 /* Hero Section */
-.hero {
-  min-height: 50vh;
+.project-hero {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.project-hero-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.project-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba($background-dark, 0.8) 0%, transparent 50%, transparent 100%);
+}
+
+.project-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+}
+
+.project-hero-breadcrumb {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 60px 0;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
 }
 
-.hero-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
+.breadcrumb-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover {
+    color: white;
+  }
 }
 
-.subtitle {
-  font-size: 1.5rem;
-  color: #42b983;
-  margin-bottom: 1rem;
+.breadcrumb-chevron {
+  font-size: 0.75rem !important;
 }
 
-.description {
-  font-size: 1.2rem;
-  color: #666;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.8;
+.project-hero-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.025em;
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
 }
 
 /* Section Content */
 .section-content {
-  max-width: 1200px;
+  max-width: $max-w-7xl;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 1.5rem;
 }
 
 section {
-  padding: 80px 0;
+  padding: 5rem 0;
 }
 
 section h2 {
   text-align: center;
-  margin-bottom: 40px;
-  color: #71808f;
-  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: $slate-400;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 /* Overview Section */
 .overview {
-  background-color: #1a2438;
+  border-top: 1px solid $slate-800;
 }
 
 .overview-text p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #ffffff;
-  margin-bottom: 20px;
-  max-width: 900px;
+  color: $slate-300;
+  margin-bottom: 1.25rem;
+  max-width: 56rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -401,47 +448,48 @@ section h2 {
 }
 
 .arch-component {
-  background: #2c3c56;
-  padding: 30px 20px;
-  border-radius: 10px;
+  background: rgba($slate-800, 0.5);
+  border: 1px solid $slate-800;
+  padding: 1.875rem 1.25rem;
+  border-radius: $radius-xl;
   text-align: center;
-  min-width: 180px;
-  max-width: 200px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  min-width: 11.25rem;
+  max-width: 12.5rem;
+  transition: transform 0.3s ease, border-color 0.2s;
 }
 
 .arch-component:hover {
   transform: translateY(-5px);
+  border-color: rgba($primary, 0.5);
 }
 
 .arch-icon {
   font-size: 2.5rem;
-  color: #42b983;
-  margin-bottom: 15px;
+  color: $primary;
+  margin-bottom: 0.9375rem;
 }
 
 .arch-component h3 {
-  color: #ffffff;
+  color: white;
   font-size: 1.1rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 .arch-component p {
-  color: #71808f;
+  color: $slate-400;
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .arch-arrow {
   font-size: 2rem;
-  color: #42b983;
+  color: $primary;
   font-weight: bold;
 }
 
 /* Features Section */
 .features {
-  background-color: #1a2438;
+  border-top: 1px solid $slate-800;
 }
 
 .features-grid {
@@ -452,44 +500,45 @@ section h2 {
 }
 
 .feature-card {
-  background: #2c3c56;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba($slate-800, 0.5);
+  border: 1px solid $slate-800;
+  padding: 1.875rem;
+  border-radius: $radius-xl;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.2s;
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
+  border-color: rgba($primary, 0.5);
 }
 
 .feature-card i {
   font-size: 2.5rem;
-  color: #42b983;
-  margin-bottom: 20px;
+  color: $primary;
+  margin-bottom: 1.25rem;
 }
 
 .feature-card h3 {
-  color: #ffffff;
-  margin-bottom: 15px;
+  color: white;
+  margin-bottom: 0.9375rem;
   font-size: 1.3rem;
 }
 
 .feature-card p {
-  color: #71808f;
+  color: $slate-400;
   line-height: 1.6;
 }
 
 /* Android Interface Section */
 .android-interface {
-  background-color: #1a2438;
+  border-top: 1px solid $slate-800;
 }
 
 .android-interface-intro {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #ffffff;
+  color: $slate-300;
   margin-bottom: 30px;
   max-width: 900px;
   margin-left: auto;
@@ -506,16 +555,18 @@ section h2 {
 }
 
 .gallery-item {
-  background: #1a2438;
-  border-radius: 10px;
+  background: rgba($slate-800, 0.5);
+  border: 1px solid $slate-800;
+  border-radius: $radius-xl;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.2s;
 }
 
 .gallery-item:hover {
   transform: translateY(-5px);
+  border-color: rgba($primary, 0.5);
 }
+
 
 .gallery-item img {
   width: 100%;
@@ -530,8 +581,8 @@ section h2 {
 }
 
 .gallery-item p {
-  padding: 15px;
-  color: #ffffff;
+  padding: 1rem;
+  color: white;
   text-align: center;
   margin: 0;
 }
@@ -569,7 +620,7 @@ section h2 {
 
 /* Future Section */
 .future {
-  background-color: #1a2438;
+  border-top: 1px solid $slate-800;
 }
 
 .future-grid {
@@ -580,32 +631,33 @@ section h2 {
 }
 
 .future-card {
-  background: #2c3c56;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba($slate-800, 0.5);
+  border: 1px solid $slate-800;
+  padding: 1.875rem;
+  border-radius: $radius-xl;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.2s;
 }
 
 .future-card:hover {
   transform: translateY(-5px);
+  border-color: rgba($primary, 0.5);
 }
 
 .future-card i {
   font-size: 2.5rem;
-  color: #42b983;
-  margin-bottom: 20px;
+  color: $primary;
+  margin-bottom: 1.25rem;
 }
 
 .future-card h3 {
-  color: #ffffff;
-  margin-bottom: 15px;
+  color: white;
+  margin-bottom: 0.9375rem;
   font-size: 1.2rem;
 }
 
 .future-card p {
-  color: #71808f;
+  color: $slate-400;
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -643,7 +695,7 @@ section h2 {
 }
 
 .lightbox-close:hover {
-  color: #42b983;
+  color: $primary;
 }
 
 /* Responsive Design */

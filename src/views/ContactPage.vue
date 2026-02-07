@@ -1,364 +1,440 @@
 <template>
   <div class="contact-page">
-    <section class="contact-hero">
-      <h1>{{ $t('contact.title') }}</h1>
-      <p class="subtitle">
-        {{ $t('contact.subtitle') }}
-      </p>
-      <RouterLink
-        :to="localePath({ name: 'home' })"
-        class="back-button"
-      >
-        {{ $t('common.back') }}
-      </RouterLink>
-    </section>
+    <div class="contact-inner">
+      <!-- Left: Contact Information -->
+      <div class="contact-info-section">
+        <div class="contact-header">
+          <div class="contact-badge">
+            <span class="badge-dot"></span>
+            {{ $t('common.availableForOpportunities') }}
+          </div>
+          <h2 class="contact-title">
+            {{ $t('contact.title') }}
+            <span class="text-primary">{{ $t('contact.subtitle') }}</span>
+          </h2>
+          <p class="contact-description">{{ $t('contact.availabilityText') }}</p>
+        </div>
 
-    <div class="contact-container">
-      <div class="contact-info">
-        <div class="info-card">
-          <i class="fas fa-envelope" />
-          <h3>{{ $t('contact.email') }}</h3>
-          <p>gregory.marshall999@gmail.com</p>
+        <div class="contact-cards">
+          <div
+            v-for="item in contactItems"
+            :key="item.label"
+            class="contact-card"
+          >
+            <div class="contact-card-icon">
+              <span class="material-symbols-outlined">{{ item.icon }}</span>
+            </div>
+            <h3 class="contact-card-label">{{ item.label }}</h3>
+            <p class="contact-card-value">{{ item.value }}</p>
+          </div>
         </div>
-        <div class="info-card">
-          <i class="fas fa-phone" />
-          <h3>{{ $t('contact.phone') }}</h3>
-          <p>+33 6 51 14 72 19</p>
-        </div>
-        <div class="info-card">
-          <i class="fas fa-map-marker-alt" />
-          <h3>{{ $t('contact.location') }}</h3>
-          <p>France</p>
-        </div>
-        <div class="info-card">
-          <i class="fas fa-clock" />
-          <h3>{{ $t('contact.availability') }}</h3>
-          <p>{{ $t('contact.availabilityText') }}</p>
+
+        <div class="contact-map-placeholder">
+          <div class="map-overlay"></div>
+          <div class="map-pin">
+            <span class="material-symbols-outlined">location_on</span>
+          </div>
         </div>
       </div>
 
-      <form
-        class="contact-form"
-        @submit.prevent="handleSubmit"
-      >
-        <div class="form-overlay">
-          <div class="coming-soon">
-            <h2>{{ $t('contact.comingSoonTitle') }}</h2>
-            <p>{{ $t('contact.comingSoonText') }}</p>
+      <!-- Right: Contact Form -->
+      <div class="contact-form-section">
+        <form class="contact-form" @submit.prevent="handleSubmit">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">{{ $t('contact.name') }}</label>
+              <input
+                id="name"
+                v-model="formData.name"
+                type="text"
+                required
+                :placeholder="$t('contact.namePlaceholder')"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">{{ $t('contact.email') }}</label>
+              <input
+                id="email"
+                v-model="formData.email"
+                type="email"
+                required
+                :placeholder="$t('contact.emailPlaceholder')"
+              />
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="name">{{ $t('contact.name') }}</label>
-          <input 
-            type="text" 
-            id="name" 
-            v-model="formData.name" 
-            required
-            :placeholder="$t('contact.namePlaceholder')"
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="email">{{ $t('contact.email') }}</label>
-          <input 
-            type="email" 
-            id="email" 
-            v-model="formData.email" 
-            required
-            :placeholder="$t('contact.emailPlaceholder')"
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="subject">{{ $t('contact.subject') }}</label>
-          <input 
-            type="text" 
-            id="subject" 
-            v-model="formData.subject" 
-            required
-            :placeholder="$t('contact.subjectPlaceholder')"
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="message">{{ $t('contact.message') }}</label>
-          <textarea 
-            id="message" 
-            v-model="formData.message" 
-            required
-            :placeholder="$t('contact.messagePlaceholder')"
-            rows="5"
-          />
-        </div>
-
-        <button
-          type="submit"
-          class="submit-btn"
-          :disabled="isSubmitting"
-        >
-          {{ isSubmitting ? $t('contact.sending') : $t('contact.sendMessage') }}
-        </button>
-
-        <div
-          v-if="submitStatus"
-          :class="['status-message', submitStatus.type]"
-        >
-          {{ submitStatus.message }}
-        </div>
-      </form>
+          <div class="form-group">
+            <label for="subject">{{ $t('contact.subject') }}</label>
+            <select id="subject" v-model="formData.subject">
+              <option value="project">{{ $t('contact.subjectProject') }}</option>
+              <option value="hiring">{{ $t('contact.subjectHiring') }}</option>
+              <option value="collab">{{ $t('contact.subjectCollab') }}</option>
+              <option value="other">{{ $t('contact.subjectOther') }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">{{ $t('contact.message') }}</label>
+            <textarea
+              id="message"
+              v-model="formData.message"
+              required
+              rows="5"
+              :placeholder="$t('contact.messagePlaceholder')"
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn" :disabled="isSubmitting">
+            <span>{{ isSubmitting ? $t('contact.sending') : $t('contact.sendMessage') }}</span>
+            <span v-if="!isSubmitting" class="material-symbols-outlined">send</span>
+          </button>
+          <p v-if="submitStatus" :class="['status-message', submitStatus.type]">
+            {{ submitStatus.message }}
+          </p>
+          <p class="form-footer">{{ $t('contact.formFooter') }}</p>
+        </form>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ContactPage',
-  inject: ['localePath'],
-  data() {
-    return {
-      formData: {
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      },
-      isSubmitting: false,
-      submitStatus: null
-    }
-  },
-  methods: {
-    async handleSubmit() {
-      this.isSubmitting = true
-      this.submitStatus = null
+<script setup>
+import { ref, reactive, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-      try {
-        // Here you would typically send the form data to your backend
-        // For now, we'll simulate a successful submission
-        await new Promise(resolve => setTimeout(resolve, 1000))
+const { t } = useI18n();
 
-        this.submitStatus = {
-          type: 'success',
-          message: this.$t('contact.successMessage')
-        }
+const contactItems = computed(() => [
+  { label: t('contact.email'), value: 'gregory.marshall999@gmail.com', icon: 'mail' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/gregorymarshall999', icon: 'share' },
+  { label: 'GitHub', value: 'github.com/GregMarshall999', icon: 'code' },
+  { label: t('contact.location'), value: 'France', icon: 'location_on' },
+]);
 
-        // Reset form
-        this.formData = {
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        }
-      } catch (error) {
-        this.submitStatus = {
-          type: 'error',
-          message: this.$t('contact.errorMessage')
-        }
-      } finally {
-        this.isSubmitting = false
-      }
-    }
+const formData = reactive({
+  name: '',
+  email: '',
+  subject: 'project',
+  message: '',
+});
+
+const isSubmitting = ref(false);
+const submitStatus = ref(null);
+
+async function handleSubmit() {
+  isSubmitting.value = true;
+  submitStatus.value = null;
+
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    submitStatus.value = { type: 'success', message: t('contact.successMessage') };
+    formData.name = '';
+    formData.email = '';
+    formData.subject = 'project';
+    formData.message = '';
+  } catch (error) {
+    submitStatus.value = { type: 'error', message: t('contact.errorMessage') };
+  } finally {
+    isSubmitting.value = false;
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/scss/variables' as *;
+
 .contact-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  width: 100%;
+  max-width: 72rem;
+  padding: 3rem 1.5rem;
+  @media (min-width: 1024px) {
+    padding: 6rem 1.5rem;
+  }
 }
 
-.contact-hero {
-  text-align: center;
-  padding: 60px 0;
-}
-
-.contact-hero h1 {
-  font-size: 3rem;
-  color: #71808f;
-  margin-bottom: 1rem;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  color: #42b983;
-}
-
-.contact-container {
+.contact-inner {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
-  padding: 40px 0;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
 }
 
-.contact-info {
+.contact-info-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
 }
 
-.info-card {
-  background: #1a2438;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  transition: transform 0.3s ease;
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.info-card:hover {
-  transform: translateY(-5px);
+.contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: $radius-full;
+  background: rgba($primary, 0.1);
+  border: 1px solid rgba($primary, 0.2);
+  color: $primary;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
 }
 
-.info-card i {
-  font-size: 2rem;
-  color: #42b983;
-  margin-bottom: 15px;
+.badge-dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: $primary;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: $primary;
+    opacity: 0.75;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
 }
 
-.info-card h3 {
-  color: #71808f;
-  margin-bottom: 10px;
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
-.info-card p {
-  color: #fff;
+.contact-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: white;
+  @media (min-width: 1024px) {
+    font-size: 3rem;
+  }
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.contact-description {
+  font-size: 1.125rem;
+  color: $slate-400;
+  max-width: 28rem;
+  line-height: 1.6;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.contact-card {
+  padding: 1.25rem;
+  border-radius: $radius-xl;
+  border: 1px solid $slate-800;
+  background: rgba($slate-900, 0.5);
+  transition: border-color 0.2s;
+  &:hover {
+    border-color: rgba($primary, 0.5);
+  }
+}
+
+.contact-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-lg;
+  background: rgba($primary, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary;
+  margin-bottom: 1rem;
+  transition: transform 0.2s;
+  .contact-card:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.contact-card-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.contact-card-value {
+  font-size: 0.875rem;
+  color: $slate-500;
+}
+
+.contact-map-placeholder {
+  margin-top: 2rem;
+  height: 12rem;
+  border-radius: $radius-xl;
+  border: 1px solid $slate-800;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, $slate-800 0%, $slate-900 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($primary, 0.1);
+  pointer-events: none;
+}
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2rem;
+  height: 2rem;
+  background: $primary;
+  border-radius: 50%;
+  border: 4px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  .material-symbols-outlined {
+    color: white;
+    font-size: 1rem;
+  }
+}
+
+.contact-form-section {
+  background: $slate-900;
+  padding: 2rem;
+  border-radius: $radius-2xl;
+  border: 1px solid $slate-800;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  @media (min-width: 1024px) {
+    padding: 2.5rem;
+  }
 }
 
 .contact-form {
-  background: #1a2438;
-  padding: 40px;
-  border-radius: 10px;
-  position: relative;
-}
-
-.form-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(26, 36, 56, 0.9);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border-radius: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.coming-soon {
-  text-align: center;
-  color: #fff;
-}
-
-.coming-soon h2 {
-  font-size: 2rem;
-  color: #42b983;
-  margin-bottom: 1rem;
-}
-
-.coming-soon p {
-  color: #71808f;
-  font-size: 1.1rem;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-group label {
-  display: block;
-  color: #71808f;
-  margin-bottom: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $slate-300;
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #2c3c56;
-  border-radius: 5px;
-  background: #2c3c56;
-  color: #fff;
+  padding: 0.75rem 1rem;
+  background: rgba($slate-800, 0.5);
+  border: 1px solid $slate-700;
+  border-radius: $radius-lg;
+  color: white;
   font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  &::placeholder {
+    color: $slate-500;
+  }
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 2px rgba($primary, 0.25);
+  }
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #42b983;
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+  padding-right: 2.5rem;
+}
+
+.form-group textarea {
+  resize: none;
 }
 
 .submit-btn {
-  background: #42b983;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  margin-top: 0.5rem;
   width: 100%;
-}
-
-.submit-btn:hover:not(:disabled) {
-  background: #3aa876;
-  transform: translateY(-2px);
-}
-
-.submit-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
+  padding: 1rem 1.5rem;
+  background: $primary;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  &:hover:not(:disabled) {
+    background: rgba($primary, 0.9);
+    box-shadow: 0 10px 25px rgba($primary, 0.25);
+  }
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
 }
 
 .status-message {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 5px;
+  padding: 1rem;
+  border-radius: $radius-lg;
   text-align: center;
-}
-
-.status-message.success {
-  background: rgba(66, 185, 131, 0.1);
-  color: #42b983;
-}
-
-.status-message.error {
-  background: rgba(255, 87, 87, 0.1);
-  color: #ff5757;
-}
-
-.back-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: transparent;
-  border: 2px solid #42b983;
-  color: #42b983;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.back-button:hover {
-  background: #42b983;
-  color: #1a2438;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .contact-container {
-    grid-template-columns: 1fr;
+  font-size: 0.875rem;
+  &.success {
+    background: rgba($primary, 0.1);
+    color: $primary;
   }
-
-  .contact-hero h1 {
-    font-size: 2.5rem;
+  &.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
   }
+}
 
-  .contact-form {
-    padding: 20px;
-  }
+.form-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: $slate-500;
 }
 </style>

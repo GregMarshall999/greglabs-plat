@@ -1,0 +1,51 @@
+@use 'variables' as *;
+
+// Shared styles for project detail pages (RelaysPage, GrowattModbusPage)
+
+// Design tokens override for project detail
+%project-hero-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+%project-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba($background-dark, 0.8) 0%,
+    transparent 50%,
+    transparent 100%
+  );
+}
+
+%project-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+}
+
+%project-hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+%project-hero-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.025em;
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}

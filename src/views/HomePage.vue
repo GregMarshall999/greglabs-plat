@@ -1,533 +1,659 @@
 <template>
   <div class="home-page">
+    <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-content">
-        <h1>{{ $t('home.title') }}</h1>
-        <p class="subtitle">
-          {{ $t('home.subtitle') }}
-        </p>
-        <p class="description">
-          {{ $t('home.descriptionIntro') }} <br>
-          {{ $t('home.descriptionWelcome') }} <br>
-          {{ $t('home.descriptionExplore') }}
-        </p>
-        <div class="cta-buttons">
-          <a v-if="false" href="https://simubank.greg-labs.com" class="btn primary">{{ $t('home.currentProject') }}</a>
-          <RouterLink
-            :to="localePath({ name: 'growatt-modbus' })"
-            class="btn primary"
-          >
-            {{ $t('home.currentProject') }}
-          </RouterLink>
-          <RouterLink
-            :to="localePath({ name: 'contact' })"
-            class="btn secondary"
-          >
-            {{ $t('nav.contact') }}
-          </RouterLink>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="about-greglabs">
-        <h2>{{ $t('home.whatIs') }}</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <p>
-              {{ $t('home.about1') }}
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-badge">
+              <span class="material-symbols-outlined">verified</span>
+              <span class="mono-text">{{ $t('common.availableForOpportunities') }}</span>
+            </div>
+            <h1 class="hero-title">
+              {{ $t('home.title') }}
+              <span class="text-primary">{{ $t('home.subtitle') }}</span>
+            </h1>
+            <p class="hero-description">
+              {{ $t('home.descriptionIntro') }}
+              {{ $t('home.descriptionWelcome') }}
+              {{ $t('home.descriptionExplore') }}
             </p>
-            <div>
-              <p>{{ $t('home.journeyTitle') }}</p>
-              <ul>
-                <li>{{ $t('home.journey1') }}</li>
-                <li>{{ $t('home.journey2') }}</li>
-                <li>{{ $t('home.journey3') }}</li>
-              </ul>
-              <p>{{ $t('home.journeyEnd') }}</p>
-            </div>
-            <p>{{ $t('home.aboutEnd') }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section
-      id="skills"
-      class="skills"
-    >
-      <h2>{{ $t('home.skills') }}</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <i class="fas fa-code" />
-          <h3>{{ $t('home.frontend') }}</h3>
-          <p>{{ $t('home.frontendTech') }}</p>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-server" />
-          <h3>{{ $t('home.backend') }}</h3>
-          <p>{{ $t('home.backendTech') }}</p>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-mobile-alt" />
-          <h3>{{ $t('home.mobile') }}</h3>
-          <p>{{ $t('home.mobileTech') }}</p>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-tools" />
-          <h3>{{ $t('home.tools') }}</h3>
-          <p>{{ $t('home.toolsTech') }}</p>
-        </div>
-      </div>
-    </section>
-
-    <section
-      id="projects"
-      class="projects"
-    >
-      <h2>{{ $t('home.featuredProjects') }}</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="../assets/icons/simubank.ico" :alt="$t('home.simubankAlt')" class="simubank-icon" />
-          </div>
-          <div class="project-content">
-            <h3>{{ $t('home.simubank') }}</h3>
-            <p>{{ $t('home.simubankDesc') }}</p>
-            <div class="project-tags">
-              <span>Vue.js</span>
-              <span>Java Spring</span>
-              <span>PostgreSQL</span>
-              <span>Docker</span>
-            </div>
-            <a
-              href="https://simubank.greg-labs.com"
-              class="btn"
-            >{{ $t('common.viewProject') }}</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-image">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 164.67 125.35"
-              width="100px"
-              height="100px"
-            >
-              <g
-                id="Calque_2"
-                data-name="Calque 2"
+            <div class="cta-buttons">
+              <RouterLink
+                :to="localePath({ name: 'growatt-modbus' })"
+                class="btn btn-primary"
               >
-                <g
-                  id="I_page_6"
-                  data-name="I page 6"
+                <span>{{ $t('common.viewLatestProject') }}</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </RouterLink>
+              <RouterLink
+                :to="localePath({ name: 'contact' })"
+                class="btn btn-secondary"
+              >
+                <span class="material-symbols-outlined">mail</span>
+                <span>{{ $t('common.getInTouch') }}</span>
+              </RouterLink>
+            </div>
+            <div class="tech-stack">
+              <span class="tech-stack-label mono-text">{{ $t('common.coreStack') }}</span>
+              <div class="tech-badges">
+                <div
+                  v-for="tech in techStack"
+                  :key="tech.name"
+                  class="tech-badge"
                 >
-                  <path
-                    class="cls-1"
-                    d="M67.07,117.51A58.75,58.75,0,0,1,25.52,17.21,58.76,58.76,0,0,1,125.54,53H144.8V64.53H114.26V58.75A47.2,47.2,0,1,0,67.07,106Z"
-                  />
-                  <rect
-                    class="cls-1"
-                    x="17.27"
-                    y="94.42"
-                    width="10.01"
-                    height="17.3"
-                    transform="translate(-66.35 45.94) rotate(-45)"
-                  />
-                  <rect
-                    class="cls-1"
-                    x="4.65"
-                    y="107.04"
-                    width="10.01"
-                    height="17.3"
-                    transform="translate(-78.98 40.71) rotate(-45)"
-                  />
-                  <path
-                    class="cls-2"
-                    d="M82,79.19a27,27,0,0,0,3.51-3,25.44,25.44,0,0,0,3.14-3.8L98.2,75l4.37-16.75L93,55.7a26.18,26.18,0,0,0-2.51-9.14l7-7.05L85.11,27.35l-7,7.06A25.93,25.93,0,0,0,69,32l-2.64-9.57L49.66,27.05l2.63,9.56a26.26,26.26,0,0,0-3.51,3,25.55,25.55,0,0,0-3.14,3.8L36,40.85,31.68,57.6l9.6,2.5a25.84,25.84,0,0,0,2.5,9.13l-7,7.06L49.14,88.44l7-7a25.93,25.93,0,0,0,9.17,2.38l2.63,9.57,16.68-4.59ZM67.38,69.73l-.88-3.2a8.65,8.65,0,0,1-3.06-.79l-2.32,2.35L57,64l2.32-2.36a8.62,8.62,0,0,1-.84-3l-3.2-.83,1.46-5.59,3.2.84a7.87,7.87,0,0,1,1-1.27,9,9,0,0,1,1.17-1l-.88-3.19,5.57-1.53.88,3.19a8.67,8.67,0,0,1,3.06.8l2.32-2.36,4.11,4.06-2.32,2.36a8.63,8.63,0,0,1,.84,3L79,58l-1.46,5.59-3.2-.84A8.33,8.33,0,0,1,73.24,64a8.22,8.22,0,0,1-1.17,1L73,68.19Z"
-                  />
-                  <polygon
-                    class="cls-1"
-                    points="144.46 70.43 144.46 47.08 164.68 58.75 144.46 70.43"
-                  />
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div class="project-content">
-            <h3>{{ $t('home.enRechercheActive') }}</h3>
-            <p>{{ $t('home.enRechercheActiveDesc') }}</p>
-            <div class="project-tags">
-              <span>Vue.js</span>
-              <span>Java Spring</span>
-              <span>MySQL</span>
+                  <span class="material-symbols-outlined tech-icon">{{ tech.icon }}</span>
+                  <span class="mono-text">{{ tech.name }}</span>
+                </div>
+              </div>
             </div>
-            <a
-              href="https://en-recherche-active.com"
-              class="btn"
-            >{{ $t('common.viewProject') }}</a>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-image-wrapper">
+              <div class="hero-image-placeholder">
+                <span class="material-symbols-outlined">code</span>
+              </div>
+              <div class="hero-floating-card">
+                <div class="floating-card-icon">
+                  <span class="material-symbols-outlined">bolt</span>
+                </div>
+                <div class="floating-card-text">
+                  <p class="floating-card-title">{{ $t('home.currentProject') }}</p>
+                  <p class="floating-card-sub mono-text">Growatt Modbus</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-image">
-            <svg
-              version="1.1"
-              id="Layer_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 100 100"
-              width="100px"
-              height="100px"
-              xml:space="preserve"
-            >
-              <path
-                xmlns="http://www.w3.org/2000/svg"
-                d="M20.9512 26.7803L40.691 60.3675L60.4309 26.7803L52.535 26.7803L40.691 46.9326L28.7484 26.7803L20.9512 26.7803Z"
-                fill="#3DD491"
-              />
-            </svg>
-          </div>
-          <div class="project-content">
-            <h3>{{ $t('home.greglabsMedLevel') }}</h3>
-            <p>{{ $t('home.greglabsMedLevelDesc') }}</p>
-            <div class="project-tags">
-              <span>Vue.js</span>
+      </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="skills" class="expertise">
+      <div class="expertise-inner">
+        <div class="expertise-header">
+          <h2 class="expertise-title">{{ $t('common.keyExpertise') }}</h2>
+          <p class="expertise-subtitle">{{ $t('home.about1') }}</p>
+        </div>
+        <div class="expertise-grid">
+          <div
+            v-for="(skill, idx) in expertiseData"
+            :key="idx"
+            class="expertise-card"
+          >
+            <div class="expertise-icon">
+              <span class="material-symbols-outlined">{{ skill.icon }}</span>
             </div>
-            <RouterLink
-              :to="localePath({ name: 'med-level-movies' })"
-              class="btn"
-            >
-              {{ $t('common.viewProject') }}
-            </RouterLink>
+            <div class="expertise-content">
+              <h3 class="expertise-card-title">{{ skill.title }}</h3>
+              <p class="expertise-card-desc">{{ skill.description }}</p>
+            </div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-image">
-            <img src="../assets/relays/relays.jpg" :alt="$t('home.relaysAlt')" />
-          </div>
-          <div class="project-content">
-            <h3>{{ $t('home.relays') }}</h3>
-            <p>{{ $t('home.relaysDesc') }}</p>
-            <div class="project-tags">
-              <span>Android</span>
-              <span>Java Spring</span>
-              <span>Arduino</span>
-              <span>IoT</span>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <div class="projects-inner">
+        <h2 class="projects-title">{{ $t('home.featuredProjects') }}</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="../assets/icons/simubank.ico" :alt="$t('home.simubankAlt')" class="simubank-icon" />
+              <div class="project-tags-overlay">
+                <span>Vue.js</span>
+                <span>Java Spring</span>
+              </div>
             </div>
-            <RouterLink
-              :to="localePath({ name: 'relays' })"
-              class="btn"
-            >
-              {{ $t('common.viewProject') }}
-            </RouterLink>
+            <div class="project-content">
+              <h3>{{ $t('home.simubank') }}</h3>
+              <p>{{ $t('home.simubankDesc') }}</p>
+              <a href="https://simubank.greg-labs.com" class="btn btn-project" target="_blank" rel="noopener noreferrer">{{ $t('common.viewProject') }}</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">
+              <img src="../assets/relays/relays.jpg" :alt="$t('home.relaysAlt')" />
+              <div class="project-tags-overlay">
+                <span>Android</span>
+                <span>Arduino</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>{{ $t('home.relays') }}</h3>
+              <p>{{ $t('home.relaysDesc') }}</p>
+              <RouterLink :to="localePath({ name: 'relays' })" class="btn btn-project">{{ $t('common.viewProject') }}</RouterLink>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">
+              <img src="../assets/growatt-modbus/ba.jpg" :alt="$t('home.growattModbusAlt')" />
+              <div class="project-tags-overlay">
+                <span>Raspberry Pi</span>
+                <span>Python</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>{{ $t('home.growattModbus') }}</h3>
+              <p>{{ $t('home.growattModbusDesc') }}</p>
+              <RouterLink :to="localePath({ name: 'growatt-modbus' })" class="btn btn-project">{{ $t('common.viewProject') }}</RouterLink>
+            </div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-image">
-            <img src="../assets/growatt-modbus/ba.jpg" :alt="$t('home.growattModbusAlt')" />
-          </div>
-          <div class="project-content">
-            <h3>{{ $t('home.growattModbus') }}</h3>
-            <p>{{ $t('home.growattModbusDesc') }}</p>
-            <div class="project-tags">
-              <span>Raspberry Pi</span>
-              <span>FastAPI</span>
-              <span>Python</span>
-              <span>Modbus</span>
-            </div>
-            <RouterLink
-              :to="localePath({ name: 'growatt-modbus' })"
-              class="btn"
-            >
-              {{ $t('common.viewProject') }}
-            </RouterLink>
-          </div>
-        </div>
+        <RouterLink :to="localePath({ name: 'projects' })" class="projects-link">
+          {{ $t('nav.projects') }}
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </RouterLink>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { useLocalePath } from '@/composables/useLocalePath';
+import { useI18n } from 'vue-i18n';
+import { computed } from 'vue';
 
 const { localePath } = useLocalePath();
+const { t } = useI18n();
+
+const techStack = [
+  { name: 'TypeScript', icon: 'code' },
+  { name: 'Vue.js', icon: 'layers' },
+  { name: 'Java', icon: 'database' },
+  { name: 'Python', icon: 'token' },
+  { name: 'Docker', icon: 'token' },
+];
+
+const expertiseData = computed(() => [
+  { title: t('home.frontend'), description: t('home.frontendTech'), icon: 'code' },
+  { title: t('home.backend'), description: t('home.backendTech'), icon: 'database' },
+  { title: t('home.mobile'), description: t('home.mobileTech'), icon: 'phone_android' },
+  { title: t('home.tools'), description: t('home.toolsTech'), icon: 'build' },
+]);
 </script>
 
-<style scoped>
-.simubank-icon {
-  margin-left: 10px;
-  margin-top: 10px;
-	width: 50px !important;
-	height: 50px !important;
-}
+<style scoped lang="scss">
+@use '@/scss/variables' as *;
 
 .home-page {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 20px;
+  width: 100%;
 }
 
-/* Hero Section */
 .hero {
-	min-height: 60vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	padding: 60px 0;
+  width: 100%;
+  max-width: $max-w-7xl;
+  padding: 6rem 1.5rem 4rem;
+  @media (min-width: 768px) {
+    padding: 8rem 1.5rem 6rem;
+  }
 }
 
-.hero-content h1 {
-	font-size: 3.5rem;
-	margin-bottom: 1rem;
-	color: #2c3e50;
+.hero-inner {
+  width: 100%;
 }
 
-.subtitle {
-	font-size: 1.5rem;
-	color: #42b983;
-	margin-bottom: 1rem;
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 3rem;
+  }
 }
 
-.description {
-	font-size: 1.2rem;
-	color: #666;
-	max-width: 600px;
-	margin: 0 auto 2rem;
+.hero-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: $radius-full;
+  background: rgba($primary, 0.1);
+  border: 1px solid rgba($primary, 0.2);
+  color: $primary;
+  width: fit-content;
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+  .mono-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: white;
+  @media (min-width: 768px) {
+    font-size: 4.5rem;
+  }
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.hero-description {
+  font-size: 1.125rem;
+  color: $slate-400;
+  max-width: 600px;
+  line-height: 1.6;
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
 
 .cta-buttons {
-	display: flex;
-	justify-content: center;
-	gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-/* Buttons */
 .btn {
-	display: inline-block;
-	padding: 10px 20px;
-	background: transparent;
-	border: 2px solid #42b983;
-	color: #42b983;
-	text-decoration: none;
-	border-radius: 25px;
-	font-weight: 500;
-	transition: all 0.3s ease;
-	margin-top: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: $radius-xl;
+  text-decoration: none;
+  transition: all 0.2s;
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
-.btn:hover {
-	background: #42b983;
-	color: #1a2438;
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(66, 185, 131, 0.2);
+.btn-primary {
+  background: $primary;
+  color: white;
+  border: none;
+  &:hover {
+    box-shadow: 0 10px 25px rgba($primary, 0.25);
+  }
 }
 
-.btn:active {
-	transform: translateY(0);
-	box-shadow: 0 2px 6px rgba(66, 185, 131, 0.2);
+.btn-secondary {
+  background: $slate-800;
+  color: white;
+  border: 1px solid $slate-700;
+  &:hover {
+    background: $slate-700;
+  }
 }
 
-.btn.primary {
-	background-color: #42b983;
-	color: white;
-
-	&:hover {
-		color: #1a2438;
-		transform: translateY(-2px);
-	}
+.tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.btn.secondary {
-	background-color: transparent;
-	border: 2px solid #42b983;
-	color: #42b983;
-
-	&:hover {
-		background: #42b983;
-		color: #1a2438;
-		transform: translateY(-2px);
-	}
+.tech-stack-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $slate-500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-/* About Section */
-.about-greglabs {
-	padding: 80px 0;
-	background-color: #1a2438;
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.about-greglabs h2 {
-	text-align: center;
-	margin-bottom: 40px;
-	color: #71808f;
-	font-size: 2.5rem;
+.tech-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: $radius-lg;
+  background: $slate-800;
+  border: 1px solid $slate-700;
+  transition: border-color 0.2s;
+  &:hover {
+    border-color: $primary;
+  }
 }
 
-.about-content {
-	max-width: 800px;
-	margin: 0 auto;
-	padding: 0 20px;
+.tech-icon {
+  color: $primary;
+  font-size: 1.25rem;
 }
 
-.about-text p {
-	font-size: 1.1rem;
-	line-height: 1.8;
-	color: #ffffff;
-	margin-bottom: 20px;
+.tech-badge .mono-text {
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-.about-text div {
-	margin: 30px 0;
+.hero-visual {
+  width: 100%;
+  flex-shrink: 0;
+  @media (min-width: 1024px) {
+    width: 480px;
+  }
 }
 
-.about-text div p {
-	font-weight: 600;
-	color: #71808f;
-	margin-bottom: 15px;
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: $radius-3xl;
+  overflow: hidden;
+  border: 1px solid $slate-800;
+  background: $slate-900;
+  padding: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-.about-text ul {
-	margin: 20px 0;
-	padding-left: 20px;
+.hero-image-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: $radius-2xl;
+  border: 1px solid $slate-800;
+  background: linear-gradient(135deg, $slate-800 0%, $slate-900 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .material-symbols-outlined {
+    font-size: 4rem;
+    color: $slate-600;
+  }
 }
 
-.about-text li {
-	font-size: 1.1rem;
-	line-height: 1.8;
-	color: #ffffff;
-	margin-bottom: 10px;
-	list-style-type: none;
-	position: relative;
-	padding-left: 25px;
+.simubank-icon {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: contain;
 }
 
-.about-text li::before {
-	content: "→";
-	color: #42b983;
-	font-weight: bold;
-	position: absolute;
-	left: 0;
-	top: 0;
+.hero-floating-card {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  right: 2.5rem;
+  padding: 1.5rem;
+  border-radius: $radius-2xl;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Skills Section */
-.skills {
-	padding: 80px 20px;
-	background-color: #1a2438;
+.floating-card-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .material-symbols-outlined {
+    color: white;
+  }
 }
 
-.skills h2 {
-	text-align: center;
-	margin-bottom: 40px;
-	color: #71808f;
+.floating-card-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
 }
 
-.skills-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: 30px;
+.floating-card-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.skill-card {
-	background: #2c3c56;
-	padding: 30px;
-	border-radius: 10px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	text-align: center;
-	transition: transform 0.3s ease;
+/* Expertise Section */
+.expertise {
+  width: 100%;
+  max-width: $max-w-7xl;
+  padding: 6rem 1.5rem;
+  border-top: 1px solid $slate-800;
 }
 
-.skill-card:hover {
-  	transform: translateY(-5px);
+.expertise-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.skill-card i {
-	font-size: 2.5rem;
-	color: #42b983;
-	margin-bottom: 20px;
+.expertise-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+}
+
+.expertise-title {
+  font-size: 1.875rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: white;
+  @media (min-width: 768px) {
+    font-size: 2.25rem;
+  }
+}
+
+.expertise-subtitle {
+  color: $slate-400;
+  max-width: 720px;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.expertise-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  border-radius: $radius-2xl;
+  border: 1px solid $slate-800;
+  background: rgba($slate-900, 0.5);
+  transition: border-color 0.2s;
+  &:hover {
+    border-color: rgba($primary, 0.5);
+  }
+}
+
+.expertise-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: $radius-xl;
+  background: $slate-800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary;
+  transition: all 0.2s;
+  .expertise-card:hover & {
+    background: $primary;
+    color: white;
+  }
+}
+
+.expertise-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.expertise-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+.expertise-card-desc {
+  color: $slate-400;
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
 /* Projects Section */
 .projects {
- 	padding: 80px 0;
+  width: 100%;
+  max-width: $max-w-7xl;
+  padding: 6rem 1.5rem;
 }
 
-.projects h2 {
-	text-align: center;
-	margin-bottom: 40px;
-	color: #71808f;
+.projects-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.projects-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  text-align: center;
 }
 
 .projects-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .project-card {
-	background: #1a2438;
-	border-radius: 10px;
-	overflow: hidden;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  background: rgba($slate-800, 0.3);
+  border: 1px solid $slate-800;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  transition: border-color 0.3s;
+  &:hover {
+    border-color: rgba($primary, 0.5);
+  }
 }
 
-.project-image img {
-	width: 100%;
-	height: 200px;
-	object-fit: cover;
+.project-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .project-card:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.project-tags-overlay {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  span {
+    padding: 0.25rem 0.5rem;
+    background: rgba($background-dark, 0.8);
+    backdrop-filter: blur(12px);
+    color: white;
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: $radius;
+  }
 }
 
 .project-content {
-  	padding: 20px;
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    transition: color 0.2s;
+    .project-card:hover & {
+      color: $primary;
+    }
+  }
+  p {
+    color: $slate-400;
+    font-size: 0.875rem;
+    flex: 1;
+  }
 }
 
-.project-tags {
-  	margin: 15px 0;
+.btn-project {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  margin-top: 0.75rem;
+  background: $primary;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: $radius-lg;
+  text-align: center;
+  transition: background-color 0.2s;
+  &:hover {
+    background: rgba($primary, 0.9);
+  }
 }
 
-.project-tags span {
-	background: #2c3c56;
-	padding: 5px 10px;
-	border-radius: 15px;
-	font-size: 0.8rem;
-	margin-right: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-	.hero-content h1 {
-		font-size: 2.5rem;
-	}
-	
-	.subtitle {
-		font-size: 1.2rem;
-	}
-	
-	.description {
-		font-size: 1rem;
-	}
-	
-	.cta-buttons {
-		display: flex;
-		flex-direction: column;
-		gap: 15px;
-	}
-	
-	.btn {
-		margin: 0;
-	}
-
-	.about-greglabs h2 {
-		font-size: 2rem;
-	}
-
-	.about-text p {
-		font-size: 1rem;
-	}
-
-	.about-text li {
-		font-size: 1rem;
-	}
+.projects-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $primary;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.2s;
+  &:hover {
+    gap: 0.75rem;
+  }
 }
 </style>

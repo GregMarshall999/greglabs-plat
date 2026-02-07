@@ -1,7 +1,14 @@
 <template>
-  <NavigationBar />
-  <RouterView />
-  <AppFooter />
+  <div class="app-layout">
+    <div class="grid-pattern app-decoration" aria-hidden="true"></div>
+    <div class="gradient-glow app-decoration" aria-hidden="true"></div>
+
+    <NavigationBar />
+    <main class="main-content">
+      <RouterView />
+    </main>
+    <AppFooter />
+  </div>
 </template>
 
 <script setup>
@@ -14,27 +21,47 @@ const { localePath } = useLocalePath();
 provide('localePath', localePath);
 </script>
 
-<style>
+<style lang="scss">
+@use '@/scss/variables' as *;
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+.app-layout {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-body {
-	background-color: #111826;
-	font-family: 'Manrope', sans-serif;
-	color: #fff;
+.app-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.grid-pattern.app-decoration {
+  inset: 0;
+}
+
+.gradient-glow.app-decoration {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 600px;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	gap: 2em;
+  max-width: $max-w-7xl;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
-
 </style>
