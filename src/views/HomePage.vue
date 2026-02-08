@@ -100,7 +100,7 @@
         <div class="projects-grid">
           <div class="project-card">
             <div class="project-image">
-              <img src="../assets/icons/simubank.ico" :alt="$t('home.simubankAlt')" class="simubank-icon" />
+              <img src="../assets/simubank/simubank.png" :alt="$t('home.simubankAlt')" />
               <div class="project-tags-overlay">
                 <span>Vue.js</span>
                 <span>Java Spring</span>
@@ -379,12 +379,6 @@ const expertiseData = computed(() => [
     font-size: 4rem;
     color: $slate-600;
   }
-}
-
-.simubank-icon {
-  width: 50px !important;
-  height: 50px !important;
-  object-fit: contain;
 }
 
 .hero-floating-card {
