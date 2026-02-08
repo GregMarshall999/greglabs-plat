@@ -215,7 +215,7 @@ export default {
     comingSoonText: 'Contact form functionality is under development',
     name: 'Full Name',
     namePlaceholder: 'John Doe',
-    emailPlaceholder: 'john@example.com',
+    emailPlaceholder: "john{'@'}example.com",
     subject: 'Subject',
     subjectPlaceholder: "What's this about?",
     subjectProject: 'Project Inquiry',
