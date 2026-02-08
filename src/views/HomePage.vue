@@ -49,10 +49,8 @@
             </div>
           </div>
           <div class="hero-visual">
-            <div class="hero-image-wrapper">
-              <div class="hero-image-placeholder">
-                <span class="material-symbols-outlined">code</span>
-              </div>
+            <RouterLink :to="localePath({ name: 'growatt-modbus' })" class="hero-image-wrapper hero-image-link">
+              <img src="../assets/growatt-modbus/ba.jpg" :alt="$t('home.growattModbusAlt')" class="hero-current-project-image" />
               <div class="hero-floating-card">
                 <div class="floating-card-icon">
                   <span class="material-symbols-outlined">bolt</span>
@@ -62,7 +60,7 @@
                   <p class="floating-card-sub mono-text">Growatt Modbus</p>
                 </div>
               </div>
-            </div>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -366,19 +364,24 @@ const expertiseData = computed(() => [
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-.hero-image-placeholder {
+.hero-image-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, opacity 0.2s;
+  &:hover {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+.hero-current-project-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: $radius-2xl;
-  border: 1px solid $slate-800;
-  background: linear-gradient(135deg, $slate-800 0%, $slate-900 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .material-symbols-outlined {
-    font-size: 4rem;
-    color: $slate-600;
-  }
 }
 
 .hero-floating-card {
