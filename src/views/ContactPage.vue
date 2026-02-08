@@ -61,15 +61,24 @@
               />
             </div>
             <div class="form-group">
-              <label for="email">{{ $t('contact.email') }}</label>
+              <label for="phone">{{ $t('contact.phone') }}</label>
               <input
-                id="email"
-                v-model="formData.email"
-                type="email"
-                required
-                :placeholder="$t('contact.emailPlaceholder')"
+                id="phone"
+                v-model="formData.phone"
+                type="tel"
+                :placeholder="$t('contact.phonePlaceholder')"
               />
             </div>
+          </div>
+          <div class="form-group">
+            <label for="email">{{ $t('contact.email') }}</label>
+            <input
+              id="email"
+              v-model="formData.email"
+              type="email"
+              required
+              :placeholder="$t('contact.emailPlaceholder')"
+            />
           </div>
           <div class="form-group">
             <label for="subject">{{ $t('contact.subject') }}</label>
@@ -122,6 +131,7 @@ const contactItems = computed(() => [
 const formData = reactive({
   name: '',
   email: '',
+  phone: '',
   subject: 'project',
   message: '',
 });
@@ -139,6 +149,7 @@ async function handleSubmit() {
     const body = {
       fullName: formData.name,
       email: formData.email,
+      phone: formData.phone,
       subject: subjectEnum,
       message: formData.message,
       language: languageEnum,
@@ -159,6 +170,7 @@ async function handleSubmit() {
       submitStatus.value = { type: 'success', message: t('contact.successMessage') };
       formData.name = '';
       formData.email = '';
+      formData.phone = '';
       formData.subject = 'project';
       formData.message = '';
     } else {

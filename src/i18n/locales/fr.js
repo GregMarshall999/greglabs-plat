@@ -216,6 +216,7 @@ export default {
     name: 'Nom complet',
     namePlaceholder: 'Jean Dupont',
     emailPlaceholder: "john{'@'}example.com",
+    phonePlaceholder: '+33 6 12 34 56 78',
     subject: 'Sujet',
     subjectPlaceholder: 'De quoi s\'agit-il ?',
     subjectProject: 'Projet',
