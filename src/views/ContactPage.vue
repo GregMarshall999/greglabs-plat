@@ -29,11 +29,20 @@
           </div>
         </div>
 
-        <div class="contact-map-placeholder">
-          <div class="map-overlay"></div>
-          <div class="map-pin">
-            <span class="material-symbols-outlined">location_on</span>
-          </div>
+        <div class="contact-map-container">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-5.5%2C41.0%2C10.5%2C51.5&layer=mapnik"
+            class="contact-map-iframe"
+            title="Map - France"
+          ></iframe>
+          <a
+            href="https://www.openstreetmap.org/?mlat=46.2&mlon=2.2#map=6/46.2/2.2"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="map-attribution-link"
+          >
+            View larger map
+          </a>
         </div>
       </div>
 
@@ -280,41 +289,37 @@ async function handleSubmit() {
   color: $slate-500;
 }
 
-.contact-map-placeholder {
+.contact-map-container {
   margin-top: 2rem;
   height: 12rem;
   border-radius: $radius-xl;
   border: 1px solid $slate-800;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(135deg, $slate-800 0%, $slate-900 100%);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.map-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba($primary, 0.1);
-  pointer-events: none;
+.contact-map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
-.map-pin {
+.map-attribution-link {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 2rem;
-  height: 2rem;
-  background: $primary;
-  border-radius: 50%;
-  border: 4px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  .material-symbols-outlined {
-    color: white;
-    font-size: 1rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.625rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  text-decoration: none;
+  border-radius: $radius;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+  &:hover {
+    background: white;
   }
 }
 
