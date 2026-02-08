@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import ContactPage from '@/views/ContactPage.vue'
 import ProjectsPage from '@/views/ProjectsPage.vue'
+import SkillPage from '@/views/SkillPage.vue'
 import RelaysPage from '@/views/projects/RelaysPage.vue'
 import GrowattModbusPage from '@/views/projects/GrowattModbusPage.vue'
 import medLevelRoutes from './med-level.routes'
@@ -21,6 +22,12 @@ const baseRoutes = [
     name: 'contact',
     meta: { projectGroup: base },
     component: ContactPage
+  },
+  {
+    path: '/skills',
+    name: 'skills',
+    meta: { projectGroup: base },
+    component: SkillPage
   },
   {
     path: '/projects',

@@ -1,34 +1,6 @@
 <template>
   <div class="projects-page">
     <div class="projects-inner">
-      <!-- Skills Section -->
-      <div class="skills-header">
-        <h1 class="skills-title">{{ $t('projectsPage.technicalArsenal') }}</h1>
-        <p class="skills-desc">{{ $t('projectsPage.technicalArsenalDesc') }}</p>
-      </div>
-
-      <div class="skills-grid">
-        <div
-          v-for="(cat, idx) in skillCategories"
-          :key="idx"
-          class="skill-card"
-        >
-          <div class="skill-card-header">
-            <span class="material-symbols-outlined skill-icon">{{ cat.icon }}</span>
-            <h3 class="skill-card-title">{{ cat.title }}</h3>
-          </div>
-          <div class="skill-tags">
-            <span
-              v-for="skill in cat.skills"
-              :key="skill"
-              class="skill-tag"
-            >
-              {{ skill }}
-            </span>
-          </div>
-        </div>
-      </div>
-
       <!-- Projects Grid Header -->
       <div class="projects-header">
         <div class="projects-header-text">
@@ -130,24 +102,6 @@ const filterTypes = [
   { value: 'Mobile', labelKey: 'projectsPage.filterMobile' },
 ];
 
-const skillCategories = computed(() => [
-  {
-    title: t('home.frontend'),
-    icon: 'web',
-    skills: ['Vue.js', 'React', 'TypeScript', 'SASS', 'HTML5'],
-  },
-  {
-    title: t('home.backend'),
-    icon: 'database',
-    skills: ['Java Spring', 'Python', 'FastAPI', 'PostgreSQL', 'MySQL'],
-  },
-  {
-    title: t('home.tools'),
-    icon: 'build',
-    skills: ['Docker', 'Git', 'CI/CD', 'Arduino', 'Raspberry Pi'],
-  },
-]);
-
 const projectsData = computed(() => [
   {
     id: 'growatt-modbus',
@@ -222,81 +176,6 @@ const filteredProjects = computed(() => {
 
 .projects-inner {
   width: 100%;
-}
-
-.skills-header {
-  margin-bottom: 3rem;
-}
-
-.skills-title {
-  font-size: 2.25rem;
-  font-weight: 900;
-  letter-spacing: -0.025em;
-  color: white;
-  margin-bottom: 1rem;
-  @media (min-width: 768px) {
-    font-size: 3rem;
-  }
-}
-
-.skills-desc {
-  font-size: 1.125rem;
-  color: $slate-400;
-  max-width: 42rem;
-  line-height: 1.6;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 6rem;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.skill-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.5rem;
-  border-radius: $radius-xl;
-  background: rgba($slate-800, 0.4);
-  border: 1px solid $slate-800;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.skill-card-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.skill-icon {
-  color: $primary;
-  font-size: 1.5rem;
-}
-
-.skill-card-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: white;
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.skill-tag {
-  padding: 0.25rem 0.75rem;
-  border-radius: $radius-lg;
-  background: $slate-800;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: $slate-300;
 }
 
 .projects-header {

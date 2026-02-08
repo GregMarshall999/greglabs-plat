@@ -21,9 +21,9 @@
           {{ $t('nav.projects') }}
         </RouterLink>
         <RouterLink
-          :to="localePath({ name: 'home' })"
+          :to="localePath({ name: 'skills' })"
           class="nav-link"
-          :class="{ active: isActive('home') }"
+          :class="{ active: isActive('skills') }"
         >
           {{ $t('nav.skills') }}
         </RouterLink>
@@ -63,6 +63,9 @@ const { localePath } = useLocalePath();
 function isActive(routeName) {
   if (routeName === 'projects') {
     return route.name === 'projects' || route.name === 'relays' || route.name === 'growatt-modbus';
+  }
+  if (routeName === 'skills') {
+    return route.name === 'skills' || route.name === 'fr-skills';
   }
   return route.name === routeName;
 }
