@@ -185,9 +185,10 @@ const expertiseData = computed(() => [
 .hero {
   width: 100%;
   max-width: $max-w-7xl;
-  padding: 6rem 1.5rem 4rem;
+  margin: 0 auto;
+  padding: 6rem 2rem 4rem;
   @media (min-width: 768px) {
-    padding: 8rem 1.5rem 6rem;
+    padding: 8rem 2rem 6rem;
   }
 }
 
@@ -430,7 +431,8 @@ const expertiseData = computed(() => [
 .expertise {
   width: 100%;
   max-width: $max-w-7xl;
-  padding: 6rem 1.5rem;
+  margin: 0 auto;
+  padding: 6rem 2rem;
   border-top: 1px solid $slate-800;
 }
 
@@ -529,7 +531,8 @@ const expertiseData = computed(() => [
 .projects {
   width: 100%;
   max-width: $max-w-7xl;
-  padding: 6rem 1.5rem;
+  margin: 0 auto;
+  padding: 6rem 2rem;
 }
 
 .projects-inner {
