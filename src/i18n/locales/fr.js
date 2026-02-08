@@ -35,7 +35,7 @@ export default {
     title: 'Bienvenue sur Greg-labs',
     subtitle: 'Ma compilation de mini-projets IT',
     descriptionIntro: "Salut ! Je suis Greg, ingénieur logiciel. Je conçois des applications web modernes offrant une bonne expérience utilisateur et un code propre.",
-    descriptionWelcome: 'Bienvenue dans mon Lab',
+    descriptionWelcome: 'Bienvenue dans mon Lab !',
     descriptionExplore: 'Installez-vous confortablement et n\'hésitez pas à explorer !',
     currentProject: 'Mon projet actuel',
     whatIs: 'C\'est quoi Greg-labs ?',
