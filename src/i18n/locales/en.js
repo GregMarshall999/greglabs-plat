@@ -55,6 +55,7 @@ export default {
     mobileTech: 'Vue Volar, React Native, Android Studio, Progressive Web Apps',
     tools: 'Tools & Technologies',
     toolsTech: 'Git, Docker, CI/CD, Trello, Figma, N8N',
+    iot: 'IoT & Embedded',
     featuredProjects: 'Featured Projects',
     simubankAlt: 'Simu Bank',
     simubank: 'Simu Bank',

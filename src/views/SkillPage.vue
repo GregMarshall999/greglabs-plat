@@ -63,17 +63,22 @@ const skillCategories = computed(() => [
   {
     title: t('home.frontend'),
     icon: 'web',
-    skills: ['Vue.js', 'React', 'TypeScript', 'SASS', 'HTML5'],
+    skills: ['Vue.js', 'React', 'Angular', 'javascript', 'TypeScript', 'css', 'SASS', 'HTML5'],
   },
   {
     title: t('home.backend'),
     icon: 'database',
-    skills: ['Java Spring', 'Python', 'FastAPI', 'PostgreSQL', 'MySQL'],
+    skills: ['Java Spring', 'Python FastAPI', 'Django', 'C# .Net', 'PostgreSQL', 'MySQL', 'MongoDB'],
   },
   {
     title: t('home.tools'),
     icon: 'build',
-    skills: ['Docker', 'Git', 'CI/CD', 'Arduino', 'Raspberry Pi'],
+    skills: ['Docker', 'Git', 'CI/CD', 'Trello', 'Figma', 'N8N'],
+  },
+  {
+    title: t('home.iot'),
+    icon: 'router',
+    skills: ['Arduino', 'Raspberry Pi', 'Modbus', 'Android', 'Sensors', 'WiFi / MQTT'],
   },
 ]);
 </script>
