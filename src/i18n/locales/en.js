@@ -26,6 +26,7 @@ export default {
     projects: 'Projects',
     skills: 'Skills',
     contact: 'Contact Me',
+    resume: 'Resume',
   },
   footer: {
     copyright: 'Greglabs. All rights reserved.',

@@ -38,13 +38,14 @@
 
       <div class="nav-actions">
         <a
-          href="#"
+          :href="resumePdfUrl"
           class="nav-resume-btn"
+          download="CV Gregory Marshall.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
           <span class="material-symbols-outlined">description</span>
-          Resume
+          {{ $t('nav.resume') }}
         </a>
       </div>
     </div>
@@ -53,6 +54,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import resumePdfUrl from '@/assets/resume/CV Gregory Marshall-V.pdf';
 import { useRoute } from 'vue-router';
 import { useLocalePath } from '@/composables/useLocalePath';
 import { computed } from 'vue';
