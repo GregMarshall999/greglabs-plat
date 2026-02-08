@@ -108,7 +108,9 @@
 import { ref, reactive, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n();
+const CONTACT_API_URL = 'https://api.greg-labs.com/api/v1/contact';
+
+const { t, locale } = useI18n();
 
 const contactItems = computed(() => [
   { label: t('contact.email'), value: 'gregory.marshall999@gmail.com', icon: 'mail' },
@@ -132,12 +134,36 @@ async function handleSubmit() {
   submitStatus.value = null;
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    submitStatus.value = { type: 'success', message: t('contact.successMessage') };
-    formData.name = '';
-    formData.email = '';
-    formData.subject = 'project';
-    formData.message = '';
+    const subjectEnum = formData.subject.toUpperCase();
+    const languageEnum = locale.value.toUpperCase();
+    const body = {
+      fullName: formData.name,
+      email: formData.email,
+      subject: subjectEnum,
+      message: formData.message,
+      language: languageEnum,
+    };
+
+    const response = await fetch(CONTACT_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    const result = await response.text();
+    const status = result.replaceAll('"', '').trim();
+
+    if (status === 'SENT') {
+      submitStatus.value = { type: 'success', message: t('contact.successMessage') };
+      formData.name = '';
+      formData.email = '';
+      formData.subject = 'project';
+      formData.message = '';
+    } else {
+      submitStatus.value = { type: 'error', message: t('contact.errorMessage') };
+    }
   } catch (error) {
     submitStatus.value = { type: 'error', message: t('contact.errorMessage') };
   } finally {
