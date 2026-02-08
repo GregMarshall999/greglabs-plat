@@ -33,8 +33,8 @@ export default {
   home: {
     title: 'Welcome to the Greg-labs',
     subtitle: 'A compilation of various IT mini projects',
-    descriptionIntro: "Hi! I'm Greg, I'm a software engineer and I build modern web apps offering a good user experience and clean code",
-    descriptionWelcome: 'Welcome to my Lab',
+    descriptionIntro: "Hi! I'm Greg, a software engineer who builds modern web apps offering a good user experience and clean code.",
+    descriptionWelcome: 'Welcome to my Lab!',
     descriptionExplore: 'Make yourself comfortable and feel free to explore!',
     currentProject: 'My Current project',
     whatIs: 'What is Greg-labs?',

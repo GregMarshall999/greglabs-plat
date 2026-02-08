@@ -10,12 +10,12 @@
               <span class="mono-text">{{ $t('common.availableForOpportunities') }}</span>
             </div>
             <h1 class="hero-title">
-              {{ $t('home.title') }}
+              {{ $t('home.title') }} <br>
               <span class="text-primary">{{ $t('home.subtitle') }}</span>
             </h1>
             <p class="hero-description">
-              {{ $t('home.descriptionIntro') }}
-              {{ $t('home.descriptionWelcome') }}
+              {{ $t('home.descriptionIntro') }} <br>
+              {{ $t('home.descriptionWelcome') }} <br>
               {{ $t('home.descriptionExplore') }}
             </p>
             <div class="cta-buttons">
