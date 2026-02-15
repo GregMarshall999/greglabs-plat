@@ -1,36 +1,42 @@
-name: Deploy Frontend to ianslab
+name: Deploy Greglabs-plat to ians-lab
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install deps & run build
-        run: |
-          npm install
-          npm run lint
-          # npm run test
-          npm run build
+      - name: Build Docker image
+        run: docker build -t greg-labs/greglabs-plat:latest .
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.0
+      - name: Save image
+        docker save greg-labs/greglabs-plat:latest | gzip > greglabs-plat.tar.gz
+
+      - name: Upload to server
+        uses: appleboy/scp-action@v0.1.7
+        with: 
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: greglabs-plat.tar.gz
+          target: ${{ secrets.DEPLOY_PATH }}
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}, 
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /opt/greglabs-plat
-            git fetch
-            git pull origin main
-            cd
-            cd docker
-            docker compose build greg-labs
-            docker compose up -d greg-labs
+            cd ${{ secrets.DEPLOY_PATH }}
+            docker load < greglabs-plat.tar.gz
+            docker compose up -d
+            docker image prune -f
