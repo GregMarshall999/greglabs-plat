@@ -2,7 +2,7 @@ name: Deploy Frontend to ianslab
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build-and-deploy:
