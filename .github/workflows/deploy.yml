@@ -16,7 +16,7 @@ jobs:
         run: docker build -t greg-labs/greglabs-plat:latest .
 
       - name: Save image
-        docker save greg-labs/greglabs-plat:latest | gzip > greglabs-plat.tar.gz
+        run: docker save greg-labs/greglabs-plat:latest | gzip > greglabs-plat.tar.gz
 
       - name: Upload to server
         uses: appleboy/scp-action@v0.1.7
